@@ -1,6 +1,7 @@
 {
-  "name": "skillgauge",
-  "version": "0.0.0",
+  "name": "skillsgauge",
+  "version": "1.0.1",
+  "description": "Опросник по веб-технологиям для быстрой оценки знаний",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,6 +12,23 @@
     "postinstall": "node ./ng-add-pug-loader.js"
   },
   "private": true,
+  "keywords": [
+    "skill",
+    "professionalism",
+    "experience",
+    "form",
+    "test",
+    "check",
+    "questionnaire",
+    "web",
+    "programing",
+    "coding",
+    "progress",
+    "progressbar",
+    "estimate",
+    "measure"
+  ],
+  "author": "Pavel Volyntsev <pavel.volyntsev@gmail.com>",
   "dependencies": {
     "@angular/animations": "~7.0.0",
     "@angular/common": "~7.0.0",
