@@ -8,7 +8,7 @@
 @import "./scss/mixins/box";
 @import "./scss/mixins/border";
 @import "./scss/variables";
-// @import "../vendor/hover/scss/hover.scss";
+@import "./vendor/hover/scss/hover.scss";
 // @import "../vendor/css-toggle-switch/toggle-switch";
 
 html { height: 100%; }

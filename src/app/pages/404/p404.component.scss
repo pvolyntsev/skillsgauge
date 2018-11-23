@@ -1,0 +1,102 @@
+/** Общая страница "404 Page Not Found" */
+@import "../../../scss/mixins/transition";
+@import "../../../scss/variables";
+@import "../../../vendor/hover/scss/hover";
+
+.p404 {
+
+  height: 100%;
+
+  &__header {
+    height: 35em;
+    background: #ffffff;
+    color: #35364b;
+  }
+
+  &__title {
+    font-size: 14em;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.5em;
+    cursor: pointer;
+
+    i {
+      display: inline-block;
+      @include transition(200ms ease-out)
+    }
+
+    @for $i from 1 through 4 {
+      $angle: random(12) - random(21);
+      i:nth-child(#{$i}) {
+        @include prefixed(transform, rotate($angle * 1deg));
+        &:hover {
+          @include prefixed(transform, rotate(-$angle * 1deg));
+        }
+      }
+    }
+  }
+
+  &__subtitle {
+    font-size: 7em;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.1em;
+    cursor: pointer;
+
+    i {
+      display: inline-block;
+      @include transition(200ms ease-out)
+    }
+
+    @for $i from 1 through 10 {
+      $angle: random(12) - random(21);
+      i:nth-child(#{$i}) {
+        @include prefixed(transform, rotate($angle * 1deg));
+        &:hover {
+          @include prefixed(transform, rotate(-$angle * 1deg));
+        }
+      }
+    }
+  }
+
+  &__content {
+    color: #ffffff;
+
+    p {
+      text-align: center;
+      margin-top: 2em;
+      font-size: 2em;
+      line-height: 2em;
+    }
+
+    a {
+      color: #ffffff;
+    }
+  }
+
+  &__buttons {
+    text-align: center;
+    margin: 6em 0 5em 0;
+  }
+
+  &__button {
+    padding: 20px;
+    max-width: 450px;
+    font-size: $big-size;
+    background: $block-hot-background;
+    color: $text-light-color;
+    text-align: center;
+    text-decoration: none;
+    @include fade();
+
+    &:hover {
+      cursor: pointer;
+      background: $block-hot-background-hover;
+      text-decoration: none;
+    }
+
+    &.active {
+      background: $block-cold-background;
+    }
+  }
+}
