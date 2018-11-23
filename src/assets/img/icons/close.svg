@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+<rect x="21" y="4" transform="matrix(0.7071 0.7071 -0.7071 0.7071 23.5 -9.734)" fill="#9C27B0" width="5.001" height="39"/>
+<rect x="21" y="4" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 56.734 23.5)" fill="#9C27B0" width="5.001" height="39"/>
+</svg>
