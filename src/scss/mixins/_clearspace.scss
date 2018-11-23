@@ -1,0 +1,8 @@
+@mixin clearspace {
+  &:before, &:after {
+    display: block;
+    content: '';
+    font-size: 0px;
+    line-height: 0px;
+  }
+}

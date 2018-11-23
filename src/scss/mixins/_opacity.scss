@@ -1,0 +1,10 @@
+// .faded-text {
+//   @include opacity(0.8);
+// }
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; // ie ?
+}

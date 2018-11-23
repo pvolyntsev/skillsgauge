@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* Переменные */
+
+$page-background: #2b2b3d;
+$text-color: #ffffff;
+
+$header-background: #333333;
+$header-text-color: #ffffff;
+$header-link-color: $header-text-color;
+
+$footer-background: #333333;
+$footer-text-color: #ffffff;
+$footer-link-color: $footer-text-color;
+
+
+$huge-size: 2.1em;
+$large-size: 1.7em;
+$big-size: 1.3em;
+
+$large-text-size: 17px;
+$text-size: 14px;
+
+$text-light-color: #ffffff;
+$link-light-color: $text-light-color;
+$link-light-hover-color: $text-light-color;
+
+$text-dark-color: #2a2b3c;
+$link-dark-color: $text-dark-color;
+$link-dark-hover-color: #ffffff;
+
+$text-cold-color: #005b16;
+$link-cold-color: $text-cold-color;
+$link-cold-hover-color: #ffffff;
+
+$text-hot-color: #c5415e;
+$link-hot-color: $text-hot-color;
+$link-hot-hover-color: #ffffff;
+
+$block-cold-background: #65B879;
+$block-cold-background-hover: darken($block-cold-background, 10%);
+
+$block-hot-background: #C5415E;
+$block-hot-background-hover: darken($block-hot-background, 10%);
+
+$font-family: 'Exo 2', Arial, Helvetica, sans-serif;
+$font-family-alternative: 'Open Sans', sans-serif;
+
+$base-padding: 10px;

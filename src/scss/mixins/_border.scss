@@ -1,0 +1,6 @@
+@mixin border($property, $value)
+{
+  border-#{$property}: $value;
+  -moz-border-#{$property}: $value;
+  -webkit-border-#{$property}: $value;
+}

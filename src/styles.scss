@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+@import "./scss/normalize";
+@import "./scss/mixins/clearfix";
+@import "./scss/mixins/transition";
+@import "./scss/mixins/opacity";
+@import "./scss/mixins/breakpoint";
+@import "./scss/mixins/box";
+@import "./scss/mixins/border";
+@import "./scss/variables";
+// @import "../vendor/hover/scss/hover.scss";
+// @import "../vendor/css-toggle-switch/toggle-switch";
+
+html { height: 100%; }
+body {
+  background: $page-background;
+  font-family: $font-family;
+  font-size: $text-size;
+  line-height: 1em;
+  color: $text-color;
+  //margin-top: 5em;
+  //margin-bottom: 5em;
+  height: 100%;
+  //  overflow: hidden;
+}
+
+/** ограничитель ширины */
+.narrow.page {
+  max-width: 900px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.full.page {
+  margin: 0 0 0 230px;
+  overflow: auto;
+  @include transition(margin 0.75s);
+}
+
+body.scroll { // страница во весь экран со стандартным скроллом
+  height: auto;
+  overflow: auto;
+}
+
+/** подсказки */
+.tooltip {
+  font-size: 1em;
+  line-height: 1em;
+}
+.tooltip-default {
+  border: 1px solid #FFFFFF;
+  background-color: #FFFFFF;
+  color: #2a2b3c;
+}
+.tooltip-hidden { display: none; }
+
+/** меню в шапке */
+
+/** разное разрешение экрана */
+
+@media (min-width: 1280px) { /* если разрешение экрана больше 1280 пикселей */
+  body {
+    //background: orange;
+    font-size: 1.2em;
+  }
+  .narrow.page {
+    max-width: 1024px;
+  }
+}
+
+@media (max-width: 640px) { /* если максимальное разрешение экрана меньше 640 пикселей */
+  body {
+    //background: green;
+    font-size: 0.7em;
+  }
+
+  .full.page { // скрывается sidebar и на странице пояляется больше свободного места справа (слева чуть-чуть торчит меню)
+    margin-left: 2em;
+  }
+}
+
+// @import "./pages/about/about.component";
+// @import "../components/chapter/chapter";
+// @import "../components/chapters/chapters";
+// @import "../components/article/article";
+// @import "../components/app/directives/skillbar";
+// @import "../components/app/directives/debug_route";
+// @import "../components/dashboard/dashboard";
+
+
+
