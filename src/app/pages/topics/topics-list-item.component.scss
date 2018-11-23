@@ -1,0 +1,103 @@
+@import "../../../scss/mixins/clearfix";
+@import "../../../scss/variables";
+
+$checked-color: #2196f3;
+$unchecked-color: #c5415e;
+
+.topics {
+
+  &__label {
+    display: block;
+    @include clearfix;
+  }
+
+  &__title, &__title_short {
+    display: block;
+    font-size: 30px;
+    line-height: 37px;
+    margin: 0;
+  }
+
+  &__title_short {
+    display: none;
+  }
+
+  &__title_main {
+    margin-left: -10px;
+    color: $text-color;
+    font-size: 30px;
+    line-height: 30px;
+  }
+
+  &__terms {
+    font-size: 17px;
+    line-height: 25px;
+    opacity: 0.5;
+    margin: 0;
+  }
+
+  &__details {
+    color: $text-color;
+    padding-left: 55px;
+    margin-bottom: 3px;
+  }
+
+  &__checkmark {
+    display: block;
+    width: 40px;
+    float: left;
+    margin-left: -55px;
+    fill: $unchecked-color;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__checkmark .checkbox_tick {
+    opacity: 0;
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+    transition: all 0.2s ease-out;
+  }
+
+  &__input:checked + &__details {
+    color: $checked-color;
+  }
+
+  &__input:checked + &__details &__checkmark {
+    fill: $checked-color;
+  }
+
+  &__input:checked + &__details .checkbox_tick {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .topics {
+      &__header {
+        position: static;
+      }
+      &__title {
+        display: none;
+      }
+      &__title_short {
+        display: block;
+      }
+  }
+}
+
+@media (max-width: 960px) {
+  .topics {
+    &__terms_last {
+      display: none;
+    }
+    &__terms_first:after {
+      display: inline;
+      content: '...';
+    }
+  }
+}

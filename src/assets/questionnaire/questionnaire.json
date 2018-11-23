@@ -1,0 +1,83 @@
+{
+  "topics": [
+    {
+      "key": "oop_common",
+      "type": "common_knowledge",
+      "title": "Объектно-ориентированное программирование",
+      "titleShort": "ООП",
+      "version": 1,
+      "terms": [
+        {
+          "key": "class",
+          "title": "class"
+        },
+        {
+          "key": "method",
+          "title": "method"
+        },
+        {
+          "key": "attribute",
+          "title": "attribute"
+        },
+        {
+          "key": "наследование",
+          "title": "наследование"
+        },
+        {
+          "key": "инкапсуляция",
+          "title": "инкапсуляция"
+        },
+        {
+          "key": "полиморфизм",
+          "title": "полиморфизм"
+        },
+        {
+          "key": "interface",
+          "title": "interface"
+        },
+        {
+          "key": "static",
+          "title": "static"
+        },
+        {
+          "key": "public",
+          "title": "public"
+        },
+        {
+          "key": "protected",
+          "title": "protected"
+        },
+        {
+          "key": "private",
+          "title": "private"
+        },
+        {
+          "key": "abstract",
+          "title": "abstract"
+        },
+        {
+          "key": "final",
+          "title": "final"
+        }
+      ],
+      "answers": [
+        {
+          "title": "Мимо",
+          "score": 0
+        },
+        {
+          "title": "Слышал",
+          "score": 1
+        },
+        {
+          "title": "Знаю",
+          "score": 2
+        },
+        {
+          "title": "Использовал",
+          "score": 4
+        }
+      ]
+    }
+  ]
+}

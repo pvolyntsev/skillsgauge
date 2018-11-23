@@ -1,0 +1,27 @@
+<div class="topics narrow page">
+  <div class="topics__container">
+    <div *ngIf="loading" class="topics__header">
+      <h1 class="topics__title_main">Загрузка...</h1>
+    </div>
+    <div *ngIf="!loading && !loaded" class="topics__header">
+      <h1 class="topics__title_main">Ошибка: в конфигурации сервиса нет разделов с тестами</h1>
+    </div>
+
+    <div *ngIf="loaded" class="topics__header">
+      <h1 class="topics__title_main">Выбери разделы:</h1>
+    </div>
+    <div *ngIf="loaded" class="topics__content">
+      <div class="topics__list_container">
+        <ul class="topics__list">
+          <li
+            appTopicsListItem
+            class="topics__topic"
+            *ngFor="let t of topics" [topic]="t"></li>
+        </ul>
+      </div>
+      <a class="topics__button"
+         (click)="gotoFirstIncomplete()"
+         [ngClass]='{ "topics__button_active": hasSelectedTopic }'>Начать тестирование</a>
+    </div>
+  </div>
+</div>
