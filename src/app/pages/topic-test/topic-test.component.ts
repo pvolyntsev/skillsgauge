@@ -3,22 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionnaireService } from '../../services/questionnaire.service';
 import { Topics} from '../../models/topics.model';
 import { Topic } from '../../models/topic.model';
-import { TopicTerm } from '../../models/topic-term.model';
-import {AnswerVariant} from '../../models/answer-variant.model';
-
-@Component({
-  selector: '[appTopicTestTerm]', // tslint:disable-line
-  templateUrl: './topic-test-term.component.html',
-  styleUrls: ['./topic-test-term.component.scss']
-})
-export class TopicTestTermComponent {
-  @Input()
-  term: TopicTerm;
-
-  get answers(): AnswerVariant[] {
-    return this.term.topic.answers;
-  }
-}
 
 @Component({
   selector: 'app-topic-test',
