@@ -15,7 +15,20 @@ export class TopicTerm {
     this._topic = topic;
   }
 
+  // example: this.score
   public get score(): number {
     return this.answer.score;
+  }
+
+  public get topic(): Topic {
+    return this._topic;
+  }
+
+  // example: this.htmlId
+  public get htmlId(): string {
+    return [
+      this._topic.htmlId,
+      this.key,
+    ].join('__');
   }
 }

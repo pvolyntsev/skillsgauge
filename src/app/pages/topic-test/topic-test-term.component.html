@@ -1,0 +1,36 @@
+<div class="topic-test__terms_list__term">{{ term.title }}</div>
+<div class="switch-toggle switch-4 switch-candy">
+
+  <input
+    id="{{ term.htmlId }}-0"
+    [checked]="term.answer === answers[0]"
+    (change)="term.answer = answers[0]"
+    name="{{ term.htmlId }}"
+    type="radio"/>
+  <label for="{{ term.htmlId }}-0" class="xxx">{{ answers[0].title }}</label>
+
+  <input
+    id="{{ term.htmlId }}-1"
+    [checked]="term.answer === answers[1]"
+    (change)="term.answer = answers[1]"
+    name="{{ term.htmlId }}"
+    type="radio"/>
+  <label for="{{ term.htmlId }}-1">{{ answers[1].title }}</label>
+
+  <input
+    id="{{ term.htmlId }}-2"
+    [checked]="term.answer === answers[2]"
+    (change)="term.answer = answers[2]"
+    name="{{ term.htmlId }}"
+    type="radio"/>
+  <label for="{{ term.htmlId }}-2">{{ answers[2].title }}</label>
+
+  <input
+    id="{{ term.htmlId }}-3"
+    [checked]="term.answer === answers[3]"
+    (change)="term.answer = answers[3]"
+    name="{{ term.htmlId }}"
+    type="radio"/>
+  <label for="{{ term.htmlId }}-3">{{ answers[3].title }}</label><a></a>
+
+</div>

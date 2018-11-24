@@ -63,4 +63,34 @@ export class Topics {
 
     return incompleteTopic;
   }
+
+  // предыдущий выбранный топик
+  public prevTopic(key: string): Topic {
+    let prev = null;
+    let temp = null;
+    this.topics.forEach((topic) => {
+      if (topic.selected) {
+        if (topic.key === key) {
+          prev = temp;
+        }
+        temp = topic;
+      }
+    });
+    return prev;
+  }
+
+  // следующий выбранный топик
+  public nextTopic(key: string): Topic {
+    let next = null;
+    let temp = null;
+    this.topics.forEach((topic) => {
+      if (topic.selected) {
+        if (temp && temp.key === key) {
+          next = topic;
+        }
+        temp = topic;
+      }
+    });
+    return next;
+  }
 }

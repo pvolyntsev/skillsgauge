@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 // pages
 import { P404Component } from './pages/404/p404.component';
 import { TopicsListComponent, TopicsListItemComponent } from './pages/topics/topics-list.component';
+import { TopicTestComponent, TopicTestTermComponent } from './pages/topic-test/topic-test.component';
 
 // сервисы
 import { QuestionnaireService } from './services/questionnaire.service';
@@ -23,6 +24,8 @@ import { QuestionnaireService } from './services/questionnaire.service';
     P404Component,
     TopicsListComponent,
     TopicsListItemComponent,
+    TopicTestComponent,
+    TopicTestTermComponent,
   ],
   imports: [
     RoutingModule,

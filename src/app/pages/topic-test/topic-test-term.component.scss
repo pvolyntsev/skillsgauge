@@ -1,0 +1,79 @@
+@import "../../../scss/mixins/clearfix";
+@import "../../../scss/mixins/box";
+@import "../../../scss/variables";
+
+:host-context(.topic-test) {
+  .switch-candy label {
+    font-size: $text-size;
+    font-style: italic; // TODO remove
+  }
+}
+
+.topic-test {
+  $space-px: $base-padding;
+  $space: ($base-padding / $text-size * 1em);
+
+  &__terms_list {
+    &__term {
+      font-size: $big-size;
+      margin-top: (2*$space);
+      margin-bottom: ($space / 2);
+      display: inline-block;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  :host-context(.topic-test) {
+    &__terms_list {
+      &__term {
+        font-weight: 400;
+        font-size: 17px;
+        padding-top: 30px;
+        padding-bottom: 15px;
+        margin: 0;
+        display: inline-block;
+      }
+    }
+
+    .switch-candy.switch-4 label {
+      font-size: 12px;
+      padding: 0.5em 0;
+      text-decoration: underline; // TODO remove
+    }
+    .switch-toggle.switch-4 input:checked:last-of-type ~ a {
+      left: 74%;
+      width: 26%;
+    }
+  }
+}
+
+@media (max-width: 740px) and (min-width: 481px) {
+  :host-context(.topic-test) {
+    &__terms_list {
+      &__term {
+        font-weight: 400;
+        font-size: 17px;
+        padding-top: 30px;
+        padding-bottom: 15px;
+        margin: 0;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media (max-width: 960px) and (min-width: 741px) {
+  :host-context(.topic-test) {
+    &__terms_list {
+      &__term {
+        font-weight: 400;
+        font-size: 17px;
+        padding-top: 30px;
+        padding-bottom: 15px;
+        margin: 0;
+        display: inline-block;
+      }
+    }
+  }
+}
