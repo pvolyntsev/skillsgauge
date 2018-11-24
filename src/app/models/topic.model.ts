@@ -64,4 +64,14 @@ export class Topic {
 
     return this.terms.length * maxScore;
   }
+
+  // процент достижения по топику
+  // @example: this.percentage
+  public get percentage(): number {
+    const { maximumScore, score } = this;
+    if (maximumScore > 0) {
+      return Math.round(score / maximumScore * 100);
+    }
+    return 0;
+  }
 }
