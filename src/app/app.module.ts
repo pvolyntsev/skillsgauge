@@ -19,6 +19,7 @@ import { TopicTestNavigationComponent } from './pages/topic-test/topic-test-navi
 
 // сервисы
 import { QuestionnaireService } from './services/questionnaire.service';
+import { QuestionnaireLocalStorageService } from './services/questionnaire-local-storage.service.ts';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { QuestionnaireService } from './services/questionnaire.service';
     FormsModule,
   ],
   providers: [
+    QuestionnaireLocalStorageService,
     QuestionnaireService,
   ],
   bootstrap: [AppComponent]

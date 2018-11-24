@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionnaireService } from '../../services/questionnaire.service';
+import { QuestionnaireLocalStorageService } from '../../services/questionnaire-local-storage.service';
 import { Topics} from '../../models/topics.model';
 import { Topic } from '../../models/topic.model';
 
@@ -18,6 +19,7 @@ export class TopicTestComponent implements OnInit {
   loading: Boolean = false;
 
   constructor(private questionnaire: QuestionnaireService,
+              private localStorage: QuestionnaireLocalStorageService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -42,19 +44,33 @@ export class TopicTestComponent implements OnInit {
 
     this.topicSearch = topics;
 
-    this.topic = this.topicSearch.topics.find(t => t.key === key);
-    if (!this.topic.selected) {
-      this.topic.selected = true;
-      // TODO сохранить результаты
+    const topic = this.topicSearch.topics.find(t => t.key === key);
+    if (topic) {
+      this.loaded = true;
+      this.topic = this.localStorage.loadTopic(topic);
+      this.setSelected(true);
     }
 
     this.prevTopic = this.topicSearch.prevTopic(key);
     this.nextTopic = this.topicSearch.nextTopic(key);
 
-    this.loaded = !!this.topic;
     this.loading = false;
   }
 
   onLoadTopicsError(error: any): void {
+    console.log(error);
+  }
+
+  setSelected(value): void {
+    if (this.topic && this.topic.selected !== value) {
+      this.topic.selected = value;
+      this.saveTopic();
+    }
+  }
+
+  saveTopic(): void {
+    if (this.topic) {
+      this.localStorage.saveTopic(this.topic);
+    }
   }
 }

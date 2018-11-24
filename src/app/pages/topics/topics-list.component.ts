@@ -70,5 +70,6 @@ export class TopicsListComponent implements OnInit {
   }
 
   onLoadTopicsError(error: any): void {
+    console.log(error);
   }
 }
