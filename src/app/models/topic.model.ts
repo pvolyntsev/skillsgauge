@@ -1,4 +1,4 @@
-import { Term } from './term.model';
+import { TopicTerm } from './topic-term.model';
 import { AnswerVariant } from './answer-variant.model';
 
 const topicKeyClearer = new RegExp('[^a-zA-Z0-9]', 'g');
@@ -9,7 +9,7 @@ export class Topic {
   title = ''; // Объектно-ориентированное программирование",
   titleShort = ''; // "ООП",
   version: string;
-  terms: Term[] = [];
+  terms: TopicTerm[] = [];
   answers: AnswerVariant[] = [];
   selected: Boolean = false;
 
