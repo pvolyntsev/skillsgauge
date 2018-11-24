@@ -1,6 +1,6 @@
 <div class="topic-test">
+  <div appTopicTestNavigation *ngIf="loaded" [topic]="topic"></div>
   <!--
-  <app-topics-navigation *ngIf="loaded && topic && selectedTopics.length > 0"></app-topics-navigation>
   <app-topic-not-found *ngIf="loaded && !topic"></app-topic-not-found>
   -->
   <div *ngIf="loaded && topic">
