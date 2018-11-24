@@ -45,4 +45,23 @@ export class Topic {
     }, []);
     return terms.join(glue);
   }
+
+  // количество баллов по топику
+  // @example: this.score
+  public get score(): number {
+    return this.terms.reduce((sum, term) => sum + term.score, 0);
+  }
+
+  // максимальное количество баллов по топику
+  // @example: this.maximumScore
+  public get maximumScore(): number {
+
+    // варианты количества баллов за ответы
+    const scores = this.answers.reduce((carry, answer) => { carry.push(answer.score); return carry; }, []);
+
+    // максимальное количество баллов за ответ
+    const maxScore = Math.max.apply(null, scores);
+
+    return this.terms.length * maxScore;
+  }
 }

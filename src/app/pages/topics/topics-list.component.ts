@@ -1,31 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Topic } from '../../models/topic.model';
 import { QuestionnaireService } from '../../services/questionnaire.service';
-import { TopicsSearch } from '../../models/topics-search.model';
+import { Topic } from '../../models/topic.model';
+import { Topics } from '../../models/topics.model';
 
 @Component({
   selector: '[appTopicsListItem]', // tslint:disable-line
   templateUrl: './topics-list-item.component.html',
   styleUrls: ['./topics-list-item.component.scss']
 })
-export class TopicsListItemComponent implements OnInit {
+export class TopicsListItemComponent {
   @Input()
   topic: Topic;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  //
-  // get score(): number {
-  //   return 0;
-  // }
-  //
-  // get maxScore(): number {
-  //   return 0;
-  // }
 }
 
 
@@ -35,7 +21,7 @@ export class TopicsListItemComponent implements OnInit {
   styleUrls: ['./topics-list.component.scss']
 })
 export class TopicsListComponent implements OnInit {
-  topics: Topic[] = [];
+  topicSearch: Topics = new Topics();
   loaded: Boolean = false;
   loading: Boolean = false;
 
@@ -46,17 +32,23 @@ export class TopicsListComponent implements OnInit {
     this.loadTopics();
   }
 
-  // выбранные топики
-  get selectedTopics(): Topic[] {
-    return this.topics.filter(t => t.selected === true);
+  // @example this.topics
+  get topics(): Topic[] {
+    return this.topicSearch.topics;
   }
 
   // есть ли выбранные топики
+  // @examle: this.hasSelectedTopic
   get hasSelectedTopic(): Boolean {
-    return this.selectedTopics.length > 0;
+    return this.topicSearch.selectedTopics.length > 0;
   }
 
+  // выполняет переход на первый топик, который надо заполнить
   gotoFirstIncomplete(): void {
+    const topic = this.topicSearch.firstIncomplete;
+    if (topic) {
+      this.router.navigateByUrl('/topic/' + topic.key);
+    }
   }
 
   // загрузить топики
@@ -71,8 +63,8 @@ export class TopicsListComponent implements OnInit {
       );
   }
 
-  onLoadTopicsSuccess(topics: TopicsSearch): void {
-    this.topics = topics.topics;
+  onLoadTopicsSuccess(topics: Topics): void {
+    this.topicSearch = topics;
     this.loaded = this.topics.length > 0;
     this.loading = false;
   }

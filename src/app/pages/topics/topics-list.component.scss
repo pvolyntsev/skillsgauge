@@ -52,7 +52,7 @@ $unchecked-color: #c5415e;
 
     background: #c5415f;
     text-decoration: none;
-    opacity: 0.95;
+    opacity: 0.9;
     text-align: center;
     color: #edc6cf;
 
@@ -73,33 +73,7 @@ $unchecked-color: #c5415e;
     &_active {
       transform: translateY(0);
       -webkit-transform: translateY(0);
-
     }
   }
 }
-//
-//@media (max-width: 640px) {
-//  .topics {
-//      &__header {
-//        position: static;
-//      }
-//      &__title {
-//        display: none;
-//      }
-//      &__title_short {
-//        display: block;
-//      }
-//  }
-//}
-//
-//@media (max-width: 960px) {
-//  .topics {
-//    &__terms_last {
-//      display: none;
-//    }
-//    &__terms_first:after {
-//      display: inline;
-//      content: '...';
-//    }
-//  }
-//}
+
