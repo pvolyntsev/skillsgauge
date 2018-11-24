@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AboutComponent } from '../pages/about/about.component';
+import { IntroComponent } from '../pages/intro/intro.component';
 import { P404Component } from '../pages/404/p404.component';
 import { TopicsListComponent } from '../pages/topics/topics-list.component';
 import { TopicTestComponent } from '../pages/topic-test/topic-test.component';
 
 const routes: Routes = [
-  { path: '', component: AboutComponent },
+  { path: '', component: IntroComponent },
   { path: 'topics', component: TopicsListComponent },
   { path: 'topic/:key', component: TopicTestComponent },
 
@@ -18,7 +18,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AboutComponent,
+    IntroComponent,
   ],
   exports: [
     RouterModule,
