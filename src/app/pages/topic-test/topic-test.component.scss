@@ -21,6 +21,7 @@
     text-decoration: none;
     text-align: center;
     color: #edc6cf;
+    opacity: 0.9;
     position: fixed;
     bottom: 0;
     z-index: 10;
@@ -53,17 +54,17 @@
     }
   }
 
-  &__nav { // навигация по разделам под страницей опросника
+  // навигация по разделам под страницей опросника
+  &__nav {
     width: 100%;
-    font-size: 25px;
-    line-height: 45px;
+    font-size: 1.5em;
+    line-height: 2.25em;
     display: table;
     border-collapse: collapse;
 
     &_wrapper {
       width: 50%;
       display: table-cell;
-      background: $block-hot-background;
       text-align: center;
       border-collapse: collapse;
 
@@ -88,25 +89,10 @@
     }
   }
 
-  &__button {
-    background: $block-hot-background;
-    color: $text-light-color;
-    text-align: center;
-    text-decoration: none;
-  }
-
   .container {
     width: 960px;
     margin: 0 auto;
 
-    &-navigation {
-      z-index: 40;
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      background: $page-background;
-    }
     &-content {
       padding-bottom: 80px;
     }
