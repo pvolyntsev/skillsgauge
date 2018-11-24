@@ -1,4 +1,4 @@
-<div class="topic-test">
+<div class="topic">
   <div appTopicTestNavigation *ngIf="loaded" [topic]="topic"></div>
   <!--
   <app-topic-not-found *ngIf="loaded && !topic"></app-topic-not-found>
@@ -6,53 +6,51 @@
   <div *ngIf="loaded && topic">
     <div class="container">
       <div class="container-content">
-        <h1 class="topic-test__terms__title">{{ topic.title }}</h1>
-        <ul class="topic-test__terms_list">
+        <h1 class="topic__title">{{ topic.title }}</h1>
+        <ul class="topic__terms_list">
           <li
             appTopicTestTerm
-            class="topic-test__terms_list__item"
+            class="topic__terms_list__item"
             *ngFor="let t of topic.terms" [term]="t"></li>
         </ul>
       </div>
     </div>
 
-    <div class="topic-test__footer">
-      <div class="container">
-        <nav class="topic-test__nav">
-          <div class="topic-test__nav_wrapper">
-            <a class="topic-test__nav_prev"
-               *ngIf="!prevTopic"
-               title="Выбрать разделы"
-               routerLink="/topics">
-                <span>Выбрать разделы</span>
-                <img class="icon icon-prev" src="/assets/img/icons/nav-left.svg" width="25" height="45">
-            </a>
-            <a class="topic-test__nav_prev"
-               *ngIf="prevTopic"
-               [title]="prevTopic.title"
-               routerLink="/topic/{{prevTopic.key}}">
-                <span>{{prevTopic.titleShort}}</span>
-                <img class="icon icon-prev" src="/assets/img/icons/nav-left.svg" width="25" height="45">
-            </a>
-          </div>
-          <div class="topic-test__nav_wrapper">
-            <a class="topic-test__nav_next"
-               *ngIf="nextTopic"
-               [title]="nextTopic.title"
-               routerLink="/topic/{{nextTopic.key}}" >
-                <span>{{nextTopic.titleShort}}</span>
-                <img class="icon icon-next" src="/assets/img/icons/nav-right.svg" width="25" height="45">
-            </a>
-            <a class="topic-test__nav_next"
-               *ngIf="!nextTopic"
-               title="Результаты"
-               routerLink="/dashboard">
-                <span>Результаты</span>
-                <img class="icon icon-next" src="/assets/img/icons/nav-right.svg" width="25" height="45">
-            </a>
-          </div>
-        </nav>
-      </div>
+    <div class="topic__footer">
+      <nav class="topic__nav">
+        <div class="topic__nav_wrapper">
+          <a class="topic__nav_prev"
+             *ngIf="!prevTopic"
+             title="Выбрать разделы"
+             routerLink="/topics">
+              <span>Выбрать разделы</span>
+              <img class="icon icon-prev" src="/assets/img/icons/nav-left.svg" width="25" height="45">
+          </a>
+          <a class="topic__nav_prev"
+             *ngIf="prevTopic"
+             [title]="prevTopic.title"
+             routerLink="/topic/{{prevTopic.key}}">
+              <span>{{prevTopic.titleShort}}</span>
+              <img class="icon icon-prev" src="/assets/img/icons/nav-left.svg" width="25" height="45">
+          </a>
+        </div>
+        <div class="topic__nav_wrapper">
+          <a class="topic__nav_next"
+             *ngIf="nextTopic"
+             [title]="nextTopic.title"
+             routerLink="/topic/{{nextTopic.key}}" >
+              <span>{{nextTopic.titleShort}}</span>
+              <img class="icon icon-next" src="/assets/img/icons/nav-right.svg" width="25" height="45">
+          </a>
+          <a class="topic__nav_next"
+             *ngIf="!nextTopic"
+             title="Результаты"
+             routerLink="/dashboard">
+              <span>Результаты</span>
+              <img class="icon icon-next" src="/assets/img/icons/nav-right.svg" width="25" height="45">
+          </a>
+        </div>
+      </nav>
     </div>
   </div>
 </div>

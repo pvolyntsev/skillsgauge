@@ -2,7 +2,7 @@
 @import "../../../scss/mixins/box";
 @import "../../../scss/variables";
 
-.topic-test {
+.topic {
 
   $back-color1: #65b879;
   $back-color2: #48a15d;
@@ -134,7 +134,7 @@
 */
 
 @media (max-width: 480px) {
-  .topic-test {
+  .topic {
     padding-top: 100px;
     &__terms {
       &_list {
@@ -161,7 +161,7 @@
 
 
 @media (max-width: 740px) and (min-width: 481px) {
-  .topic-test {
+  .topic {
     padding-top: 100px;
     &__terms {
       &_list {
@@ -186,7 +186,7 @@
 }
 
 @media (max-width: 960px) and (min-width: 741px) {
-  .topic-test {
+  .topic {
     padding-top: 100px;
     &__terms_list {
       width: 400px;

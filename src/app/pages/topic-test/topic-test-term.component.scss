@@ -2,14 +2,14 @@
 @import "../../../scss/mixins/box";
 @import "../../../scss/variables";
 
-:host-context(.topic-test) {
+:host-context(.topic) {
   .switch-candy label {
     font-size: $text-size;
     font-style: italic; // TODO remove
   }
 }
 
-.topic-test {
+.topic {
   $space-px: $base-padding;
   $space: ($base-padding / $text-size * 1em);
 
@@ -17,14 +17,14 @@
     &__term {
       font-size: $big-size;
       margin-top: (2*$space);
-      margin-bottom: ($space / 2);
+      margin-bottom: $space;
       display: inline-block;
     }
   }
 }
 
 @media (max-width: 480px) {
-  :host-context(.topic-test) {
+  :host-context(.topic) {
     &__terms_list {
       &__term {
         font-weight: 400;
@@ -49,7 +49,7 @@
 }
 
 @media (max-width: 740px) and (min-width: 481px) {
-  :host-context(.topic-test) {
+  :host-context(.topic) {
     &__terms_list {
       &__term {
         font-weight: 400;
@@ -64,7 +64,7 @@
 }
 
 @media (max-width: 960px) and (min-width: 741px) {
-  :host-context(.topic-test) {
+  :host-context(.topic) {
     &__terms_list {
       &__term {
         font-weight: 400;
