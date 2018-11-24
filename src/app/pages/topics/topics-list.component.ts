@@ -5,17 +5,6 @@ import { Topic } from '../../models/topic.model';
 import { Topics } from '../../models/topics.model';
 
 @Component({
-  selector: '[appTopicsListItem]', // tslint:disable-line
-  templateUrl: './topics-list-item.component.html',
-  styleUrls: ['./topics-list-item.component.scss']
-})
-export class TopicsListItemComponent {
-  @Input()
-  topic: Topic;
-}
-
-
-@Component({
   selector: 'app-topics-list',
   templateUrl: './topics-list.component.html',
   styleUrls: ['./topics-list.component.scss']

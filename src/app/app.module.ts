@@ -12,14 +12,11 @@ import { AppComponent } from './app.component';
 
 // pages
 import { P404Component } from './pages/404/p404.component';
-import { TopicsListComponent, TopicsListItemComponent } from './pages/topics/topics-list.component';
-import { TopicTestComponent } from './pages/topic-test/topic-test.component';
-import { TopicTestTermComponent } from './pages/topic-test/topic-test-term.component';
-import { TopicTestNavigationComponent } from './pages/topic-test/topic-test-navigation.component';
+import { TopicsListComponent, TopicsListItemComponent } from './pages/topics';
+import { TopicTestComponent, TopicTestTermComponent, TopicTestNavigationComponent } from './pages/topic-test';
 
 // сервисы
-import { QuestionnaireService } from './services/questionnaire.service';
-import { QuestionnaireLocalStorageService } from './services/questionnaire-local-storage.service.ts';
+import { QuestionnaireService, QuestionnaireLocalStorageService } from './services';
 
 @NgModule({
   declarations: [
