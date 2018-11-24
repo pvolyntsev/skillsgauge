@@ -5,7 +5,7 @@
       "type": "common_knowledge",
       "title": "Объектно-ориентированное программирование",
       "titleShort": "ООП",
-      "version": 1,
+      "version": "2018-11-24",
       "terms": [
         {
           "key": "class",
@@ -20,20 +20,24 @@
           "title": "attribute"
         },
         {
-          "key": "наследование",
+          "key": "inheritance",
           "title": "наследование"
         },
         {
-          "key": "инкапсуляция",
+          "key": "encapsulation",
           "title": "инкапсуляция"
         },
         {
-          "key": "полиморфизм",
+          "key": "polymorphism",
           "title": "полиморфизм"
         },
         {
           "key": "interface",
           "title": "interface"
+        },
+        {
+          "key": "instance",
+          "title": "экземпляр"
         },
         {
           "key": "static",
@@ -58,6 +62,161 @@
         {
           "key": "final",
           "title": "final"
+        },
+        {
+          "key": "instance-method",
+          "title": "метод экземпляра"
+        },
+        {
+          "key": "class-method",
+          "title": "метод класса"
+        }
+      ],
+      "answers": [
+        {
+          "title": "Мимо",
+          "score": 0
+        },
+        {
+          "title": "Слышал",
+          "score": 1
+        },
+        {
+          "title": "Знаю",
+          "score": 2
+        },
+        {
+          "title": "Использовал",
+          "score": 4
+        }
+      ]
+    },
+    {
+      "key": "codestyle",
+      "type": "common",
+      "title": "Архитектура и стиль кода",
+      "titleShort": "Архитектура/стиль кода",
+      "version": "2018-11-25",
+      "terms": [
+        {
+          "key": "GRASP",
+          "title": "GRASP"
+        },
+        {
+          "key": "UML",
+          "title": "UML"
+        },
+        {
+          "key": "class-diagram",
+          "title": "диаграмма классов"
+        },
+        {
+          "key": "state-diagram",
+          "title": "диаграмма состояний"
+        },
+        {
+          "key": "use-case_diagram",
+          "title": "диаграмма вариантов использования"
+        },
+        {
+          "key": "sequence-diagram",
+          "title": "диаграмма взаимодействий"
+        },
+        {
+          "key": "solid",
+          "title": "S.O.L.I.D."
+        },
+        {
+          "key": "kiss",
+          "title": "KISS"
+        },
+        {
+          "key": "dry",
+          "title": "DRY"
+        },
+        {
+          "key": "yagni",
+          "title": "YAGNI"
+        },
+        {
+          "key": "occam_razor",
+          "title": "бритва Оккама"
+        },
+        {
+          "key": "software-metric",
+          "title": "метрики кода"
+        },
+        {
+          "key": "multitier",
+          "title": "слоистая архитектура"
+        },
+        {
+          "key": "monolith",
+          "title": "монолитная архитектура"
+        },
+        {
+          "key": "microservice",
+          "title": "микросервисная архитектура"
+        },
+        {
+          "key": "cap",
+          "title": "CAP-теорема"
+        },
+        {
+          "key": "oop",
+          "title": "объектно-ориентированное программирование"
+        },
+        {
+          "key": "aop",
+          "title": "аспектно-ориентированное программирование"
+        },
+        {
+          "key": "functional",
+          "title": "функциональное программирование"
+        },
+        {
+          "key": "structured",
+          "title": "структурное программирование"
+        },
+        {
+          "key": "imperative",
+          "title": "императивное программирование"
+        },
+        {
+          "key": "declarative",
+          "title": "декларативное программирование"
+        },
+        {
+          "key": "ddd",
+          "title": "предметно-ориентированное проектирование"
+        },
+        {
+          "key": "contract-based-programming",
+          "title": "контрактное программирование"
+        },
+        {
+          "key": "orm",
+          "title": "объектно-реляционное отображение"
+        },
+        {
+          "key": "codestyle",
+          "title": "cтандарт оформления кода"
+        },
+        {
+          "key": "titlecase_notation",
+          "title": "title case нотация"
+        },
+        {
+          "key": "pascal_case_notation",
+          "title": "Pascal case нотация"
+        },
+        {
+          "key": "snake_case_notation",
+          "title": "snake case нотация"
+        },
+        {
+          "key": "hungarian_notation",
+          "title": "венгерская нотация"
         }
       ],
       "answers": [
