@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionnaireService } from '../../services/questionnaire.service';
-import { QuestionnaireLocalStorageService } from '../../services/questionnaire-local-storage.service';
+import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs/operators';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { QuestionnaireService, QuestionnaireLocalStorageService } from '../../services';
 import { Topics} from '../../models/topics.model';
 import { Topic } from '../../models/topic.model';
 
@@ -21,7 +21,14 @@ export class TopicTestComponent implements OnInit {
   constructor(private questionnaire: QuestionnaireService,
               private localStorage: QuestionnaireLocalStorageService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+    router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      console.log(event.url);
+      this.selectTopic();
+    });
+  }
 
   ngOnInit() {
     this.loadTopics();
@@ -40,22 +47,29 @@ export class TopicTestComponent implements OnInit {
   }
 
   onLoadTopicsSuccess(topics: Topics): void {
-    const key = this.route.snapshot.paramMap.get('key');
-
     topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
     this.topicSearch = topics;
+    this.loading = false;
 
+    this.selectTopic();
+  }
+
+  selectTopic(): void {
+    const key = this.route.snapshot.paramMap.get('key');
+    console.log('selectTopic', key);
     const topic = this.topicSearch.topics.find(t => t.key === key);
     if (topic) {
-      this.topic = topic;
       this.loaded = true;
+      this.topic = topic;
+      this.prevTopic = this.topicSearch.prevTopic(key);
+      this.nextTopic = this.topicSearch.nextTopic(key);
       this.setSelected(true);
+    } else {
+      this.loaded = false;
+      this.topic = null;
+      this.prevTopic = null;
+      this.nextTopic = null;
     }
-
-    this.prevTopic = this.topicSearch.prevTopic(key);
-    this.nextTopic = this.topicSearch.nextTopic(key);
-
-    this.loading = false;
   }
 
   onLoadTopicsError(error: any): void {
