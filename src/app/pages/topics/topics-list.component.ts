@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuestionnaireService } from '../../services/questionnaire.service';
-import { QuestionnaireLocalStorageService } from '../../services';
+import { Subscription } from 'rxjs';
+import { TopicsStore } from '../../store/topics.store';
 import { Topic } from '../../models/topic.model';
 import { Topics } from '../../models/topics.model';
 
@@ -10,17 +10,29 @@ import { Topics } from '../../models/topics.model';
   templateUrl: './topics-list.component.html',
   styleUrls: ['./topics-list.component.scss']
 })
-export class TopicsListComponent implements OnInit {
+export class TopicsListComponent implements OnInit, OnDestroy {
+  private topicSearchSubscription: Subscription;
   topicSearch: Topics = new Topics();
   loaded: Boolean = false;
-  loading: Boolean = false;
+  loading: Boolean = true;
 
-  constructor(private questionnaire: QuestionnaireService,
-              private localStorage: QuestionnaireLocalStorageService,
-              private router: Router) { }
+  constructor(private topicsStore: TopicsStore,
+              private router: Router) {
+
+    // обработчик на загрузку топиков
+    this.topicSearchSubscription = topicsStore.awaitTopics()
+      .subscribe(
+        (topics) => { this.onLoadTopicsSuccess(topics); },
+        (error) => { this.onLoadTopicsError(error); }
+      );
+  }
 
   ngOnInit() {
-    this.loadTopics();
+  }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.topicSearchSubscription.unsubscribe();
   }
 
   // @example this.topics
@@ -42,26 +54,15 @@ export class TopicsListComponent implements OnInit {
     }
   }
 
-  // загрузить топики
-  loadTopics(): void {
-    this.loaded = false;
-    this.loading = true;
-
-    this.questionnaire.topics()
-      .subscribe(
-        this.onLoadTopicsSuccess.bind(this),
-        this.onLoadTopicsError.bind(this)
-      );
-  }
-
   onLoadTopicsSuccess(topics: Topics): void {
-    topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
+    console.log('TopicsListComponent:onLoadTopicsSuccess');
     this.topicSearch = topics;
     this.loaded = this.topics.length > 0;
     this.loading = false;
   }
 
   onLoadTopicsError(error: any): void {
+    console.log('TopicsListComponent:onLoadTopicsError');
     console.log(error);
   }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { QuestionnaireService, QuestionnaireLocalStorageService } from '../../services';
+import { Subscription } from 'rxjs';
+import { TopicsStore } from '../../store/topics.store';
+import { QuestionnaireLocalStorageService } from '../../services';
 import { Topics} from '../../models/topics.model';
 import { Topic } from '../../models/topic.model';
 
@@ -10,7 +12,8 @@ import { Topic } from '../../models/topic.model';
   templateUrl: './topic-test.component.html',
   styleUrls: ['./topic-test.component.scss']
 })
-export class TopicTestComponent implements OnInit {
+export class TopicTestComponent implements OnInit, OnDestroy {
+  private topicSearchSubscription: Subscription;
   topicSearch: Topics = new Topics();
   topic: Topic;
   nextTopic: Topic; // следующий выбранный топик
@@ -18,10 +21,19 @@ export class TopicTestComponent implements OnInit {
   loaded: Boolean = false;
   loading: Boolean = false;
 
-  constructor(private questionnaire: QuestionnaireService,
+  constructor(private topicsStore: TopicsStore,
               private localStorage: QuestionnaireLocalStorageService,
               private router: Router,
               private route: ActivatedRoute) {
+
+    // обработчик на загрузку топиков
+    this.topicSearchSubscription = topicsStore.awaitTopics()
+      .subscribe(
+        (topics) => { this.onLoadTopicsSuccess(topics); },
+        (error) => { this.onLoadTopicsError(error); }
+      );
+
+    // обработчик на смену URL - показать другой топик
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -31,32 +43,23 @@ export class TopicTestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadTopics();
   }
 
-  // загрузить топик
-  loadTopics(): void {
-    this.loaded = false;
-    this.loading = true;
-
-    this.questionnaire.topics()
-      .subscribe(
-        this.onLoadTopicsSuccess.bind(this),
-        this.onLoadTopicsError.bind(this)
-      );
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.topicSearchSubscription.unsubscribe();
   }
 
   onLoadTopicsSuccess(topics: Topics): void {
-    topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
+    console.log('TopicTestComponent:onLoadTopicsSuccess');
     this.topicSearch = topics;
     this.loading = false;
-
     this.selectTopic();
   }
 
   selectTopic(): void {
     const key = this.route.snapshot.paramMap.get('key');
-    console.log('selectTopic', key);
+    console.log('TopicTestComponent:selectTopic', key);
     const topic = this.topicSearch.topics.find(t => t.key === key);
     if (topic) {
       this.loaded = true;
@@ -73,6 +76,7 @@ export class TopicTestComponent implements OnInit {
   }
 
   onLoadTopicsError(error: any): void {
+    console.log('TopicTestComponent:onLoadTopicsError');
     console.log(error);
   }
 

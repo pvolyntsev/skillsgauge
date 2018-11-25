@@ -17,6 +17,7 @@ import { TopicTestComponent, TopicTestTermComponent, TopicTestNavigationComponen
 
 // сервисы
 import { QuestionnaireService, QuestionnaireLocalStorageService } from './services';
+import { TopicsStore } from './store/topics.store';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { QuestionnaireService, QuestionnaireLocalStorageService } from './servic
   providers: [
     QuestionnaireLocalStorageService,
     QuestionnaireService,
+    TopicsStore,
   ],
   bootstrap: [AppComponent]
 })
