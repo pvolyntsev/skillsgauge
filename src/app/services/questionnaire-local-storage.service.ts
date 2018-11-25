@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { Topic } from '../models/topic.model';
 
 @Injectable()
