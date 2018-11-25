@@ -1,0 +1,72 @@
+/*
+ * полоска прогресса c надписью
+ * <div class="skillbars">
+ *   <div class="skillbar">
+ *     <div class="skillbar_title"><span>CSS/HTML</span></div>
+ *     <div class="skillbar_bar" data-percent="50"></div>
+ *     <div class="skillbar_percent">50%</div>
+ *   </div>
+ *   <div class="skillbar">
+ *     <div class="skillbar_title"><span>Javascript</span></div>
+ *     <div class="skillbar_bar" data-percent="75"></div>
+ *     <div class="skillbar_percent">75%</div>
+ *   </div>
+ * </div>
+*/
+.skillbars {
+  @include clearfix;
+}
+
+.skillbar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  background: #c5415f;
+  @include clearfix;
+
+  /*&-title {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 2;
+    >span {
+      display: block;
+      padding: 0 40px 0 10px;
+      line-height: 30px;
+    }
+    >i {
+      display: block;
+      position: absolute;
+      right: 0;
+    }*/
+
+  &-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+    width: 0;
+    background: #2196f3;
+    @include transition(width 3s);
+  }
+
+  /*&-percent {
+    position: absolute;
+    display: block;
+    right: 10px;
+    top: 0;
+    height: 100%;
+    color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    >span {
+      vertical-align: middle;
+    }*/
+  &-title, &-percent {
+    line-height: 30px;
+    font-size: 22px;
+  }
+}

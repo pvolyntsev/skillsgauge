@@ -1,0 +1,271 @@
+@import "../../../scss/mixins/transition";
+@import "../../../scss/mixins/clearfix";
+@import "../../../scss/mixins/opacity";
+@import "../../../scss/variables";
+@import "../../../vendor/hover/scss/hover";
+
+//@import "../app/directives/header";
+//@import "../app/directives/sidebar";
+
+@import "../../../scss/skillbar";
+
+.dashboard {
+
+  &__container {
+    max-width: 820px;
+    margin: 5em auto;
+  }
+
+  &__content {
+    padding: 0 10px;
+    height: 100%; // высота пересчитывается через javascript
+  }
+
+  a {
+    color: #ffffff;
+
+    i {
+      color: #49A15D;
+      @include transition(color 0.25s);
+    }
+
+    &:hover {
+      color: #ffffff;
+    }
+    &:hover i {
+      color: #ffffff;
+    }
+  }
+
+  &__row {
+    display: block;
+  }
+
+  /** верхний блок с картинкой сертификата и итогами */
+  &__certificate {
+    width: 100%;
+    max-width: 240px;
+    margin: 0 auto;
+
+    > img {
+      width: 210px;
+      height: 210px;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  &__overall_progress_title {
+    text-align: center;
+    line-height: 110%;
+    font-weight: 400;
+    color: #e6fcd0;
+  }
+
+  /** строки "Что дальше?" */
+  &__more {
+    line-height: 40px;
+    font-size: 30px;
+  }
+
+  &__row_action {
+    margin-bottom: 20px;
+    max-height: 140px;
+
+    &_description { // подсказка
+      @include clearfix;
+
+      > div {
+        background-color: #49A15D;
+        width: 254px;
+        padding: 10px;
+        position: relative;
+        float: right;
+
+        // появление подсказки при наведении на блок
+        @include opacity(0);
+        left: 10px;
+        @include transition(opacity 0.4s, left 0.25s);
+        z-index: 2;
+
+        span.arrow { // уголочек у подсказки
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 5px;
+          height: 24px;
+          width: 24px;
+          margin-left: -12px;
+          background: #49A15D;
+          z-index: 1;
+          @include prefixed(transform, rotate(45deg));
+        }
+
+        > div {
+          position: relative;
+          top: 0;
+          z-index: 2;
+        }
+      }
+    }
+
+    &_title {
+      color: #ffffff;
+      font-size: $big-size;
+      line-height: 40px;
+      a {
+        color: #ffffff;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    &_small_icons {
+      font-size: 32px;
+      a {
+        display: inline-block;
+        padding: 5px;
+      }
+    }
+
+    &_big_icons {
+      font-size: 80px;
+      a {
+        display: inline-block;
+        padding: 10px;
+      }
+    }
+
+    &:hover &_description > div { // подсказка появляется при наведении на весь блок
+      @include opacity(1);
+      left: 0;
+    }
+  }
+
+  /** скилл-бары */
+  .skillbar {
+    width: 100%;
+    background-color: #c5415f;
+    margin-bottom: 15px;
+    line-height: 18px;
+    font-size: 18px;
+
+    &-bar {
+      background-color: #2196f3;
+    }
+
+    &-title {
+      display: none;
+      position: absolute;
+      left: 10px;
+      right: 70px;
+      z-index: 10;
+
+      &-short {
+        display: inline-block;
+      }
+    }
+    &-percent {
+      position: absolute;
+      right: 10px;
+      z-index: 10;
+      color: #fff;
+    }
+  }
+
+  .dashboard__row > div.dashboard__skillbars {
+    padding-top: 10px;
+    display: block;
+    font-size: 18px;
+  }
+
+  .dashboard__row > .dashboard__skillbars-title {
+    padding-top: 40px;
+    display: block;
+    font-size: 22px;
+    text-align: center;
+    color: #e6fcd0;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+}
+
+
+
+@media (min-width: 720px) {
+  .dashboard {
+    &__skillbars-title {
+    }
+    &__row {
+    vertical-align: top;
+    &-top {
+      > div {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      &__title {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+      }
+      }
+    }
+    &__certificate {
+      display: inline-block;
+    }
+    .skillbar {
+      margin-bottom: 25px;
+    }
+  }
+}
+
+@media (min-width: 810px) {
+  .dashboard__row-top__title {
+    max-width: 530px
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard {
+    margin-left: 210px;
+  }
+}
+
+
+
+//  @include breakpoint("max-width: 1040px") { // если максимальное разрешение экрана меньше 1040 пикселей
+//    &__container { // выводить не колонкой, а на всю доступную ширину
+//      max-width: none;
+//      width: 100%;
+//    }
+//  }
+//
+//  @include breakpoint("max-width: 940px") { /* если максимальное разрешение экрана меньше 940 пикселей */
+//    &__row { // выводить двухколоночные блоки одной вертикальной колонкой
+//      &_action {
+//        &_description > div { // подсказки
+//          @include opacity(1); // всегда видны
+//          float: none;
+//          width: auto;
+//          left: 0;
+//
+//          span.arrow { // уголочек у подсказки скрыть
+//            display: none;
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
+//
+//body.mobile { // для мобильных устройств :hover не доступен, поэтому подсказки показывать всегда
+//  .dashboard__row {
+//    &_action {
+//      &_description > div { // подсказки
+//        @include opacity(1); // всегда видны
+//        left: 0;
+//      }
+//    }
+//  }

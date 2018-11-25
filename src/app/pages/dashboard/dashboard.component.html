@@ -1,0 +1,48 @@
+<!--
+<header ng-show="sidebarVisible()"></header>
+-->
+<!--
+<sidebar ng-show="sidebarVisible()"></sidebar>
+-->
+
+<div class="dashboard">
+  <div class="dashboard__container">
+    <div class="dashboard__content">
+
+      <h1 class="dashboard__title">Результаты тестирования:</h1>
+
+      <div class="dashboard__row">
+        <h2 class="dashboard__skillbars-title">
+          Разделов: {{ selectedTopics.length }}&nbsp;
+          <!-- <ng-pluralize count="selectedTopics().length" when="{'one':'раздел','few':'раздела','many':'разделов','other':'раздела','0':'Разделы не выбраны'}"></ng-pluralize> -->
+        </h2>
+        <div class="dashboard__skillbars">
+          <div class="skillbar" *ngFor="let topic of selectedTopics ">
+            <div class="skillbar-bar" [style.width]="(percentageAnim[topic.key] || 0) + '%'">
+              <span class="skillbar-title">{{ topic.title }}</span>
+            </div>
+            <span class="skillbar-title skillbar-title-short">{{ topic.titleShort }}</span>
+            <div class="skillbar-percent">{{ topic.percentage }}%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard__row dashboard__row-top">
+        <div class="dashboard__certificate">
+          <img src="/assets/img/certificate.svg"/>
+        </div>
+        <div class="dashboard__row-top__title">
+          <h2 class="dashboard__overall_progress_title">{{ score }} из {{ maximumScore }}<br>баллов</h2>
+          <div class="dashboard__skillbars">
+            <div class="skillbar">
+              <div class="skillbar-bar" [style.width]="percentageAnim['TOTAL'] + '%'"> </div>
+              <span class="skillbar-title skillbar-title-short">Общий прогресс</span>
+              <div class="skillbar-percent">{{ percentage }}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

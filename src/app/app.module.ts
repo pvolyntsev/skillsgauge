@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { P404Component } from './pages/404/p404.component';
 import { TopicsListComponent, TopicsListItemComponent } from './pages/topics';
 import { TopicTestComponent, TopicTestTermComponent, TopicTestNavigationComponent } from './pages/topic-test';
+import { DashboardComponent } from './pages/dashboard';
 
 // сервисы
 import { QuestionnaireService, QuestionnaireLocalStorageService } from './services';
@@ -28,6 +29,7 @@ import { TopicsStore } from './store/topics.store';
     TopicTestComponent,
     TopicTestTermComponent,
     TopicTestNavigationComponent,
+    DashboardComponent,
   ],
   imports: [
     RoutingModule,

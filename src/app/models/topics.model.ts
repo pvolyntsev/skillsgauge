@@ -37,14 +37,24 @@ export class Topics {
 
   // количество баллов по выбранным топикам
   // @example: this.score
-  public score(): number {
+  public get score(): number {
     return this.topics.reduce((sum, topic) => sum + topic.score, 0);
   }
 
   // максимальное количество баллов по выбранным топикам
   // @example: this.maximumScore
-  public maximumScore(): number {
+  public get maximumScore(): number {
     return this.topics.reduce((sum, topic) => sum + topic.maximumScore, 0);
+  }
+
+  // процент достижения по всем топикам
+  // @example: this.percentage
+  public get percentage(): number {
+    const { maximumScore, score } = this;
+    if (maximumScore > 0) {
+      return Math.round(score / maximumScore * 100);
+    }
+    return 0;
   }
 
   public get firstIncomplete(): Topic {
