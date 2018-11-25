@@ -1,4 +1,5 @@
 @import "../../../scss/mixins/clearfix";
+@import "../../../scss/mixins/opacity";
 @import "../../../scss/variables";
 
 $checked-color: #2196f3;
@@ -52,7 +53,7 @@ $unchecked-color: #c5415e;
 
     background: #c5415f;
     text-decoration: none;
-    opacity: 0.9;
+    @include opacity(0.9);
     text-align: center;
     color: #edc6cf;
 
@@ -63,11 +64,11 @@ $unchecked-color: #c5415e;
     transition: all 0.2s ease-out;
 
     &:hover {
-      opacity: 1;
+      @include opacity(1);
     }
 
     &:focus {
-      opacity: 1;
+      @include opacity(1);
     }
 
     &_active {
