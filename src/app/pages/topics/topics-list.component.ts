@@ -55,7 +55,7 @@ export class TopicsListComponent implements OnInit {
   }
 
   onLoadTopicsSuccess(topics: Topics): void {
-    topics.topics = topics.topics.map(topic => this.localStorage.loadTopic(topic));
+    topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
     this.topicSearch = topics;
     this.loaded = this.topics.length > 0;
     this.loading = false;

@@ -42,7 +42,7 @@ export class TopicTestComponent implements OnInit {
   onLoadTopicsSuccess(topics: Topics): void {
     const key = this.route.snapshot.paramMap.get('key');
 
-    topics.topics = topics.topics.map(topic => this.localStorage.loadTopic(topic));
+    topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
     this.topicSearch = topics;
 
     const topic = this.topicSearch.topics.find(t => t.key === key);
