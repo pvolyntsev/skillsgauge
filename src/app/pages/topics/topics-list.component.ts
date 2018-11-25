@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionnaireService } from '../../services/questionnaire.service';
+import { QuestionnaireLocalStorageService } from '../../services';
 import { Topic } from '../../models/topic.model';
 import { Topics } from '../../models/topics.model';
 
@@ -15,6 +16,7 @@ export class TopicsListComponent implements OnInit {
   loading: Boolean = false;
 
   constructor(private questionnaire: QuestionnaireService,
+              private localStorage: QuestionnaireLocalStorageService,
               private router: Router) { }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class TopicsListComponent implements OnInit {
   }
 
   onLoadTopicsSuccess(topics: Topics): void {
+    topics.topics = topics.topics.map(topic => this.localStorage.loadTopic(topic));
     this.topicSearch = topics;
     this.loaded = this.topics.length > 0;
     this.loading = false;

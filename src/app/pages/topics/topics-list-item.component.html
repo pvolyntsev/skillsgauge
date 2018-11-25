@@ -3,7 +3,7 @@
     type="checkbox"
     [id]="topic.htmlId"
     [checked]="topic.selected"
-    (change)="topic.selected = !topic.selected"
+    (change)="setSelected(topic, !topic.selected)"
     class="topics__input"/>
   <div class="topics__details">
     <span class="topics__checkmark">

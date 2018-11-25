@@ -34,6 +34,7 @@ export class QuestionnaireLocalStorageService {
     const expiration = null; // TODO 2 месяца на хранение new Date(now.getTime() + 2 * 30 * 24 * 60 * 60 * 1000 * ttl).getTime();
     const value = {
       date: today,
+      selected: topic.selected,
       version: topic.version,
       answers: topic.answers,
       terms: topic.terms.reduce((carry, term) => {
@@ -70,11 +71,12 @@ export class QuestionnaireLocalStorageService {
     }, []);
 
     const topics = versions.map((version) => {
-      const tempTopic = Object.assign(new Topic(), { ...topic }); // TODO answerVersion: version.version
+      const { selected, terms } = version;
+      const tempTopic = Object.assign(new Topic(), { ...topic, selected }); // TODO answerVersion: version.version
       const answersIdx = tempTopic.answers.reduce((carry, answer) => { carry[answer.score] = answer; return carry; }, {});
 
       tempTopic.terms.forEach((term) => {
-        const answerScore = version.terms.hasOwnProperty(term.key) ? version.terms[term.key] : null;
+        const answerScore = terms.hasOwnProperty(term.key) ? version.terms[term.key] : null;
         if (answerScore !== null) {
           term.answer = answersIdx[answerScore];
         }
