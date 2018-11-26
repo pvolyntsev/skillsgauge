@@ -1,0 +1,151 @@
+@import "../../../scss/mixins/transition";
+@import "../../../scss/mixins/clearfix";
+//@import "../../../scss/mixins/opacity";
+@import "../../../scss/variables";
+//@import "../../../vendor/hover/scss/hover";
+
+.sidebar {
+
+  $block-background: #49A15D;
+  $nav_link_color: $link-light-color;
+  $nav_link_hover_color: $link-light-color;
+  $nav_current_link_color: $link-light-color;
+  $nav_current_link_hover_color: $link-light-color;
+
+  $space: (10px / $text-size * 1em);
+
+  background-color: #2196f3;
+  padding-left: $space;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 260px;
+  min-width: 210px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 15;
+  @include transition(left 0.5s);
+
+  &-nav {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &__menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    a {
+      color: $nav_link_color;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    &_item {
+      font-size: 1.2*$big-size;
+      line-height: 1.2*$big-size;
+      //line-height: (4*$space);
+      margin-bottom: (2*$space);
+      @include clearfix;
+
+      &_title {
+        font-size: 1.05*$large-size;
+        line-height: $large-size;
+        //line-height: (4*$space);
+        margin-bottom: (2*$space);
+      }
+
+      &_spacer {
+        height: (6*$space);
+      }
+
+      &.active a {
+        color: $nav_current_link_color;
+      }
+
+      &_label {
+        float: right;
+        padding-right: $space;
+      }
+    }
+
+    // подменю, меню в меню
+    & & {
+    }
+    & & &_item { // пункт в подменю
+      font-size: 0.8em;
+      margin-bottom: (0.8 * $space);
+    }
+    & & &_title { // подзаголовок в подменю
+      font-size: 0.7em;
+    }
+    & & &_item:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__share {
+    padding-top: 1em;
+    padding-bottom: 5em;
+    list-style: none;
+    padding-left: 0;
+
+    a {
+      color: $nav_link_color;
+      text-decoration: none;
+      padding: 0;
+    }
+
+    &_item {
+      padding: 0.5em 0;
+
+      &_github > iframe {
+
+      }
+
+      &_title {
+        font-size: $big-size;
+        line-height: $big-size;
+        padding-top: 2em;
+      }
+    }
+  }
+
+  @media (min-width: 1280px) { /* если разрешение экрана больше 1280 пикселей */
+    // шрифт оставить обычным - там и так всё крупное
+    font-size: 1.1*$text-size;
+  }
+
+  @media (max-width: 1023px) { /* если максимальное разрешение экрана меньше 640 пикселей */
+    left: -260px;
+    font-size: 10px;
+
+    &.opened { // сместить скрытое меню вправо (класс назначается в другой компоненте)
+      left: 0;
+    }
+    &__menu {
+      &_item {
+        margin-bottom: 1em;
+
+        &_title {
+          margin-bottom: 1.25em;
+        }
+
+        &_spacer {
+          height: 1em;
+        }
+      }
+
+      & & { // подменю
+        font-size: 1em;
+      }
+      & & &_item { // пункт в подменю
+        font-size: 1em;
+      }
+    }
+  }
+}

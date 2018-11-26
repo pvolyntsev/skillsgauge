@@ -9,6 +9,9 @@ import { RoutingModule } from './routing/routing.module';
 
 // components
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 // pages
 import { P404Component } from './pages/404/p404.component';
@@ -25,6 +28,9 @@ import { TopicsStore } from './store/topics.store';
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
     P404Component,
     // HomeComponent,
     IntroComponent,
