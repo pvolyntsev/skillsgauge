@@ -26,7 +26,8 @@ export class QuestionnaireLocalStorageService {
   loadTopic(topic: Topic): Topic {
     const topics = this.loadTopicVersions(topic);
     if (topics.length > 0) {
-      return topics[0];
+      // в отсортированном списке взять версию за самую последнюю дату
+      return topics[topics.length - 1];
     }
     return topic;
   }
@@ -35,7 +36,7 @@ export class QuestionnaireLocalStorageService {
     const keys = Object.keys(localStorage);
     const topicKey = topic.key + ':';
     const nowDt = new Date();
-    const versions = keys.reduce((carry, key) => {
+    let versions = keys.reduce((carry, key) => {
       if (key.indexOf(topicKey) === 0) {
         const item = localStorage.getItem(key);
         const [value, expiration] = JSON.parse(item);
@@ -46,6 +47,13 @@ export class QuestionnaireLocalStorageService {
       }
       return carry;
     }, []);
+
+    // сортировка версий по возрастанию даты версии
+    versions = versions.sort((v1: any, v2: any) => {
+      const d1 = 1 * v1.date;
+      const d2 = 1 * v2.date;
+      return d1 > d2 ? 1 : d1 < d2 ? -1 : 0;
+    });
 
     const topics = versions.map((version) => {
       const { selected, terms } = version;
