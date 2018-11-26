@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TopicsStore } from '../../store/topics.store';
 import { Topic } from '../../models/topic.model';
-import {Subscription} from 'rxjs';
-import {Topics} from '../../models/topics.model';
+import { Subscription } from 'rxjs';
+import { Topics } from '../../models/topics.model';
 
 @Component({
   selector: 'app-dashboard',
