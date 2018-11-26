@@ -4,11 +4,6 @@
 @import "../../../scss/variables";
 @import "../../../vendor/hover/scss/hover";
 
-//@import "../app/directives/header";
-//@import "../app/directives/sidebar";
-
-@import "../../../scss/skillbar";
-
 .dashboard {
 
   &__container {
@@ -18,7 +13,7 @@
 
   &__content {
     padding: 0 10px;
-    height: 100%; // высота пересчитывается через javascript
+    height: 100%;
   }
 
   a {

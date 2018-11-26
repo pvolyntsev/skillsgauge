@@ -19,9 +19,9 @@
         <div class="dashboard__skillbars">
           <div class="skillbar" *ngFor="let topic of selectedTopics ">
             <div class="skillbar-bar" [style.width]="(percentageAnim[topic.key] || 0) + '%'">
-              <span class="skillbar-title">{{ topic.title }}</span>
+              <div class="skillbar-title">{{ topic.title }}</div>
             </div>
-            <span class="skillbar-title skillbar-title-short">{{ topic.titleShort }}</span>
+            <div class="skillbar-title skillbar-title-short">{{ topic.titleShort }}</div>
             <div class="skillbar-percent">{{ topic.percentage }}%</div>
           </div>
         </div>

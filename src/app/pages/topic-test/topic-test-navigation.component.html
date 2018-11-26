@@ -6,7 +6,7 @@
       </a>
       <h1 class="topic__header_nav__title"><a routerLink="/topic/{{topic.key}}">{{ topic.title }}</a></h1>
       <div class="topic__header_nav__counter">
-        <span>{{ topic.score }}&nbsp;из&nbsp;{{ topic.maximumScore }}</span>
+        {{ topic.score }}&nbsp;из&nbsp;{{ topic.maximumScore }}
       </div>
       <a class="topic__header_nav_exit" routerLink="/dashboard">
         <img class="icon" src="/assets/img/icons/skill-bar.svg" width="60" height="50">
@@ -16,8 +16,8 @@
     <div class="topic__header">
       <div class="topic__header_title">
         <div class="topic__skillbar skillbar">
-          <div ng-show="topic.score > 0" class="skillbar-bar" style="width:{{ topic.percentage }}%;"></div>
-          <span class="skillbar-percent">{{ topic.percentage }}%</span>
+          <div ng-show="topic.score > 0" class="skillbar-bar" [style.width]="topic.percentage + '%'"></div>
+          <div class="skillbar-percent">{{ topic.percentage }}%</div>
         </div>
       </div>
     </div>
