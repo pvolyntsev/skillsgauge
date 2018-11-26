@@ -8,6 +8,11 @@ $text-color : #96a686;
     padding-bottom: 80px;
   }
 
+  &__titles {
+    background: $background;
+    @include opacity(0.9);
+  }
+
   &__title {
     text-align: center;
     color: $text-color;
@@ -42,6 +47,7 @@ $text-color : #96a686;
 
   &__card {
     width: 220px;
+    min-height: 200px;
     padding: 0 10px;
     text-align: center;
 
@@ -70,6 +76,7 @@ $text-color : #96a686;
   }
 
   &__button {
+    cursor: pointer;
     display: block;
     outline: 0;
 
@@ -124,38 +131,16 @@ $text-color : #96a686;
       margin-bottom: 20px;
     }
 
-    &__cards {
-      width: 300vw;
-      padding: 0;
-    }
-
     &__duplet {
       display: inline-block;
       width: 100vw;
       margin: auto 0;
     }
 
-    &__navi {
-      display: block;
-      width: 80px;
-
-      &_icon_right {
-        position: fixed;
-        right: 0;
-        top: 50%;
-      }
-    }
-
     &__card {
-
       margin: 0 auto;
-      
       &_title {
         margin-top: 10px;
-      }
-
-      &:first-child {
-        margin-bottom: 20px;
       }
     }
   }
@@ -174,12 +159,6 @@ $text-color : #96a686;
       display: flex;
       justify-content: space-between;
     }
-    &__card:last-child {
-      margin-bottom: 40px;
-    }
-    &__navi {
-      display: none;
-    }
   }
 }
 
@@ -196,20 +175,6 @@ $text-color : #96a686;
       display: flex;
       justify-content: space-between;
     }
-    &__card:last-child {
-      margin-bottom: 60px;
-    }
-    &__navi {
-      display: none;
-    }
   }
 }
 
-@media (min-width: 961px) {
-  .intro__card:first-child {
-    margin-bottom: 90px;
-  }
-  .intro__navi {
-    display: none;
-  }
-}
