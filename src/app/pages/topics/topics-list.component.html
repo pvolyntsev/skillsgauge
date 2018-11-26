@@ -1,5 +1,21 @@
 <div class="topics narrow page">
   <div class="topics__container">
+
+    <div class="topics__titles">
+      <h1 class="topics__title">Опросник по стеку технологий для веб-разработчика</h1>
+      <span class="topics__subtitle">для неформальной оценки личного профессионального роста</span>
+    </div>
+
+    <div class="topics__share">
+      <share-buttons
+        [include]="['copy','facebook','twitter','google','vk']"
+        [show]="5"
+        [showIcon]="false"
+        [showText]="true"
+        url="http://skillsgauge.uptlo.com/"
+      ></share-buttons>
+    </div>
+
     <div *ngIf="loading" class="topics__header">
       <h1 class="topics__title_main">Загрузка...</h1>
     </div>

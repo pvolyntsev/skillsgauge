@@ -6,6 +6,17 @@
   <div *ngIf="loaded && topic">
     <div class="container">
       <div class="container-content">
+
+        <div class="topic__share">
+          <share-buttons
+            [include]="['copy','facebook','twitter','google','vk']"
+            [show]="5"
+            [showIcon]="false"
+            [showText]="true"
+            [url]="share_url"
+          ></share-buttons>
+        </div>
+
         <h1 class="topic__title">{{ topic.title }}</h1>
         <ul class="topic__terms_list">
           <li

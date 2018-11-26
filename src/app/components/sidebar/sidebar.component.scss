@@ -89,7 +89,6 @@
   }
 
   &__share {
-    padding-top: 1em;
     padding-bottom: 5em;
     list-style: none;
     padding-left: 0;
@@ -104,13 +103,13 @@
       padding: 0.5em 0;
 
       &_github > iframe {
-
+        display: inline-block;
       }
 
       &_title {
         font-size: $big-size;
         line-height: $big-size;
-        padding-top: 2em;
+        padding: 2em 0 0.5em;
       }
     }
   }

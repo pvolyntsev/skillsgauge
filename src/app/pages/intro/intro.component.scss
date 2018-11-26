@@ -31,8 +31,12 @@ $text-color : #96a686;
     font-size: 18px;
     line-height: 28px;
 
-    margin-bottom: 80px;
     padding: 0 10px;
+  }
+
+  &__share {
+    text-align: center;
+    margin-bottom: 80px;
   }
 
   &__cards {

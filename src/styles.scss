@@ -11,6 +11,8 @@
 @import "./vendor/hover/scss/hover.scss";
 @import "./vendor/css-toggle-switch/toggle-switch";
 
+@import '~@ngx-share/button/themes/default/default-theme';
+
 html { height: 100%; }
 body {
   background: $page-background;

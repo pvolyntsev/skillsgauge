@@ -75,6 +75,10 @@ export class TopicTestComponent implements OnInit, OnDestroy {
     }
   }
 
+  get share_url(): string {
+    return 'http://skillsgauge.uptlo.com/topic/' + this.topic.key;
+  }
+
   onLoadTopicsError(error: any): void {
     console.log('TopicTestComponent:onLoadTopicsError');
     console.log(error);

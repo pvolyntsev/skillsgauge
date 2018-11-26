@@ -2,6 +2,8 @@
 @import "../../../scss/mixins/opacity";
 @import "../../../scss/variables";
 
+$background : #2b2b3d;
+$text-color : #96a686;
 $checked-color: #2196f3;
 $unchecked-color: #c5415e;
 
@@ -15,6 +17,38 @@ $unchecked-color: #c5415e;
     padding-top: 20px;
     padding-bottom: 60px;
   }
+
+  &__titles {
+    background: $background;
+    @include opacity(0.9);
+  }
+
+  &__title {
+    text-align: center;
+    color: $text-color;
+    font-size: 30px;
+    line-height: 30px;
+    padding: 18px;
+    margin: 0;
+  }
+
+  &__subtitle {
+    display: block;
+    text-align: center;
+
+    color: $text-color;
+    @include opacity(0.5);
+    font-size: 18px;
+    line-height: 28px;
+
+    padding: 0 10px;
+  }
+
+  &__share {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
 
   &__list_container { }
 

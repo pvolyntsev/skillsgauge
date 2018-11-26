@@ -12,4 +12,8 @@ export class IntroComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  get share_url(): string {
+    return 'http://skillsgauge.uptlo.com/';
+  }
 }

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 // modules
 import { RoutingModule } from './routing/routing.module';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // components
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ import { TopicsStore } from './store/topics.store';
     HttpClientModule,
     // ReactiveFormsModule,
     FormsModule,
+    ShareButtonsModule.forRoot(),
   ],
   providers: [
     QuestionnaireLocalStorageService,

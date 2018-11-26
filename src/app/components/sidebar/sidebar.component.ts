@@ -23,6 +23,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   topicSearch: Topics = new Topics();
 
   visible: Boolean = true;
+  share_url: string;
 
   constructor(@Inject(DOCUMENT) private document: Document,
               private router: Router,
@@ -41,6 +42,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     ).subscribe((event: NavigationEnd) => {
       console.log(event.url);
       this.visible = event.url === '/dashboard';
+      this.share_url = 'http://skillsgauge.uptlo.com' + event.url;
     });
   }
 
