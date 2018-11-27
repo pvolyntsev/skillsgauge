@@ -21,13 +21,13 @@ export class Topics {
   // количество баллов по выбранным топикам
   // @example: this.score
   public get score(): number {
-    return this.topics.reduce((sum, topic) => sum + topic.score, 0);
+    return this.selectedTopics.reduce((sum, topic) => sum + topic.score, 0);
   }
 
   // максимальное количество баллов по выбранным топикам
   // @example: this.maximumScore
   public get maximumScore(): number {
-    return this.topics.reduce((sum, topic) => sum + topic.maximumScore, 0);
+    return this.selectedTopics.reduce((sum, topic) => sum + topic.maximumScore, 0);
   }
 
   // процент достижения по всем топикам
@@ -61,7 +61,7 @@ export class Topics {
   public prevTopic(key: string): Topic {
     let prev = null;
     let temp = null;
-    this.topics.forEach((topic) => {
+    this.selectedTopics.forEach((topic) => {
       if (topic.selected) {
         if (topic.key === key) {
           prev = temp;
@@ -76,7 +76,7 @@ export class Topics {
   public nextTopic(key: string): Topic {
     let next = null;
     let temp = null;
-    this.topics.forEach((topic) => {
+    this.selectedTopics.forEach((topic) => {
       if (topic.selected) {
         if (temp && temp.key === key) {
           next = topic;
