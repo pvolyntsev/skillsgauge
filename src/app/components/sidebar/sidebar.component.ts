@@ -3,8 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { TopicsStore } from '../../stores';
-import { Topics, Topic } from '../../models';
+import { TopicsStore, UserStore } from '../../stores';
+import { Topics, Topic, User } from '../../models';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,19 +21,30 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private topicSearchSubscription: Subscription;
   topicSearch: Topics = new Topics();
 
+  private userSubscription: Subscription;
+  user: User;
+
   visible: Boolean = true;
   share_url: string;
 
   constructor(@Inject(DOCUMENT) private document: Document,
               private router: Router,
               private renderer: Renderer2,
-              private topicsStore: TopicsStore) {
+              private topicsStore: TopicsStore,
+              private userStore: UserStore) {
     // обработчик на загрузку топиков
     this.topicSearchSubscription = topicsStore.awaitTopics()
       .subscribe(
         (topics) => { this.onLoadTopicsSuccess(topics); },
         (error) => { this.onLoadTopicsError(error); }
       );
+
+    // обработчик на загрузку пользователя
+    this.userSubscription = userStore.awaitUser()
+      .subscribe(
+        user => this.user = user,
+      (error) => { console.log(error); }
+    );
 
     // обработчик на смену URL
     router.events.pipe(

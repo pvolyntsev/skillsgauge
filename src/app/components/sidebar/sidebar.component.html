@@ -1,6 +1,7 @@
 <div class="sidebar" [class.opened]="opened" *ngIf="visible">
   <nav class="sidebar-nav">
     <ul class="sidebar__menu">
+      <li class="sidebar__menu_item" *ngIf="user && user.name">{{ user.name }}</li>
       <li class="sidebar__menu_item_title"><a routerLink="/dashboard">Твой опросник</a></li>
       <li class="sidebar__menu_item">
         <ul class="sidebar__menu">
