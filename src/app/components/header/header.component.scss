@@ -1,0 +1,46 @@
+@import "../../../scss/mixins/transition";
+@import "../../../scss/mixins/clearfix";
+@import "../../../scss/variables";
+
+.header {
+  $block-background: #49A15D;
+  //$nav_link_color: $link-light-color;
+  //$nav_link_hover_color: $link-light-color;
+  //$nav_current_link_color: $link-light-color;
+  //$nav_current_link_hover_color: $link-light-color;
+  $space: (10px / $text-size * 1em);
+
+  background-color: #2196f3;
+  padding-left: $space;
+  //width: 100%;
+  //min-width: 210px;
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  @include transition(left 0.5s);
+  @include clearfix();
+
+  .header__menu {
+    display: inline-block;
+  }
+
+  .header__menu_right {
+    float: right;
+  }
+
+  .header__menu {
+    margin: 0;
+    padding: 0 1em;
+  }
+
+  .header__menu_item {
+    padding: 0 0.25em;
+    margin: 0;
+    list-style: none;
+    display: inline-block;
+    line-height: 40px;
+  }
+}
