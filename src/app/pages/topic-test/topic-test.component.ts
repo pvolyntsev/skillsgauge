@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TopicsStore, OwnTopicsStore } from '../../stores';
+import { TopicsStore } from '../../stores';
 import { QuestionnaireLocalStorageService } from '../../services';
 import { Topics, Topic } from '../../models';
 
@@ -21,7 +21,6 @@ export class TopicTestComponent implements OnInit, OnDestroy {
   loading: Boolean = false;
 
   constructor(private topicsStore: TopicsStore,
-              private ownTopicsStore: OwnTopicsStore,
               private localStorage: QuestionnaireLocalStorageService,
               private router: Router,
               private route: ActivatedRoute) {

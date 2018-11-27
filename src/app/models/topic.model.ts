@@ -1,5 +1,6 @@
 import { TopicTerm } from './topic-term.model';
 import { Answer } from './answer.model';
+import { User } from './user.model';
 
 const topicKeyClearer = new RegExp('[^a-zA-Z0-9]', 'g');
 
@@ -12,11 +13,13 @@ export class Topic {
   terms: TopicTerm[] = [];
   answers: Answer[] = [];
   selected: Boolean = false;
+  owner: User;
 
   public static fromObject(obj: any): Topic {
     const instance = new Topic();
     const answers = obj.answers.map(answer => Answer.fromObject(answer));
     const terms = obj.terms.map(term => TopicTerm.fromObject(instance, term));
+    const user = User.fromObject(obj.user);
     return Object.assign(instance, {
       ...obj,
       terms,

@@ -58,12 +58,6 @@ export class TopicsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  // выполняет переход на страницу создания нового топика
-  createMyTopic(): void {
-    // const topic = this.topicsStore.createTopic();
-    // this.router.navigateByUrl('/edit/' + topic.key);
-  }
-
   onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicsListComponent:onLoadTopicsSuccess');
     this._topics = topics;

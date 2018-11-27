@@ -8,8 +8,10 @@ import { QuestionnaireLocalStorageService, QuestionnaireService } from '../servi
 @Injectable()
 export class TopicsStore {
   private _topics = new BehaviorSubject(new Topics());
-  private loaded = false;
-  private loading = false;
+  private topicsLoaded = false;
+  private topicsLoading = false;
+  private ownTopicsLoaded = false;
+  private ownTopicsLoading = false;
 
   constructor(private questionnaire: QuestionnaireService,
               private localStorage: QuestionnaireLocalStorageService) { }
@@ -17,6 +19,14 @@ export class TopicsStore {
   // current value
   get topics(): Topics {
     return this._topics.getValue();
+  }
+
+  get loaded(): Boolean {
+    return this.topicsLoaded && this.ownTopicsLoaded;
+  }
+
+  get loading(): Boolean {
+    return this.topicsLoading || this.ownTopicsLoading;
   }
 
   awaitTopics(): Observable<Topics> {
@@ -28,22 +38,33 @@ export class TopicsStore {
 
   loadTopics() {
     console.log('TopicsStore:loadTopics');
-    this.loaded = true;
-    this.loading = true;
+    this.topicsLoaded = false;
+    this.topicsLoading = true;
+    this.ownTopicsLoaded = false;
+    this.ownTopicsLoading = true;
+
     this.questionnaire.topics()
       .subscribe(
         this.onLoadTopicsSuccess.bind(this),
         this.onLoadTopicsError.bind(this)
+      );
+
+    this.questionnaire.ownTopics()
+      .subscribe(
+        this.onLoadOwnTopicsSuccess.bind(this),
+        this.onLoadOwnTopicsError.bind(this)
       );
   }
 
   onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicsStore:onLoadTopicsSuccess');
 
-    topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
-    this._topics.next(topics);
-    this.loaded = true;
-    this.loading = false;
+    // Можно бы ввести Mutex но NodeJS однопоточный
+    const _topics = this.topics;
+    _topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
+    this._topics.next(_topics);
+    this.topicsLoaded = true;
+    this.topicsLoading = false;
   }
 
   onLoadTopicsError(error: any): void {
@@ -51,7 +72,27 @@ export class TopicsStore {
     console.log(error);
 
     this._topics.error(error);
-    this.loaded = false;
-    this.loading = false;
+    this.topicsLoaded = false;
+    this.topicsLoading = false;
+  }
+
+  onLoadOwnTopicsSuccess(topics: Topics): void {
+    console.log('TopicsStore:onLoadOwnTopicsSuccess');
+
+    // Можно бы ввести Mutex но NodeJS однопоточный
+    const _topics = this.topics;
+    _topics.ownTopics = topics.ownTopics.map(t => this.localStorage.loadTopic(t));
+    this._topics.next(_topics);
+    this.ownTopicsLoaded = true;
+    this.ownTopicsLoading = false;
+  }
+
+  onLoadOwnTopicsError(error: any): void {
+    console.log('TopicsStore:onLoadTopicsError');
+    console.log(error);
+
+    this._topics.error(error);
+    this.ownTopicsLoaded = false;
+    this.ownTopicsLoading = false;
   }
 }

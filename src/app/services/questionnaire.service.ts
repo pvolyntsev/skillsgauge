@@ -23,6 +23,13 @@ export class QuestionnaireService {
       );
   }
 
+  ownTopics(): Observable<Topics> {
+    return this.http.get<Topics>(`${this.endpoint}/questionnaire/own-topics.json`)
+      .pipe(
+        map(this.decodeAnswer)
+      );
+  }
+
   decodeAnswer(obj: any): Topics {
     return Topics.fromObject(obj);
   }

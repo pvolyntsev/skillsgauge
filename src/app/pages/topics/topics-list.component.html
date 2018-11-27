@@ -35,6 +35,18 @@
             *ngFor="let t of topics" [topic]="t"></li>
         </ul>
       </div>
+
+      <div class="topics__header">
+        <h1 class="topics__title_main">Мои разделы:</h1>
+      </div>
+      <div class="topics__list_container">
+        <ul class="topics__list">
+          <li
+            appTopicsListItem
+            class="topics__topic"
+            *ngFor="let t of ownTopics" [topic]="t"></li>
+        </ul>
+      </div>
       <a class="topics__button"
          (click)="gotoFirstIncomplete()"
          [ngClass]='{ "topics__button_active": hasSelectedTopic }'>Начать тестирование</a>

@@ -7,6 +7,11 @@ $text-color : #96a686;
 $checked-color: #2196f3;
 $unchecked-color: #c5415e;
 
+$button-background: #c5415f;
+$button-color: #edc6cf;
+$button-secondary-background: #66B879;
+$button-secondary-color: #ffffff;
+
 .topics {
 
   &__container {
@@ -52,6 +57,22 @@ $unchecked-color: #c5415e;
 
   &__list_container { }
 
+  &__list__button_add {
+    margin-top: 1em;
+    display: inline-block;
+    cursor: pointer;
+    padding: 1em;
+    line-height: 2em;
+    background: $button-secondary-background;
+    color: $button-secondary-color;
+
+    .icon {
+      width: 2em;
+      height: 2em;
+      margin-right: 1em;
+    }
+  }
+
   &__list {
     list-style: none;
     margin: 0;
@@ -86,11 +107,11 @@ $unchecked-color: #c5415e;
     font-size: 25px;
     line-height: 70px;
 
-    background: #c5415f;
+    background: $button-background;
     text-decoration: none;
     @include opacity(0.9);
     text-align: center;
-    color: #edc6cf;
+    color: $button-color;
 
     height: 70px;
 
