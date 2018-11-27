@@ -16,7 +16,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 // pages
 import { P404Component } from './pages/404/p404.component';
-import { HomeComponent } from './pages/home/home.component';
 import { IntroComponent } from './pages/intro/intro.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TopicsListComponent, TopicsListItemComponent } from './pages/topics';
@@ -33,7 +32,6 @@ import { TopicsStore } from './store/topics.store';
     FooterComponent,
     SidebarComponent,
     P404Component,
-    // HomeComponent,
     IntroComponent,
     DashboardComponent,
     TopicsListComponent,
