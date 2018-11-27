@@ -4,8 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TopicsStore } from '../../store/topics.store';
 import { QuestionnaireLocalStorageService } from '../../services';
-import { Topics} from '../../models/topics.model';
-import { Topic } from '../../models/topic.model';
+import { Topics, Topic } from '../../models';
 
 @Component({
   selector: 'app-topic-test',
