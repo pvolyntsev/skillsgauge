@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TopicsStore } from '../../store/topics.store';
-import { Topic } from '../../models/topic.model';
-import { Topics } from '../../models/topics.model';
+import { Topic, Topics } from '../../models';
 
 @Component({
   selector: 'app-topics-list',

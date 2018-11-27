@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { QuestionnaireLocalStorageService } from '../../services/questionnaire-local-storage.service';
-import { TopicTerm } from '../../models/topic-term.model';
-import { AnswerVariant } from '../../models/answer-variant.model';
+import { QuestionnaireLocalStorageService } from '../../services';
+import { TopicTerm, Answer } from '../../models';
 
 @Component({
   selector: '[appTopicTestTerm]', // tslint:disable-line
@@ -14,11 +13,11 @@ export class TopicTestTermComponent {
 
   constructor(private localStorage: QuestionnaireLocalStorageService) { }
 
-  get answers(): AnswerVariant[] {
+  get answers(): Answer[] {
     return this.term.topic.answers;
   }
 
-  setAnswer(answer: AnswerVariant): void {
+  setAnswer(answer: Answer): void {
     if (this.term.answer !== answer) {
       this.term.answer = answer;
       this.saveTopic();

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { QuestionnaireLocalStorageService } from '../../services';
-import { Topic } from '../../models/topic.model';
+import { Topic } from '../../models';
 
 @Component({
   selector: '[appTopicsListItem]', // tslint:disable-line

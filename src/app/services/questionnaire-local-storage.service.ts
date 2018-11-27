@@ -57,7 +57,7 @@ export class QuestionnaireLocalStorageService {
 
     const topics = versions.map((version) => {
       const { selected, terms } = version;
-      const tempTopic = Object.assign(new Topic(), { ...topic, selected }); // TODO answerVersion: version.version
+      const tempTopic = Topic.fromObject({ ...topic, selected }); // TODO answerVersion: version.version
       const answersIdx = tempTopic.answers.reduce((carry, answer) => { carry[answer.score] = answer; return carry; }, {});
 
       tempTopic.terms.forEach((term) => {
