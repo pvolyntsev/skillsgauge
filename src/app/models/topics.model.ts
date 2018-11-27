@@ -1,32 +1,15 @@
 import { Topic } from './topic.model';
-import { TopicTerm } from './topic-term.model';
-import { AnswerVariant } from './answer-variant.model';
-
-function topicMapper(obj): Topic {
-  const instance = new Topic();
-  const answers = obj.answers.map(answer => answerMapper(answer));
-  const terms = obj.terms.map(term => termMapper(instance, term));
-  return Object.assign(instance, {
-    ...obj,
-    terms,
-    answers,
-  });
-}
-
-function termMapper(topic: Topic, obj): TopicTerm {
-  return Object.assign(new TopicTerm(topic), obj);
-}
-
-function answerMapper(obj): AnswerVariant {
-  return Object.assign(new AnswerVariant(), obj);
-}
 
 export class Topics {
   topics: Topic[] = [];
 
-  public assign(obj: any): Topics {
-    this.topics = obj.topics.map(topic => topicMapper(topic));
-    return this;
+  public static fromObject(obj: any): Topics {
+    const instance = new Topics();
+    const topics = (obj.topics || []).map(topic => Topic.fromObject(topic));
+    return Object.assign(instance, {
+      ...obj,
+      topics,
+    });
   }
 
   // выбранные топики

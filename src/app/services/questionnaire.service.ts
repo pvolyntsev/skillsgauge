@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Topics } from '../models/topics.model';
+import { Topics } from '../models';
 
 @Injectable()
 export class QuestionnaireService {
@@ -24,6 +24,6 @@ export class QuestionnaireService {
   }
 
   decodeAnswer(obj: any): Topics {
-    return new Topics().assign(obj);
+    return Topics.fromObject(obj);
   }
 }

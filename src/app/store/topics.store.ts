@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Topics } from '../models/topics.model';
+import { Topics } from '../models';
 import { QuestionnaireLocalStorageService, QuestionnaireService } from '../services';
 
 // https://www.lucidchart.com/techblog/2016/11/08/angular-2-and-observables-data-sharing-in-a-multi-view-application/

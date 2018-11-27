@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Topic } from '../models/topic.model';
+import { Topic } from '../models';
 
 @Injectable()
 export class QuestionnaireLocalStorageService {

@@ -1,5 +1,5 @@
 import { TopicTerm } from './topic-term.model';
-import { AnswerVariant } from './answer-variant.model';
+import { Answer } from './answer.model';
 
 const topicKeyClearer = new RegExp('[^a-zA-Z0-9]', 'g');
 
@@ -10,8 +10,19 @@ export class Topic {
   titleShort = ''; // "ООП",
   version: string;
   terms: TopicTerm[] = [];
-  answers: AnswerVariant[] = [];
+  answers: Answer[] = [];
   selected: Boolean = false;
+
+  public static fromObject(obj: any): Topic {
+    const instance = new Topic();
+    const answers = obj.answers.map(answer => Answer.fromObject(answer));
+    const terms = obj.terms.map(term => TopicTerm.fromObject(instance, term));
+    return Object.assign(instance, {
+      ...obj,
+      terms,
+      answers,
+    });
+  }
 
   public get htmlId(): string {
     return [

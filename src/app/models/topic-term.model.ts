@@ -1,18 +1,28 @@
 import { URLResource } from './url-resource.model';
-import { AnswerVariant } from './answer-variant.model';
+import { Answer } from './answer.model';
 import { Topic } from './topic.model';
 
 export class TopicTerm {
+  private readonly _topic: Topic;
+
   key = '';
   title = '';
   description: string;
   hint: string;
   links: URLResource[];
-  answer: AnswerVariant = new AnswerVariant();
-  private _topic: Topic;
+  answer: Answer = new Answer();
 
   constructor(topic) {
     this._topic = topic;
+  }
+
+  public static fromObject(topic: Topic, obj: any): TopicTerm {
+    const instanse = new TopicTerm(topic);
+    const links = (obj.links || []).map(link => URLResource.fromObject(link));
+    return Object.assign(instanse, {
+      ...obj,
+      links,
+    });
   }
 
   // example: this.score
