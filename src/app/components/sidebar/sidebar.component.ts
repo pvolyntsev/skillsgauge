@@ -65,6 +65,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.topicSearchSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
   get selectedTopics(): Topic[] {
