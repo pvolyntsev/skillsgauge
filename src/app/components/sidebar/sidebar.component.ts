@@ -3,9 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { TopicsStore } from '../../store/topics.store';
-import { Topic } from '../../models/topic.model';
-import { Topics } from '../../models/topics.model';
+import { TopicsStore } from '../../stores';
+import { Topics, Topic } from '../../models';
 
 @Component({
   selector: 'app-sidebar',

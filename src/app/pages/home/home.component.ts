@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TopicsStore } from '../../store/topics.store';
-import { Topics } from '../../models/topics.model';
+import { TopicsStore } from '../../stores/';
+import { Topics } from '../../models';
 
 @Component({
   selector: 'app-home',

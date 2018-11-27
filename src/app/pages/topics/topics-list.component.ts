@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TopicsStore } from '../../store/topics.store';
+import { TopicsStore } from '../../stores';
 import { Topic, Topics } from '../../models';
 
 @Component({
@@ -10,8 +10,8 @@ import { Topic, Topics } from '../../models';
   styleUrls: ['./topics-list.component.scss']
 })
 export class TopicsListComponent implements OnInit, OnDestroy {
-  private topicSearchSubscription: Subscription;
-  topicSearch: Topics = new Topics();
+  private readonly _topicsSubscription: Subscription;
+  private _topics: Topics = new Topics();
   loaded: Boolean = false;
   loading: Boolean = true;
 
@@ -19,7 +19,7 @@ export class TopicsListComponent implements OnInit, OnDestroy {
               private router: Router) {
 
     // обработчик на загрузку топиков
-    this.topicSearchSubscription = topicsStore.awaitTopics()
+    this._topicsSubscription = topicsStore.awaitTopics()
       .subscribe(
         (topics) => { this.onLoadTopicsSuccess(topics); },
         (error) => { this.onLoadTopicsError(error); }
@@ -31,31 +31,42 @@ export class TopicsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.topicSearchSubscription.unsubscribe();
+    this._topicsSubscription.unsubscribe();
   }
 
   // @example this.topics
   get topics(): Topic[] {
-    return this.topicSearch.topics;
+    return this._topics.topics;
+  }
+
+  // @examle: this.myTopics
+  get ownTopics(): Topic[] {
+    return this._topics.ownTopics;
   }
 
   // есть ли выбранные топики
   // @examle: this.hasSelectedTopic
   get hasSelectedTopic(): Boolean {
-    return this.topicSearch.selectedTopics.length > 0;
+    return this._topics.selectedTopics.length > 0;
   }
 
   // выполняет переход на первый топик, который надо заполнить
   gotoFirstIncomplete(): void {
-    const topic = this.topicSearch.firstIncomplete;
+    const topic = this._topics.firstIncomplete;
     if (topic) {
       this.router.navigateByUrl('/topic/' + topic.key);
     }
   }
 
+  // выполняет переход на страницу создания нового топика
+  createMyTopic(): void {
+    // const topic = this.topicsStore.createTopic();
+    // this.router.navigateByUrl('/edit/' + topic.key);
+  }
+
   onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicsListComponent:onLoadTopicsSuccess');
-    this.topicSearch = topics;
+    this._topics = topics;
     this.loaded = this.topics.length > 0;
     this.loading = false;
   }
