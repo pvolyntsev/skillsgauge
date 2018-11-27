@@ -11,7 +11,7 @@ import { UserStore } from '../../stores';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private userSubscription: Subscription;
+  private readonly _userSubscription: Subscription;
   user: User;
 
   public visible = false;
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
 
     // обработчик на загрузку пользователя
-    this.userSubscription = userStore.awaitUser()
+    this._userSubscription = userStore.awaitUser()
       .subscribe(
         user => this.user = user,
         (error) => { console.log(error); }
@@ -40,6 +40,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.userSubscription.unsubscribe();
+    this._userSubscription.unsubscribe();
   }
 }

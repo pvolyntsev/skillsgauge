@@ -18,10 +18,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @Input()
   opened: Boolean = false;
 
-  private topicSearchSubscription: Subscription;
+  private readonly _topicSearchSubscription: Subscription;
   topicSearch: Topics = new Topics();
 
-  private userSubscription: Subscription;
+  private readonly _userSubscription: Subscription;
   user: User;
 
   visible: Boolean = true;
@@ -33,14 +33,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
               private topicsStore: TopicsStore,
               private userStore: UserStore) {
     // обработчик на загрузку топиков
-    this.topicSearchSubscription = topicsStore.awaitTopics()
+    this._topicSearchSubscription = topicsStore.awaitTopics()
       .subscribe(
         (topics) => { this.onLoadTopicsSuccess(topics); },
         (error) => { this.onLoadTopicsError(error); }
       );
 
     // обработчик на загрузку пользователя
-    this.userSubscription = userStore.awaitUser()
+    this._userSubscription = userStore.awaitUser()
       .subscribe(
         user => this.user = user,
       (error) => { console.log(error); }
@@ -64,8 +64,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.topicSearchSubscription.unsubscribe();
-    this.userSubscription.unsubscribe();
+    this._topicSearchSubscription.unsubscribe();
+    this._userSubscription.unsubscribe();
   }
 
   get selectedTopics(): Topic[] {
