@@ -34,8 +34,8 @@ export class TopicsStore {
       || this.recommendedTopicsLoading;
   }
 
-  awaitTopics(topicsKeys: string[]): Observable<Topics> {
-    if (!this.loaded && !this.loading) {
+  awaitTopics(topicsKeys?: string[]): Observable<Topics> {
+    if (topicsKeys !== undefined && !this.loaded && !this.loading) {
       this.loadTopics(topicsKeys);
       this.loadOwnTopics(topicsKeys);
     }
