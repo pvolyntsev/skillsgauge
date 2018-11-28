@@ -20,7 +20,7 @@ import { P404Component } from './pages/404/p404.component';
 import { IntroComponent } from './pages/intro/intro.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TopicsListComponent, TopicsListItemComponent } from './pages/topics';
-import { TopicTestComponent, TopicTestTermComponent, TopicTestNavigationComponent } from './pages/topic-test';
+import { TopicTestModule} from './pages/topic-test';
 
 // сервисы
 import { QuestionnaireService, QuestionnaireLocalStorageService } from './services';
@@ -35,9 +35,6 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
     DashboardComponent,
     TopicsListComponent,
     TopicsListItemComponent,
-    TopicTestComponent,
-    TopicTestTermComponent,
-    TopicTestNavigationComponent,
   ],
   imports: [
     RoutingModule,
@@ -47,6 +44,7 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
     FormsModule,
     ShareButtonsModule.forRoot(),
     MainLayoutModule,
+    TopicTestModule,
   ],
   providers: [
     QuestionnaireLocalStorageService,
