@@ -1,5 +1,5 @@
 import { URLResource } from './url-resource.model';
-import { Answer } from './answer.model';
+import { Choice } from './choice.model';
 import { Topic } from './topic.model';
 
 export class TopicTerm {
@@ -10,7 +10,6 @@ export class TopicTerm {
   description: string;
   hint: string;
   links: URLResource[];
-  answer: Answer = new Answer();
 
   constructor(topic) {
     this._topic = topic;
