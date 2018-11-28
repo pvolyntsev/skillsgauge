@@ -72,20 +72,24 @@
           "title": "метод класса"
         }
       ],
-      "answers": [
+      "choices": [
         {
+          "key": 0,
           "title": "Мимо",
           "score": 0
         },
         {
+          "key": 1,
           "title": "Слышал",
           "score": 1
         },
         {
+          "key": 2,
           "title": "Знаю",
           "score": 2
         },
         {
+          "key": 4,
           "title": "Использовал",
           "score": 4
         }
@@ -219,20 +223,24 @@
           "title": "венгерская нотация"
         }
       ],
-      "answers": [
+      "choices": [
         {
+          "key": 0,
           "title": "Мимо",
           "score": 0
         },
         {
+          "key": 1,
           "title": "Слышал",
           "score": 1
         },
         {
+          "key": 2,
           "title": "Знаю",
           "score": 2
         },
         {
+          "key": 4,
           "title": "Использовал",
           "score": 4
         }
