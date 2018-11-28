@@ -3,8 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { TopicsStore, UserStore } from '../../stores';
-import { Topics, Topic, User } from '../../models';
+import { AnswersStore, TopicsStore, UserStore } from '../../stores';
+import { Topics, Topic, User, TopicsAnswers } from '../../models';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,11 +18,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   @Input()
   opened: Boolean = false;
 
-  private readonly _topicSearchSubscription: Subscription;
-  topicSearch: Topics = new Topics();
-
   private readonly _userSubscription: Subscription;
   user: User;
+
+  private readonly _answersSubscription: Subscription;
+  private _answers: TopicsAnswers;
 
   visible: Boolean = true;
   share_url: string;
@@ -31,19 +31,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
               private router: Router,
               private renderer: Renderer2,
               private topicsStore: TopicsStore,
+              private answersStore: AnswersStore,
               private userStore: UserStore) {
-    // обработчик на загрузку топиков
-    this._topicSearchSubscription = topicsStore.awaitTopics()
+    // обработчик на загрузку ответов
+    this._answersSubscription = answersStore.awaitAnswers()
       .subscribe(
-        (topics) => { this.onLoadTopicsSuccess(topics); },
-        (error) => { this.onLoadTopicsError(error); }
+        answers => { this._answers = answers; },
+        (error) => { /* console.log(error); */ }
       );
 
     // обработчик на загрузку пользователя
     this._userSubscription = userStore.awaitUser()
       .subscribe(
         user => this.user = user,
-      (error) => { console.log(error); }
+      (error) => { /* console.log(error); */ }
     );
 
     // обработчик на смену URL
@@ -64,41 +65,31 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this._topicSearchSubscription.unsubscribe();
+    this._answersSubscription.unsubscribe();
     this._userSubscription.unsubscribe();
   }
 
   get selectedTopics(): Topic[] {
-    return this.topicSearch.selectedTopics;
+    return this.answersStore.selectedTopics;
   }
 
   get score(): number {
-    return this.topicSearch.score;
+    return this.answersStore.score;
   }
 
   get maximumScore(): number {
-    return this.topicSearch.maximumScore;
+    return this.answersStore.maximumScore;
   }
 
   get percentage(): number {
-    return this.topicSearch.percentage;
+    return this.answersStore.percentage;
   }
 
   // выполняет переход на первый топик, который надо заполнить
   gotoFirstIncomplete(): void {
-    const topic = this.topicSearch.firstIncomplete;
+    const topic = this.answersStore.firstIncomplete;
     if (topic) {
       this.router.navigateByUrl('/topic/' + topic.key);
     }
-  }
-
-  onLoadTopicsSuccess(topics: Topics): void {
-    console.log('SidebarComponent:onLoadTopicsSuccess');
-    this.topicSearch = topics;
-  }
-
-  onLoadTopicsError(error: any): void {
-    console.log('SidebarComponent:onLoadTopicsError');
-    console.log(error);
   }
 }
