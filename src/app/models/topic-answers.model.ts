@@ -79,10 +79,9 @@ export class TopicAnswers {
   }
 
   toObject(): object {
+    const { key, date, score, maximumScore, selected, answers } = this;
     return {
-      ...this,
-      score: this.score,
-      maximumScore: this.maximumScore,
+      key, date, score, maximumScore, maximumScore, score, selected, answers,
     };
   }
 
