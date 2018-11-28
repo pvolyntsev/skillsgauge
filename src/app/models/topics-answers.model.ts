@@ -1,5 +1,6 @@
 import { Topic } from './topic.model';
 import { TopicAnswers } from './topic-answers.model';
+import deleteProperty = Reflect.deleteProperty;
 
 export class TopicsAnswers {
   private _topicAnswersPlain = [];
@@ -9,6 +10,7 @@ export class TopicsAnswers {
   pushPlainAnswers(answers: any): void {
     if (answers.hasOwnProperty('key')) { // TODO более тщательная проверка
       this._topicAnswersPlain[answers.key] = answers;
+      deleteProperty(this._topicAnswers, answers.key);
     }
   }
 
