@@ -1,0 +1,71 @@
+@import "../../../scss/mixins/transition";
+@import "../../../scss/mixins/clearfix";
+@import "../../../scss/variables";
+
+.footer {
+  $block-background: #2196f3;
+  $nav_current_link_color: $link-light-color;
+
+  background-color: $block-background;
+  height: 30px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 -1px 4px rgba(0,0,0,0.5);
+  @include transition(left 0.5s);
+  @include clearfix();
+
+  * {
+    color: $nav_current_link_color;
+    font-size: 14px;
+    text-decoration: none;
+    font-style: normal;
+  }
+  a {
+    color: $nav_current_link_color;
+    font-size: 14px;
+    text-decoration: none;
+    font-style: normal;
+  }
+
+  &__menu {
+    display: inline-block;
+  }
+
+  &__menu_right {
+    float: right;
+  }
+
+  &__menu {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__menu_item {
+    cursor: pointer;
+    padding: 0 0.5em;
+    margin: 2px;
+    list-style: none;
+    display: inline-block;
+    line-height: 24px;
+    border: 1px solid darken($block-background, 10%);
+    @include transition(border 0.25s);
+
+    &:hover {
+      border-color: $nav_current_link_color;
+    }
+  }
+
+  .application-cooked .ng-fa-icon {
+    padding: 0 0.25em;
+    @include transition(color 0.5s);
+  }
+
+  .application-cooked:hover .ng-fa-icon {
+    color: red;
+  }
+}
