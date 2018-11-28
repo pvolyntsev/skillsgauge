@@ -99,25 +99,44 @@ export class AnswersStore {
 
   // все топики
   public get topics(): Topic[] {
-    return [ ...this._topics.topics, ...this._topics.ownTopics ];
+    const topics = [
+      ...this._topics.topics,
+      ...this._topics.ownTopics,
+      ...this._topics.recommendedTopics,
+    ];
+    return topics.reduce((carry, topic) => {
+      if (!carry.find(t => t.key === topic.key)) {
+        carry.push(topic);
+      }
+      return carry;
+    }, []);
   }
 
   // выбранные топики
   // @example: this.selectedTopics
   public get selectedTopics(): Topic[] {
-    return this.topics.filter(topic => this.answers.getTopicAnswers(topic).selected === true);
+    return this.topics.filter(topic => {
+      const answers = this.answers.getTopicAnswers(topic);
+      return answers && answers.selected;
+    });
   }
 
   // количество баллов по выбранным топикам
   // @example: this.score
   public get score(): number {
-    return this.selectedTopics.reduce((sum, topic) => sum + this.answers.getTopicAnswers(topic).score, 0);
+    return this.selectedTopics.reduce((sum, topic) => {
+      const answers = this.answers.getTopicAnswers(topic);
+      return sum + answers ? answers.score : 0;
+    }, 0);
   }
 
   // максимальное количество баллов по выбранным топикам
   // @example: this.maximumScore
   public get maximumScore(): number {
-    return this.selectedTopics.reduce((sum, topic) => sum + this.answers.getTopicAnswers(topic).maximumScore, 0);
+    return this.selectedTopics.reduce((sum, topic) => {
+      const answers = this.answers.getTopicAnswers(topic);
+      return sum + answers ? answers.maximumScore : 0;
+    }, 0);
   }
 
   // процент достижения по всем топикам
@@ -135,14 +154,14 @@ export class AnswersStore {
     // 1. если есть совсем незаполненный топик
     let incompleteTopic = this.selectedTopics.find(topic => {
       const answers = this.answers.getTopicAnswers(topic);
-      return answers.selected && answers.score === 0;
+      return answers && answers.selected && answers.score === 0;
     });
 
     // 2. есть есть неполностью заполненный топик
     if (!incompleteTopic) {
       incompleteTopic = this.selectedTopics.find(topic => {
         const answers = this.answers.getTopicAnswers(topic);
-        return answers.score < answers.maximumScore;
+        return answers && answers.score < answers.maximumScore;
       });
     }
 
@@ -152,31 +171,5 @@ export class AnswersStore {
     }
 
     return incompleteTopic;
-  }
-
-  // предыдущий выбранный топик
-  public prevTopic(key: string): Topic {
-    let prev = null;
-    let temp = null;
-    this.selectedTopics.forEach((topic) => {
-      if (topic.key === key) {
-        prev = temp;
-      }
-      temp = topic;
-    });
-    return prev;
-  }
-
-  // следующий выбранный топик
-  public nextTopic(key: string): Topic {
-    let next = null;
-    let temp = null;
-    this.selectedTopics.forEach((topic) => {
-      if (temp && temp.key === key) {
-        next = topic;
-      }
-      temp = topic;
-    });
-    return next;
   }
 }

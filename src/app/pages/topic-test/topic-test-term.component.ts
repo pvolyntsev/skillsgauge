@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { QuestionnaireLocalStorageService } from '../../services';
-import { TopicTerm, Answer } from '../../models';
+import { TopicTerm, Choice, TopicAnswers } from '../../models';
 
 @Component({
   selector: '[appTopicTestTerm]', // tslint:disable-line
@@ -11,20 +11,32 @@ export class TopicTestTermComponent {
   @Input()
   term: TopicTerm;
 
+  @Input()
+  answers: TopicAnswers;
+
   constructor(private localStorage: QuestionnaireLocalStorageService) { }
 
-  get answers(): Answer[] {
-    return this.term.topic.answers;
+  get choices(): Choice[] {
+    return this.term.topic.choices;
   }
 
-  setAnswer(answer: Answer): void {
-    if (this.term.answer !== answer) {
-      this.term.answer = answer;
-      this.saveTopic();
+  get defaultChoice(): Choice {
+    return this.term.topic.defaultChoice;
+  }
+
+  get answerKey(): string {
+    return this.answers.getAnswerByTerm(this.term, this.defaultChoice).key;
+  }
+
+  setAnswer(answer: Choice): void {
+    if (this.answerKey !== answer.key) {
+      this.answers.setAnswerByTerm(answer, this.term);
+      this.saveAnswers();
     }
   }
 
-  saveTopic(): void {
-    this.localStorage.saveTopic(this.term.topic);
+  saveAnswers(): void {
+    // TODO HTTP ?
+    this.localStorage.saveTopicAnswers(this.answers);
   }
 }

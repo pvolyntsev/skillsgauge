@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TopicsStore } from '../../stores';
+import { AnswersStore, TopicsStore } from '../../stores';
 import { QuestionnaireLocalStorageService } from '../../services';
-import { Topics, Topic } from '../../models';
+import { Topics, Topic, TopicAnswers, TopicsAnswers } from '../../models';
 
 @Component({
   selector: 'app-topic-test',
@@ -12,24 +12,35 @@ import { Topics, Topic } from '../../models';
   styleUrls: ['./topic-test.component.scss']
 })
 export class TopicTestComponent implements OnInit, OnDestroy {
-  private topicSearchSubscription: Subscription;
-  topicSearch: Topics = new Topics();
+  private readonly _topicsSubscription: Subscription;
+  private _topics: Topics = new Topics();
+
+  private readonly _answersSubscription: Subscription;
+  private _answers: TopicsAnswers;
+
   topic: Topic;
   nextTopic: Topic; // следующий выбранный топик
   prevTopic: Topic; // предыдущий выбранный топик
   loaded: Boolean = false;
-  loading: Boolean = false;
 
   constructor(private topicsStore: TopicsStore,
+              private answersStore: AnswersStore,
               private localStorage: QuestionnaireLocalStorageService,
               private router: Router,
               private route: ActivatedRoute) {
 
+    // обработчик на загрузку ответов
+    this._answersSubscription = answersStore.awaitAnswers()
+      .subscribe(
+        answers => { this.onLoadAnswersSuccess(answers); },
+        (error) => { /* console.log(error); */ }
+      );
+
     // обработчик на загрузку топиков
-    this.topicSearchSubscription = topicsStore.awaitTopics()
+    this._topicsSubscription = topicsStore.awaitTopics()
       .subscribe(
         (topics) => { this.onLoadTopicsSuccess(topics); },
-        (error) => { this.onLoadTopicsError(error); }
+        (error) => { /* error.log(error); */ }
       );
 
     // обработчик на смену URL - показать другой топик
@@ -46,26 +57,39 @@ export class TopicTestComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.topicSearchSubscription.unsubscribe();
+    this._topicsSubscription.unsubscribe();
+    this._answersSubscription.unsubscribe();
+  }
+
+  get topicAnswers(): TopicAnswers {
+    if (this.topic) {
+      return this._answers.getTopicAnswers(this.topic);
+    }
+    return null;
+  }
+
+  onLoadAnswersSuccess(answers: TopicsAnswers): void {
+    console.log('TopicTestComponent:onLoadAnswersSuccess');
+    this._answers = answers;
+    this.selectTopic();
   }
 
   onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicTestComponent:onLoadTopicsSuccess');
-    this.topicSearch = topics;
-    this.loading = false;
+    this._topics = topics;
     this.selectTopic();
   }
 
   selectTopic(): void {
     const key = this.route.snapshot.paramMap.get('key');
     console.log('TopicTestComponent:selectTopic', key);
-    const topic = this.topicSearch.topics.find(t => t.key === key);
+    const topic = this.answersStore.topics.find(t => t.key === key);
     if (topic) {
       this.loaded = true;
       this.topic = topic;
-      this.prevTopic = this.topicSearch.prevTopic(key);
-      this.nextTopic = this.topicSearch.nextTopic(key);
-      this.setSelected(true);
+      this.prevTopic = this.findPrevTopic(key);
+      this.nextTopic = this.findNextTopic(key);
+      this.setSelected();
     } else {
       this.loaded = false;
       this.topic = null;
@@ -74,25 +98,48 @@ export class TopicTestComponent implements OnInit, OnDestroy {
     }
   }
 
+  // предыдущий выбранный топик
+  private findPrevTopic(key: string): Topic {
+    let prev = null;
+    let temp = null;
+    this.answersStore.selectedTopics.forEach((topic) => {
+      if (topic.key === key) {
+        prev = temp;
+      }
+      temp = topic;
+    });
+    return prev;
+  }
+
+  // следующий выбранный топик
+  private findNextTopic(key: string): Topic {
+    let next = null;
+    let temp = null;
+    this.answersStore.selectedTopics.forEach((topic) => {
+      if (temp && temp.key === key) {
+        next = topic;
+      }
+      temp = topic;
+    });
+    return next;
+  }
+
   get share_url(): string {
     return 'http://skillsgauge.uptlo.com/topic/' + this.topic.key;
   }
 
-  onLoadTopicsError(error: any): void {
-    console.log('TopicTestComponent:onLoadTopicsError');
-    console.log(error);
-  }
-
-  setSelected(value): void {
-    if (this.topic && this.topic.selected !== value) {
-      this.topic.selected = value;
-      this.saveTopic();
-    }
-  }
-
-  saveTopic(): void {
+  setSelected(): void {
     if (this.topic) {
-      this.localStorage.saveTopic(this.topic);
+      const anwsers = this._answers.getTopicAnswers(this.topic);
+      if (!anwsers.selected) {
+        anwsers.selected = true;
+        this.saveAnswers(anwsers);
+      }
     }
+  }
+
+  saveAnswers(answers: TopicAnswers): void {
+    // TODO HTTP
+    this.localStorage.saveTopicAnswers(answers);
   }
 }

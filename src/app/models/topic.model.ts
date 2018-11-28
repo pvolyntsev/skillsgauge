@@ -55,4 +55,9 @@ export class Topic {
     }, []);
     return terms.join(glue);
   }
+
+  // значение по-умолчанию для терминов без голоса
+  public get defaultChoice(): Choice {
+    return this.choices[0];
+  }
 }

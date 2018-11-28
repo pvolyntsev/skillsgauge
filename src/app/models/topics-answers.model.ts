@@ -29,7 +29,7 @@ export class TopicsAnswers {
         this._topicAnswers[topic.key] = new TopicAnswers(topic);
       }
     }
-    return this._topicAnswers[topic.key];
+    return this._topicAnswers[topic.key] || null;
   }
 
   // ключи всех топиков, упоминаемых в ответах

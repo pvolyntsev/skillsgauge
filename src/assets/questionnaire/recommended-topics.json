@@ -74,22 +74,22 @@
       ],
       "choices": [
         {
-          "key": 0,
+          "key": "1",
           "title": "Мимо",
           "score": 0
         },
         {
-          "key": 1,
+          "key": "2",
           "title": "Слышал",
           "score": 1
         },
         {
-          "key": 2,
+          "key": "3",
           "title": "Знаю",
           "score": 2
         },
         {
-          "key": 4,
+          "key": "4",
           "title": "Использовал",
           "score": 4
         }
@@ -225,22 +225,22 @@
       ],
       "choices": [
         {
-          "key": 0,
+          "key": "1",
           "title": "Мимо",
           "score": 0
         },
         {
-          "key": 1,
+          "key": "2",
           "title": "Слышал",
           "score": 1
         },
         {
-          "key": 2,
+          "key": "3",
           "title": "Знаю",
           "score": 2
         },
         {
-          "key": 4,
+          "key": "4",
           "title": "Использовал",
           "score": 4
         }
@@ -335,22 +335,22 @@
       ],
       "choices": [
         {
-          "key": 0,
+          "key": "1",
           "title": "Мимо",
           "score": 0
         },
         {
-          "key": 1,
+          "key": "2",
           "title": "Слышал",
           "score": 1
         },
         {
-          "key": 2,
+          "key": "3",
           "title": "Знаю",
           "score": 2
         },
         {
-          "key": 4,
+          "key": "4",
           "title": "Использовал",
           "score": 4
         }

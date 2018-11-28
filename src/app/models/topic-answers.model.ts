@@ -24,19 +24,19 @@ export class TopicAnswers {
 
   public static fromObject(topic: Topic, obj: any): TopicAnswers {
     const today = moment().format('YYYYMMDD');
-    const { key, date, version, score, maximumScore } = obj;
+    const { key, date, version, selected, score, maximumScore } = obj;
     deleteProperty(obj, 'score');
     deleteProperty(obj, 'maximumScore');
 
     const answers = Object.keys((obj.answers || {}))
       .reduce((carry, termKey) => {
-        carry[termKey] = topic.choices.find(c => c.key === answers[termKey].key);
+        carry[termKey] = topic.choices.find(c => c.key === obj.answers[termKey].key);
         return carry;
       }, {});
 
     const instance = Object.assign(new TopicAnswers(topic), {
       date: today,
-      ...obj,
+      ...{ key, date, version, selected },
       answers,
     });
 

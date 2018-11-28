@@ -22,7 +22,9 @@
           <li
             appTopicTestTerm
             class="topic__terms_list__item"
-            *ngFor="let t of topic.terms" [term]="t"></li>
+            *ngFor="let t of topic.terms"
+            [term]="t"
+            [answers]="topicAnswers"></li>
         </ul>
       </div>
     </div>
