@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TopicsStore } from '../../stores';
 import { Subscription } from 'rxjs';
-import { Topics, Topic } from '../../models';
+import { AnswersStore } from '../../stores';
+import { Topics, Topic, TopicsAnswers } from '../../models';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,18 +9,22 @@ import { Topics, Topic } from '../../models';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  private topicSearchSubscription: Subscription;
-  topicSearch: Topics = new Topics();
+  private readonly _answersSubscription: Subscription;
+  private _answers: TopicsAnswers;
+
   loaded: Boolean = false;
   loading: Boolean = true;
   percentageAnim = {};
 
-  constructor(private topicsStore: TopicsStore) {
-    // обработчик на загрузку топиков
-    this.topicSearchSubscription = topicsStore.awaitTopics()
+  constructor(private answersStore: AnswersStore) {
+    // обработчик на загрузку ответов
+    this._answersSubscription = answersStore.awaitAnswers()
       .subscribe(
-        (topics) => { this.onLoadTopicsSuccess(topics); },
-        (error) => { this.onLoadTopicsError(error); }
+        answers => {
+            this._answers = answers;
+            this.setupPercentageAnim();
+          },
+        (error) => { /* console.log(error); */ }
       );
   }
 
@@ -30,28 +34,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.topicSearchSubscription.unsubscribe();
-  }
-
-  // @example this.topics
-  get topics(): Topic[] {
-    return this.topicSearch.topics;
+    this._answersSubscription.unsubscribe();
   }
 
   get selectedTopics(): Topic[] {
-    return this.topicSearch.selectedTopics;
+    return this.answersStore.selectedTopics;
   }
 
   get score(): number {
-    return this.topicSearch.score;
+    return this.answersStore.score;
   }
 
   get maximumScore(): number {
-    return this.topicSearch.maximumScore;
+    return this.answersStore.maximumScore;
   }
 
   get percentage(): number {
-    return this.topicSearch.percentage;
+    return this.answersStore.percentage;
   }
 
   setupPercentageAnim(): void {
@@ -60,23 +59,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.selectedTopics.forEach((topic, index) => {
       this.percentageAnim[topic.key] = 0;
       setTimeout(() => {
-        this.percentageAnim[topic.key] = topic.percentage;
+        const answers = this._answers.getTopicAnswers(topic);
+        this.percentageAnim[topic.key] = answers ? answers.percentage : 0;
       }, (index + 1) * 200);
     });
 
     setTimeout(() => { this.percentageAnim['TOTAL'] = this.percentage; }, (this.selectedTopics.length + 3) * 200);
-  }
-
-  onLoadTopicsSuccess(topics: Topics): void {
-    console.log('TopicsListComponent:onLoadTopicsSuccess');
-    this.topicSearch = topics;
-    this.loaded = this.topics.length > 0;
-    this.loading = false;
-    this.setupPercentageAnim();
-  }
-
-  onLoadTopicsError(error: any): void {
-    console.log('TopicsListComponent:onLoadTopicsError');
-    console.log(error);
   }
 }
