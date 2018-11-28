@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CleanLayoutComponent } from '../layouts/clean/clean-layout.component';
+import { MainLayoutComponent } from '../layouts/main/main-layout.component';
+
 import { HomeComponent } from '../pages/home/home.component';
 import { IntroComponent } from '../pages/intro/intro.component';
 import { P404Component } from '../pages/404/p404.component';
@@ -9,13 +12,32 @@ import { TopicTestComponent } from '../pages/topic-test/topic-test.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'intro', component: IntroComponent },
-  { path: 'topics', component: TopicsListComponent },
-  { path: 'topic/:key', component: TopicTestComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  // простое оформление
+  {
+    path: '',
+    component: CleanLayoutComponent,
+    children: [
+      // { path: '', component: HomeComponent, pathMatch: 'full'},
+      // { path: 'about', component: AboutComponent }
+      { path: '', component: HomeComponent },
+      { path: 'intro', component: IntroComponent },
+      { path: 'topics', component: TopicsListComponent },
+      { path: 'topic/:key', component: TopicTestComponent },
+    ]
+  },
 
-  { path: '**',  component: P404Component }
+  // оформление с сайдбаром, шапкой и подвалом
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      // { path: '', component: HomeComponent, pathMatch: 'full'},
+      // { path: 'about', component: AboutComponent }
+      { path: 'dashboard', component: DashboardComponent },
+    ]
+  },
+
+  { path: '**',  component: P404Component } // Страница не найдена
 ];
 
 @NgModule({

@@ -10,9 +10,10 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 
 // components
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+
+// layouts
+import { CleanLayoutComponent } from './layouts/clean/clean-layout.component';
+import { MainLayoutModule } from './layouts/main';
 
 // pages
 import { P404Component } from './pages/404/p404.component';
@@ -28,9 +29,7 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    SidebarComponent,
+    CleanLayoutComponent,
     P404Component,
     IntroComponent,
     DashboardComponent,
@@ -47,6 +46,7 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
     // ReactiveFormsModule,
     FormsModule,
     ShareButtonsModule.forRoot(),
+    MainLayoutModule,
   ],
   providers: [
     QuestionnaireLocalStorageService,

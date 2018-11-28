@@ -1,10 +1,9 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { AnswersStore, TopicsStore, UserStore } from '../../stores';
-import { Topics, Topic, User, TopicsAnswers } from '../../models';
+import { Router } from '@angular/router';
+import { AnswersStore, UserStore } from '../../../stores';
+import { Topic, User, TopicsAnswers } from '../../../models';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,13 +23,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private readonly _answersSubscription: Subscription;
   private _answers: TopicsAnswers;
 
-  visible: Boolean = true;
   share_url: string;
 
   constructor(@Inject(DOCUMENT) private document: Document,
               private router: Router,
               private renderer: Renderer2,
-              private topicsStore: TopicsStore,
               private answersStore: AnswersStore,
               private userStore: UserStore) {
     // обработчик на загрузку ответов
@@ -46,15 +43,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         user => this.user = user,
       (error) => { /* console.log(error); */ }
     );
-
-    // обработчик на смену URL
-    router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      console.log(event.url);
-      this.visible = event.url === '/dashboard';
-      this.share_url = 'http://skillsgauge.uptlo.com' + event.url;
-    });
   }
 
   ngOnInit() {
