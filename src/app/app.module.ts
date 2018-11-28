@@ -19,7 +19,7 @@ import { MainLayoutModule } from './layouts/main';
 import { P404Component } from './pages/404/p404.component';
 import { IntroComponent } from './pages/intro/intro.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { TopicsListComponent, TopicsListItemComponent } from './pages/topics';
+import { TopicsListModule } from './pages/topics-list';
 import { TopicTestModule} from './pages/topic-test';
 
 // сервисы
@@ -33,8 +33,6 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
     P404Component,
     IntroComponent,
     DashboardComponent,
-    TopicsListComponent,
-    TopicsListItemComponent,
   ],
   imports: [
     RoutingModule,
@@ -44,6 +42,7 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
     FormsModule,
     ShareButtonsModule.forRoot(),
     MainLayoutModule,
+    TopicsListModule,
     TopicTestModule,
   ],
   providers: [
