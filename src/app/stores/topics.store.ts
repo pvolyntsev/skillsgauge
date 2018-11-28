@@ -73,12 +73,23 @@ export class TopicsStore {
   }
 
   private onLoadTopicsError(error: any): void {
-    console.log('TopicsStore:onLoadTopicsError');
-    console.log(error);
+    console.log('TopicsStore:onLoadTopicsError', error);
 
     this._topics.error(error);
     this.topicsLoaded = false;
     this.topicsLoading = false;
+  }
+
+  loadOwnTopics(topicsKeys: string[]) {
+    console.log('TopicsStore:loadOwnTopics', topicsKeys);
+
+    this.ownTopicsLoaded = false;
+    this.ownTopicsLoading = true;
+    this.questionnaire.ownTopics(topicsKeys)
+      .subscribe(
+        this.onLoadOwnTopicsSuccess.bind(this),
+        this.onLoadOwnTopicsError.bind(this)
+      );
   }
 
   private onLoadOwnTopicsSuccess(topics: Topics): void {
@@ -86,26 +97,48 @@ export class TopicsStore {
 
     // Можно бы ввести Mutex но NodeJS однопоточный
     const _topics = this.topics;
-    _topics.ownTopics = topics.ownTopics;
+    _topics.ownTopics = topics.topics;
     this._topics.next(_topics);
     this.ownTopicsLoaded = true;
     this.ownTopicsLoading = false;
   }
 
   private onLoadOwnTopicsError(error: any): void {
-    console.log('TopicsStore:onLoadTopicsError');
-    console.log(error);
+    console.log('TopicsStore:onLoadTopicsError', error);
 
     this._topics.error(error);
     this.ownTopicsLoaded = false;
     this.ownTopicsLoading = false;
   }
 
-  private onLoadRecommendedTopicsSuccess(topics: Topics): void {
+  loadRecommendedTopics() {
+    console.log('TopicsStore:loadRecommendedTopics');
 
+    this.recommendedTopicsLoaded = false;
+    this.recommendedTopicsLoading = true;
+    this.questionnaire.recommendedTopics()
+      .subscribe(
+        this.onLoadRecommendedTopicsSuccess.bind(this),
+        this.onLoadRecommendedTopicsError.bind(this)
+      );
+  }
+
+  private onLoadRecommendedTopicsSuccess(topics: Topics): void {
+    console.log('TopicsStore:onLoadRecommendedTopicsSuccess');
+
+    // Можно бы ввести Mutex но NodeJS однопоточный
+    const _topics = this.topics;
+    _topics.recommendedTopics = topics.topics;
+    this._topics.next(_topics);
+    this.recommendedTopicsLoaded = true;
+    this.recommendedTopicsLoading = false;
   }
 
   private onLoadRecommendedTopicsError(error: any): void {
+    console.log('TopicsStore:onLoadRecommendedTopicsError', error);
 
+    this._topics.error(error);
+    this.recommendedTopicsLoaded = false;
+    this.recommendedTopicsLoading = false;
   }
 }
