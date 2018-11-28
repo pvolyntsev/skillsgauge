@@ -12,8 +12,8 @@ export class QuestionnaireLocalStorageService {
       .reduce((carry, topicKey) => {
         // сортировка версий по возрастанию даты версии
         const versions = allTopicsAnswers[topicKey].sort((v1, v2) => {
-          const d1 = 1 * v1.date;
-          const d2 = 1 * v2.date;
+          const d1 = Number(v1.date);
+          const d2 = Number(v2.date);
           return d1 > d2 ? 1 : d1 < d2 ? -1 : 0;
         });
 
@@ -51,8 +51,9 @@ export class QuestionnaireLocalStorageService {
 
   saveTopicAnswers(answer: TopicAnswers): void {
     const answerObj = answer.toObject();
+    const { key, date } = answer;
     const expiration = null; // TODO 2 месяца на хранение new Date(now.getTime() + 2 * 30 * 24 * 60 * 60 * 1000 * ttl).getTime();
-    const key = [answerObj.key, 'v', answerObj.date].join(':');
-    localStorage.setItem(key, JSON.stringify([answerObj, expiration]));
+    const itemKey = [key, 'v', date].join(':');
+    localStorage.setItem(itemKey, JSON.stringify([answerObj, expiration]));
   }
 }

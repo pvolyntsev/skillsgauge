@@ -34,14 +34,10 @@ export class TopicAnswers {
         return carry;
       }, {});
 
-    const instance = Object.assign(new TopicAnswers(topic), {
-      date: today,
-      ...{ key, date, version, selected },
-      answers,
-    });
+    const instance = Object.assign(new TopicAnswers(topic), { key, date, version, selected, answers });
 
     // зафиксировать исторические значения
-    if ((1 * instance.date)  < (1 * today)) {
+    if (Number(instance.date) < Number(today)) {
       instance.freeze(score, maximumScore);
     }
 
