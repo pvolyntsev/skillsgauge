@@ -25,7 +25,7 @@ export class TopicsListComponent implements OnDestroy {
               private answersStore: AnswersStore) {
 
     // обработчик на загрузку топиков
-    this._topicsSubscription = topicsStore.awaitTopics()
+    this._topicsSubscription = topicsStore.awaitRecommendedTopics()
       .subscribe(
         (topics) => { this._topics = topics; },
         (error) => { /* console.log(error); */ }
@@ -65,9 +65,21 @@ export class TopicsListComponent implements OnDestroy {
     return this._topics !== undefined ? this._topics.topics : [];
   }
 
-  // @example: this.myTopics
+  // @example: this.ownTopics
   get ownTopics(): Topic[] {
     return this._topics !== undefined ? this._topics.ownTopics : [];
+  }
+
+  // @example: this.recommendedTopics
+  get recommendedTopics(): Topic[] {
+    return this._topics !== undefined
+      ? this._topics.recommendedTopics
+        .filter(topic => {
+          const sameTopic = this.topics.find(t => t.key === topic.key);
+          const sameOwnTopic = this.ownTopics.find(t => t.key === topic.key);
+          return !sameTopic && !sameOwnTopic;
+        })
+      : [];
   }
 
   topicAnswers(topic: Topic): TopicAnswers {
