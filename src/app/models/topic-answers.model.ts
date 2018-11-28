@@ -91,7 +91,7 @@ export class TopicAnswers {
       return carry;
     }, {});
     return {
-      key, date, score, maximumScore, maximumScore, score, selected, answers,
+      key, date, maximumScore, score, selected, answers,
     };
   }
 
