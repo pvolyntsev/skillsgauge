@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Topic, TopicAnswers } from '../../models';
 import { QuestionnaireLocalStorageService } from '../../services';
-import { Topic } from '../../models';
 
 @Component({
   selector: '[appTopicsListItem]', // tslint:disable-line
@@ -11,16 +11,25 @@ export class TopicsListItemComponent {
   @Input()
   topic: Topic;
 
-  constructor(private localStorage: QuestionnaireLocalStorageService) { }
+  @Input()
+  answers: TopicAnswers;
 
-  setSelected(topic, value): void {
-    if (topic && topic.selected !== value) {
-      topic.selected = value;
-      this.saveTopic(topic);
+  constructor(private localStorage: QuestionnaireLocalStorageService) {
+  }
+
+  get selected(): boolean {
+    return this.answers ? this.answers.selected : false;
+  }
+
+  set selected(selected: boolean) {
+    if (this.answers && this.answers.selected !== selected) {
+      this.answers.selected = selected;
+      this.saveAnswers(this.answers);
     }
   }
 
-  saveTopic(topic: Topic): void {
-    this.localStorage.saveTopic(topic);
+  saveAnswers(answers: TopicAnswers): void {
+    // TODO HTTP
+    this.localStorage.saveTopicAnswers(answers);
   }
 }

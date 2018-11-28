@@ -16,11 +16,8 @@
       ></share-buttons>
     </div>
 
-    <div *ngIf="loading" class="topics__header">
+    <div *ngIf="!loaded" class="topics__header">
       <h1 class="topics__title_main">Загрузка...</h1>
-    </div>
-    <div *ngIf="!loading && !loaded" class="topics__header">
-      <h1 class="topics__title_main">Ошибка: в конфигурации сервиса нет разделов с тестами</h1>
     </div>
 
     <div *ngIf="loaded" class="topics__header">
@@ -32,20 +29,43 @@
           <li
             appTopicsListItem
             class="topics__topic"
-            *ngFor="let t of topics" [topic]="t"></li>
+            *ngFor="let t of topics"
+            [topic]="t"
+            [answers]="topicAnswers(t)"></li>
         </ul>
       </div>
 
       <div class="topics__header">
-        <h1 class="topics__title_main">Мои разделы:</h1>
+        <h1 class="topics__title_main">Мои разделы:
+          <div
+            class="topics__title_main__button"
+            *ngIf="user && ownTopics.length > 0"
+            (click)="createOwnTopic()">
+              <!--<svg class="icon plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <path style="fill:#4CAF50;" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
+                <path style="fill:#FFFFFF;" d="M21,14h6v20h-6V14z"></path>
+                <path style="fill:#FFFFFF;" d="M14,21h20v6H14V21z"></path>
+              </svg>--> Добавить раздел</div>
+        </h1>
       </div>
       <div class="topics__list_container">
         <ul class="topics__list">
           <li
             appTopicsListItem
             class="topics__topic"
-            *ngFor="let t of ownTopics" [topic]="t"></li>
+            *ngFor="let t of ownTopics"
+            [topic]="t"
+            [answers]="topicAnswers(t)"></li>
         </ul>
+        <div
+          class="topics__list__button_add"
+          *ngIf="user && ownTopics.length === 0"
+            (click)="createOwnTopic()">
+            <!--<svg class="icon plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+              <path style="fill:#4CAF50;" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
+              <path style="fill:#FFFFFF;" d="M21,14h6v20h-6V14z"></path>
+              <path style="fill:#FFFFFF;" d="M14,21h20v6H14V21z"></path>
+            </svg>--> Создать свой раздел</div>
       </div>
       <a class="topics__button"
          (click)="gotoFirstIncomplete()"

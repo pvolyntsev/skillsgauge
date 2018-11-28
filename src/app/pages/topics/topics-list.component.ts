@@ -1,72 +1,96 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TopicsStore } from '../../stores';
-import { Topic, Topics } from '../../models';
+import { TopicsStore, UserStore, AnswersStore } from '../../stores';
+import {Topic, TopicAnswers, Topics, TopicsAnswers, User} from '../../models';
 
 @Component({
   selector: 'app-topics-list',
   templateUrl: './topics-list.component.html',
   styleUrls: ['./topics-list.component.scss']
 })
-export class TopicsListComponent implements OnInit, OnDestroy {
+export class TopicsListComponent implements OnDestroy {
   private readonly _topicsSubscription: Subscription;
-  private _topics: Topics = new Topics();
-  loaded: Boolean = false;
-  loading: Boolean = true;
+  private _topics: Topics;
+
+  private readonly _userSubscription: Subscription;
+  user: User;
+
+  private readonly _answersSubscription: Subscription;
+  private _answers: TopicsAnswers;
 
   constructor(private topicsStore: TopicsStore,
-              private router: Router) {
+              private router: Router,
+              private userStore: UserStore,
+              private answersStore: AnswersStore) {
 
     // обработчик на загрузку топиков
     this._topicsSubscription = topicsStore.awaitTopics()
       .subscribe(
-        (topics) => { this.onLoadTopicsSuccess(topics); },
-        (error) => { this.onLoadTopicsError(error); }
+        (topics) => { this._topics = topics; },
+        (error) => { /* console.log(error); */ }
       );
-  }
 
-  ngOnInit() {
+    // обработчик на загрузку пользователя
+    this._userSubscription = userStore.awaitUser()
+      .subscribe(
+        user => this.user = user,
+        (error) => { /* console.log(error); */ }
+      );
+
+    // обработчик на загрузку ответов
+    this._answersSubscription = answersStore.awaitAnswers()
+      .subscribe(
+        answers => this._answers = answers,
+        (error) => { /* console.log(error); */ }
+      );
   }
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this._topicsSubscription.unsubscribe();
+    this._userSubscription.unsubscribe();
+    this._answersSubscription.unsubscribe();
+  }
+
+  // @example this.loaded
+  get loaded(): boolean {
+    return (this.user !== undefined)
+      && (this._topics !== undefined)
+      && (this._answers !== undefined);
   }
 
   // @example this.topics
   get topics(): Topic[] {
-    return this._topics.topics;
+    return this._topics !== undefined ? this._topics.topics : [];
   }
 
-  // @examle: this.myTopics
+  // @example: this.myTopics
   get ownTopics(): Topic[] {
-    return this._topics.ownTopics;
+    return this._topics !== undefined ? this._topics.ownTopics : [];
+  }
+
+  topicAnswers(topic: Topic): TopicAnswers {
+    return this._answers.getTopicAnswers(topic);
   }
 
   // есть ли выбранные топики
-  // @examle: this.hasSelectedTopic
+  // @example: this.hasSelectedTopic
   get hasSelectedTopic(): Boolean {
-    return this._topics.selectedTopics.length > 0;
+    return this.answersStore.selectedTopics.length > 0;
   }
 
   // выполняет переход на первый топик, который надо заполнить
   gotoFirstIncomplete(): void {
-    const topic = this._topics.firstIncomplete;
+    const topic = this.answersStore.firstIncomplete;
     if (topic) {
       this.router.navigateByUrl('/topic/' + topic.key);
     }
   }
 
-  onLoadTopicsSuccess(topics: Topics): void {
-    console.log('TopicsListComponent:onLoadTopicsSuccess');
-    this._topics = topics;
-    this.loaded = this.topics.length > 0;
-    this.loading = false;
-  }
-
-  onLoadTopicsError(error: any): void {
-    console.log('TopicsListComponent:onLoadTopicsError');
-    console.log(error);
+  // создаёт новый топик и переходит на страницу редактирования
+  createOwnTopic(): void {
+    const topic = this.topicsStore.createTopic(this.user);
+    this.router.navigateByUrl('/edit/' + this.user.login + '/' + topic.key);
   }
 }
