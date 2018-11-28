@@ -1,14 +1,12 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { Topic, TopicAnswers, Topics, TopicsAnswers } from '../models';
+import { Topic, Topics, TopicsAnswers } from '../models';
 import { QuestionnaireLocalStorageService, QuestionnaireService } from '../services';
 import { TopicsStore } from './topics.store';
 
 @Injectable()
-export class AnswersStore implements OnDestroy {
+export class AnswersStore {
   private _topics: Topics = new Topics();
-  private readonly _topicsSubscription: Subscription;
-
   private _answers = new BehaviorSubject(new TopicsAnswers());
   private answersLoaded = false;
   private answersLoading = false;
@@ -16,17 +14,6 @@ export class AnswersStore implements OnDestroy {
   constructor(private questionnaire: QuestionnaireService,
               private localStorage: QuestionnaireLocalStorageService,
               private topicsStore: TopicsStore) {
-    // обработчик на загрузку топиков
-    this._topicsSubscription = topicsStore.awaitTopics()
-      .subscribe(
-        (topics) => { this.onLoadTopicSuccess(topics); },
-        (error) => { /* console.log(error); */ }
-      );
-  }
-
-  ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this._topicsSubscription.unsubscribe();
   }
 
   // current value
@@ -54,6 +41,10 @@ export class AnswersStore implements OnDestroy {
     this.answersLoaded = false;
     this.answersLoading = false;
 
+    // сначала загрузить всё что есть в LocalStorage
+    this.onLocalStorageAnswers(this.localStorage.findLastTopicsAnswers());
+
+    // затем то, что есть на сервере
     this.questionnaire.answers()
       .subscribe(
         this.onLoadAnswersSuccess.bind(this),
@@ -61,18 +52,30 @@ export class AnswersStore implements OnDestroy {
       );
   }
 
-  onLoadAnswersSuccess(answers: TopicAnswers[]): void {
+  // завершение загрузки ответов из LocalStorage
+  onLocalStorageAnswers(answers: object[]): void {
+    console.log('AnswersStore:onLocalStorageAnswers');
+
+    const _answers = this.answers;
+    answers.map(obj => _answers.pushPlainAnswers(obj));
+    this._answers.next(_answers);
+
+    // загрузить топики с сервера
+    this.loadTopics();
+  }
+
+  // завершение загрузки ответов с сервера
+  onLoadAnswersSuccess(answers: object[]): void {
     console.log('AnswersStore:onLoadAnswersSuccess');
 
-    /*
-    // Можно бы ввести Mutex но NodeJS однопоточный
-    const _answers = new TopicsAnswers();
-    _answers.
-    _topics.topics = topics.topics;
-    this._answers.next(_topics);
-    */
+    const _answers = this.answers;
+    answers.map(obj => _answers.pushPlainAnswers(obj));
+    this._answers.next(_answers);
     this.answersLoaded = true;
     this.answersLoading = false;
+
+    // загрузить топики с сервера
+    this.loadTopics();
   }
 
   onLoadAnswersError(error: any): void {
@@ -84,30 +87,37 @@ export class AnswersStore implements OnDestroy {
     this.answersLoading = false;
   }
 
-  onLoadTopicSuccess(topics: Topics): void {
-    this._topics = topics;
+  // загрузить топики с сервера
+  loadTopics(): void {
+    const topicsKeys = this.answers.allTopicsKeys;
+    this.topicsStore.awaitTopics(topicsKeys)
+      .subscribe(
+        (topics) => { this._topics = topics; },
+        (error) => { /* console.log(error); */ }
+      );
+  }
+
+  // все топики
+  public get topics(): Topic[] {
+    return [ ...this._topics.topics, ...this._topics.ownTopics ];
   }
 
   // выбранные топики
   // @example: this.selectedTopics
   public get selectedTopics(): Topic[] {
-    // return [
-    //   ...(this.topics.filter(t => t.selected === true)),
-    //   ...this.ownTopics,
-    // ];
-    return [];
+    return this.topics.filter(topic => this.answers.getTopicAnswers(topic).selected === true);
   }
 
   // количество баллов по выбранным топикам
   // @example: this.score
   public get score(): number {
-    return this.selectedTopics.reduce((sum, topic) => sum + topic.score, 0);
+    return this.selectedTopics.reduce((sum, topic) => sum + this.answers.getTopicAnswers(topic).score, 0);
   }
 
   // максимальное количество баллов по выбранным топикам
   // @example: this.maximumScore
   public get maximumScore(): number {
-    return this.selectedTopics.reduce((sum, topic) => sum + topic.maximumScore, 0);
+    return this.selectedTopics.reduce((sum, topic) => sum + this.answers.getTopicAnswers(topic).maximumScore, 0);
   }
 
   // процент достижения по всем топикам
@@ -120,13 +130,20 @@ export class AnswersStore implements OnDestroy {
     return 0;
   }
 
+  // первый не полностью заполненный топик
   public get firstIncomplete(): Topic {
     // 1. если есть совсем незаполненный топик
-    let incompleteTopic = this.selectedTopics.find(topic => topic.selected && topic.score === 0);
+    let incompleteTopic = this.selectedTopics.find(topic => {
+      const answers = this.answers.getTopicAnswers(topic);
+      return answers.selected && answers.score === 0;
+    });
 
     // 2. есть есть неполностью заполненный топик
     if (!incompleteTopic) {
-      incompleteTopic = this.selectedTopics.find(topic => topic.score < topic.maximumScore);
+      incompleteTopic = this.selectedTopics.find(topic => {
+        const answers = this.answers.getTopicAnswers(topic);
+        return answers.score < answers.maximumScore;
+      });
     }
 
     // 3. если есть какой-нибудь топик
@@ -142,12 +159,10 @@ export class AnswersStore implements OnDestroy {
     let prev = null;
     let temp = null;
     this.selectedTopics.forEach((topic) => {
-      if (topic.selected) {
-        if (topic.key === key) {
-          prev = temp;
-        }
-        temp = topic;
+      if (topic.key === key) {
+        prev = temp;
       }
+      temp = topic;
     });
     return prev;
   }
@@ -157,12 +172,10 @@ export class AnswersStore implements OnDestroy {
     let next = null;
     let temp = null;
     this.selectedTopics.forEach((topic) => {
-      if (topic.selected) {
-        if (temp && temp.key === key) {
-          next = topic;
-        }
-        temp = topic;
+      if (temp && temp.key === key) {
+        next = topic;
       }
+      temp = topic;
     });
     return next;
   }

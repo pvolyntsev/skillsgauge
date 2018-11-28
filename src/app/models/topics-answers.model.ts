@@ -31,4 +31,9 @@ export class TopicsAnswers {
     }
     return this._topicAnswers[topic.key];
   }
+
+  // ключи всех топиков, упоминаемых в ответах
+  get allTopicsKeys(): string[] {
+    return Object.keys({ ...this._topicAnswers, ...this._topicAnswersPlain });
+  }
 }

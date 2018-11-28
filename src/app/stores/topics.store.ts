@@ -13,8 +13,7 @@ export class TopicsStore {
   private ownTopicsLoaded = false;
   private ownTopicsLoading = false;
 
-  constructor(private questionnaire: QuestionnaireService,
-              private localStorage: QuestionnaireLocalStorageService) { }
+  constructor(private questionnaire: QuestionnaireService) { }
 
   // current value
   get topics(): Topics {
@@ -29,27 +28,28 @@ export class TopicsStore {
     return this.topicsLoading || this.ownTopicsLoading;
   }
 
-  awaitTopics(): Observable<Topics> {
+  awaitTopics(topicsKeys?: string[]): Observable<Topics> {
     if (!this.loaded && !this.loading) {
-      this.loadTopics();
+      this.loadTopics(topicsKeys);
     }
     return this._topics.asObservable();
   }
 
-  loadTopics() {
-    console.log('TopicsStore:loadTopics');
+  loadTopics(topicsKeys?: string[]) {
+    console.log('TopicsStore:loadTopics', topicsKeys);
+
     this.topicsLoaded = false;
     this.topicsLoading = true;
     this.ownTopicsLoaded = false;
     this.ownTopicsLoading = true;
 
-    this.questionnaire.topics()
+    this.questionnaire.topics(topicsKeys)
       .subscribe(
         this.onLoadTopicsSuccess.bind(this),
         this.onLoadTopicsError.bind(this)
       );
 
-    this.questionnaire.ownTopics()
+    this.questionnaire.ownTopics(topicsKeys)
       .subscribe(
         this.onLoadOwnTopicsSuccess.bind(this),
         this.onLoadOwnTopicsError.bind(this)
@@ -61,7 +61,7 @@ export class TopicsStore {
 
     // Можно бы ввести Mutex но NodeJS однопоточный
     const _topics = this.topics;
-    _topics.topics = topics.topics.map(t => this.localStorage.loadTopic(t));
+    _topics.topics = topics.topics;
     this._topics.next(_topics);
     this.topicsLoaded = true;
     this.topicsLoading = false;
@@ -81,7 +81,7 @@ export class TopicsStore {
 
     // Можно бы ввести Mutex но NodeJS однопоточный
     const _topics = this.topics;
-    _topics.ownTopics = topics.ownTopics.map(t => this.localStorage.loadTopic(t));
+    _topics.ownTopics = topics.ownTopics;
     this._topics.next(_topics);
     this.ownTopicsLoaded = true;
     this.ownTopicsLoading = false;

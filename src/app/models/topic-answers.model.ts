@@ -28,10 +28,16 @@ export class TopicAnswers {
     deleteProperty(obj, 'score');
     deleteProperty(obj, 'maximumScore');
 
+    const answers = Object.keys((obj.answers || {}))
+      .reduce((carry, key) => {
+        carry[key] = Choice.fromObject(answers[key]);
+        return carry;
+      }, {});
+
     const instance = Object.assign(new TopicAnswers(topic), {
       date: today,
       ...obj,
-      answers: (obj.answers || {}).map(answer => Choice.fromObject(answer))
+      answers,
     });
 
     // зафиксировать исторические значения
