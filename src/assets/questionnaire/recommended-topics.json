@@ -245,6 +245,116 @@
           "score": 4
         }
       ]
+    },
+    {
+      "key": "software_design_pattern",
+      "type": "common",
+      "title": "Шаблоны проектирования",
+      "version": "2018-11-28",
+      "terms": [
+        {
+          "key": "singleton",
+          "title": "singleton"
+        },
+        {
+          "key": "factory",
+          "title": "factory"
+        },
+        {
+          "key": "wrapper",
+          "title": "wrapper"
+        },
+        {
+          "key": "bridge",
+          "title": "bridge"
+        },
+        {
+          "key": "strategy",
+          "title": "strategy"
+        },
+        {
+          "key": "decorator",
+          "title": "decorator"
+        },
+        {
+          "key": "lazy load",
+          "title": "lazy load"
+        },
+        {
+          "key": "builder",
+          "title": "builder"
+        },
+        {
+          "key": "composit",
+          "title": "composit"
+        },
+        {
+          "key": "proxy",
+          "title": "proxy"
+        },
+        {
+          "key": "iterator",
+          "title": "iterator"
+        },
+        {
+          "key": "active record",
+          "title": "active record"
+        },
+        {
+          "key": "mvc",
+          "title": "MVC"
+        },
+        {
+          "key": "mvvm",
+          "title": "MVVM"
+        },
+        {
+          "key": "behavior",
+          "title": "behavior"
+        },
+        {
+          "key": "mixin",
+          "title": "mixin"
+        },
+         {
+          "key": "mixin",
+          "title": "mixin"
+        },
+         {
+          "key": "mixin",
+          "title": "mixin"
+        },
+        {
+          "key": "filters",
+          "title": "filters"
+        },
+        {
+          "key": "registry",
+          "title": "registry"
+        }
+      ],
+      "choices": [
+        {
+          "key": 0,
+          "title": "Мимо",
+          "score": 0
+        },
+        {
+          "key": 1,
+          "title": "Слышал",
+          "score": 1
+        },
+        {
+          "key": 2,
+          "title": "Знаю",
+          "score": 2
+        },
+        {
+          "key": 4,
+          "title": "Использовал",
+          "score": 4
+        }
+      ]
     }
   ]
 }
