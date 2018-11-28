@@ -1,0 +1,42 @@
+<div class="topic-editor">
+
+  <form [formGroup]="topicForm" (ngSubmit)="onSubmit()">
+    <label>
+      Название раздела:
+      <input type="text" formControlName="name" required>
+    </label>
+
+    <!--
+    <div formArrayName="aliases">
+      <h3>Термины</h3> <button (click)="addTerm()">добавить термин</button>
+
+      <div *ngFor="let term of terms.controls; let i=index">
+        <label>
+          Термин:
+          <input type="text" [formControlName]="term.name">
+        </label>
+
+        <label>
+          Термин:
+          <input type="text" [formControlName]="term.name">
+        </label>
+      </div>
+    </div>
+    -->
+
+    <!--<button type="submit" [disabled]="!profileForm.valid">Submit</button>-->
+  </form>
+
+  <hr>
+
+
+  <p>
+    Form Value: {{ profileForm.value | json }}
+  </p>
+
+
+  <p>
+    Form Status: {{ profileForm.status }}
+  </p>
+
+</div>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Topics } from '../models';
+import { defaultChoices, Topic, Topics, User } from '../models';
 import { QuestionnaireLocalStorageService, QuestionnaireService } from '../services';
+import { pseudoRandom } from '../pseudo-random';
 
 // https://www.lucidchart.com/techblog/2016/11/08/angular-2-and-observables-data-sharing-in-a-multi-view-application/
 
@@ -15,7 +16,8 @@ export class TopicsStore {
   private recommendedTopicsLoaded = false;
   private recommendedTopicsLoading = false;
 
-  constructor(private questionnaire: QuestionnaireService) { }
+  constructor(private questionnaire: QuestionnaireService,
+              private localStorage: QuestionnaireLocalStorageService) { }
 
   // current value
   get topics(): Topics {
@@ -140,5 +142,22 @@ export class TopicsStore {
     this._topics.error(error);
     this.recommendedTopicsLoaded = false;
     this.recommendedTopicsLoading = false;
+  }
+
+  createTopic(owner: User): Topic {
+    const topic = Topic.fromObject({
+      key: pseudoRandom(8),
+      owner,
+      choices: defaultChoices,
+    });
+
+    // TODO HTTP
+    this.localStorage.saveOwnTopic(topic);
+
+    const _topics = this.topics;
+    _topics.ownTopics.push(topic);
+    this._topics.next(_topics);
+
+    return topic;
   }
 }

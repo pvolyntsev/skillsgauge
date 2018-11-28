@@ -23,6 +23,16 @@ export class Topic {
     return Object.assign(instance, { key, type, title, titleShort, version, terms, choices, owner });
   }
 
+  toObject(): object {
+    const { key, type, title, titleShort, version, terms, choices  } = this;
+    const owner = {
+      id: this.owner ? this.owner.id : null,
+    };
+    return {
+      key, type, title, titleShort, version, terms, choices, owner,
+    };
+  }
+
   public get htmlId(): string {
     return [
       'topic',

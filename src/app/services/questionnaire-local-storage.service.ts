@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TopicAnswers } from '../models';
+import { Topic, TopicAnswers } from '../models';
 
 @Injectable()
 export class QuestionnaireLocalStorageService {
@@ -55,5 +55,12 @@ export class QuestionnaireLocalStorageService {
     const expiration = null; // TODO 2 месяца на хранение new Date(now.getTime() + 2 * 30 * 24 * 60 * 60 * 1000 * ttl).getTime();
     const itemKey = [key, 'v', date].join(':');
     localStorage.setItem(itemKey, JSON.stringify([answerObj, expiration]));
+  }
+
+  saveOwnTopic(topic: Topic): void {
+    const topicObj = topic.toObject();
+    const { key } = topic;
+    const itemKey = [ key, 't'].join(':');
+    localStorage.setItem(itemKey, JSON.stringify(topicObj));
   }
 }

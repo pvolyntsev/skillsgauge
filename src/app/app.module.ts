@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-// import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 // modules
@@ -21,6 +21,7 @@ import { IntroComponent } from './pages/intro/intro.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TopicsListModule } from './pages/topics-list';
 import { TopicTestModule} from './pages/topic-test';
+import { TopicEditorModule } from './pages/topic-editor';
 
 // сервисы
 import { QuestionnaireService, QuestionnaireLocalStorageService } from './services';
@@ -38,12 +39,13 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
     RoutingModule,
     BrowserModule,
     HttpClientModule,
-    // ReactiveFormsModule,
+    ReactiveFormsModule,
     FormsModule,
     ShareButtonsModule.forRoot(),
     MainLayoutModule,
     TopicsListModule,
     TopicTestModule,
+    TopicEditorModule,
   ],
   providers: [
     QuestionnaireLocalStorageService,

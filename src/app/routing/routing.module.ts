@@ -9,6 +9,7 @@ import { IntroComponent } from '../pages/intro/intro.component';
 import { P404Component } from '../pages/404/p404.component';
 import { TopicsListComponent } from '../pages/topics-list/topics-list.component';
 import { TopicTestComponent } from '../pages/topic-test/topic-test.component';
+import { TopicEditorComponent } from '../pages/topic-editor/topic-editor.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'intro', component: IntroComponent },
       { path: 'topics', component: TopicsListComponent },
       { path: 'topic/:key', component: TopicTestComponent },
+      { path: 'topic/:user/:key/edit', component: TopicEditorComponent },
     ]
   },
 

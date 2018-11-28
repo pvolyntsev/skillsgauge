@@ -22,6 +22,11 @@ export class TopicTerm {
     return Object.assign(instance, { key, title, description, hint, links });
   }
 
+  toObject(): object {
+    const { key, title, description, hint, links } = this;
+    return { key, title, description, hint, links };
+  }
+
   public get topic(): Topic {
     return this._topic;
   }
