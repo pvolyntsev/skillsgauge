@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Topic } from '../../models/topic.model';
+import { Topic, TopicAnswers } from '../../models';
 
 @Component({
   selector: '[appTopicTestNavigation]', // tslint:disable-line
@@ -9,4 +9,7 @@ import { Topic } from '../../models/topic.model';
 export class TopicTestNavigationComponent {
   @Input()
   topic: Topic;
+
+  @Input()
+  answers: TopicAnswers;
 }
