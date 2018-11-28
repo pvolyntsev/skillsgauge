@@ -11,26 +11,45 @@ export class QuestionnaireService {
 
   constructor(private http: HttpClient) {}
 
-  topics(): Observable<Topics> {
-    const options = {};
+  private static decodeTopics(obj: any): Topics {
+    return Topics.fromObject(obj);
+  }
+
+  topics(topicsKeys?: string[]): Observable<Topics> {
+    const options = {
+      keys: (topicsKeys || []).join(','),
+    };
     let params = new HttpParams();
     Object.keys(options).forEach((p, i) => {
       params = params.set(p, options[p]);
     });
-    return this.http.get<Topics>(`${this.endpoint}/questionnaire/questionnaire.json`, {params})
+    return this.http.get<Topics>(`${this.endpoint}/questionnaire/topics.json`, {params})
       .pipe(
-        map(this.decodeAnswer)
+        map(QuestionnaireService.decodeTopics)
       );
   }
 
-  ownTopics(): Observable<Topics> {
-    return this.http.get<Topics>(`${this.endpoint}/questionnaire/own-topics.json`)
+  ownTopics(topicsKeys?: string[]): Observable<Topics> {
+    const options = {
+      keys: (topicsKeys || []).join(','),
+    };
+    let params = new HttpParams();
+    Object.keys(options).forEach((p, i) => {
+      params = params.set(p, options[p]);
+    });
+    return this.http.get<Topics>(`${this.endpoint}/questionnaire/own-topics.json`, {params})
       .pipe(
-        map(this.decodeAnswer)
+        map(QuestionnaireService.decodeTopics)
       );
   }
 
-  decodeAnswer(obj: any): Topics {
-    return Topics.fromObject(obj);
+  answers(): Observable<Topics> {
+    return this.http.get<Topics>(`${this.endpoint}/questionnaire/answers.json`);
+  }
+
+  saveOwnTopic(/*topic: Topic*/): void {
+  }
+
+  saveAnswers(/*answers: Answers*/): void {
   }
 }
