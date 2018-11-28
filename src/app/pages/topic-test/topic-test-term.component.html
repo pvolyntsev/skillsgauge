@@ -2,35 +2,35 @@
 <div class="switch-toggle switch-4 switch-candy">
 
   <input
-    id="{{ term.htmlId }}-0"
-    [checked]="answerKey === '0'"
+    id="{{ term.htmlId }}-1"
+    [checked]="answerKey === '1'"
     (change)="setAnswer(choices[0])"
     name="{{ term.htmlId }}"
     type="radio"/>
-  <label for="{{ term.htmlId }}-0">{{ choices[0].title }}</label>
-
-  <input
-    id="{{ term.htmlId }}-1"
-    [checked]="answerKey === '1'"
-    (change)="setAnswer(choices[1])"
-    name="{{ term.htmlId }}"
-    type="radio"/>
-  <label for="{{ term.htmlId }}-1">{{ choices[1].title }}</label>
+  <label for="{{ term.htmlId }}-1">{{ choices[0].title }}</label>
 
   <input
     id="{{ term.htmlId }}-2"
     [checked]="answerKey === '2'"
-    (change)="setAnswer(choices[2])"
+    (change)="setAnswer(choices[1])"
     name="{{ term.htmlId }}"
     type="radio"/>
-  <label for="{{ term.htmlId }}-2">{{ choices[2].title }}</label>
+  <label for="{{ term.htmlId }}-2">{{ choices[1].title }}</label>
 
   <input
     id="{{ term.htmlId }}-3"
+    [checked]="answerKey === '3'"
+    (change)="setAnswer(choices[2])"
+    name="{{ term.htmlId }}"
+    type="radio"/>
+  <label for="{{ term.htmlId }}-3">{{ choices[2].title }}</label>
+
+  <input
+    id="{{ term.htmlId }}-4"
     [checked]="answerKey === '4'"
     (change)="setAnswer(choices[3]);"
     name="{{ term.htmlId }}"
     type="radio"/>
-  <label for="{{ term.htmlId }}-3">{{ choices[3].title }}</label><a></a>
+  <label for="{{ term.htmlId }}-4">{{ choices[3].title }}</label><a></a>
 
 </div>
