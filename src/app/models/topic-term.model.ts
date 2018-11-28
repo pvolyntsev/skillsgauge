@@ -16,17 +16,10 @@ export class TopicTerm {
   }
 
   public static fromObject(topic: Topic, obj: any): TopicTerm {
-    const instanse = new TopicTerm(topic);
+    const { key, title, description, hint } = obj;
+    const instance = new TopicTerm(topic);
     const links = (obj.links || []).map(link => URLResource.fromObject(link));
-    return Object.assign(instanse, {
-      ...obj,
-      links,
-    });
-  }
-
-  // example: this.score
-  public get score(): number {
-    return this.answer.score;
+    return Object.assign(instance, { key, title, description, hint, links });
   }
 
   public get topic(): Topic {

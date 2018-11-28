@@ -11,7 +11,6 @@ export class Topics {
     const ownTopics = (obj.ownTopics || []).map(topic => Topic.fromObject(topic));
     const recommendedTopics = (obj.recommended || []).map(topic => Topic.fromObject(topic));
     return Object.assign(instance, {
-      ...obj,
       topics,
       ownTopics,
       recommendedTopics,

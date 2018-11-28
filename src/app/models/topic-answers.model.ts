@@ -24,13 +24,13 @@ export class TopicAnswers {
 
   public static fromObject(topic: Topic, obj: any): TopicAnswers {
     const today = moment().format('YYYYMMDD');
-    const { score, maximumScore } = obj;
+    const { key, date, version, score, maximumScore } = obj;
     deleteProperty(obj, 'score');
     deleteProperty(obj, 'maximumScore');
 
     const answers = Object.keys((obj.answers || {}))
-      .reduce((carry, key) => {
-        carry[key] = Choice.fromObject(answers[key]);
+      .reduce((carry, termKey) => {
+        carry[termKey] = topic.choices.find(c => c.key === answers[termKey].key);
         return carry;
       }, {});
 
@@ -85,7 +85,11 @@ export class TopicAnswers {
   }
 
   toObject(): object {
-    const { key, date, score, maximumScore, selected, answers } = this;
+    const { key, date, score, maximumScore, selected } = this;
+    const answers = Object.keys(this.answers).reduce((carry, termKey) => {
+      carry[termKey] = { score: this.answers[termKey].score, key: this.answers[termKey].key };
+      return carry;
+    }, {});
     return {
       key, date, score, maximumScore, maximumScore, score, selected, answers,
     };

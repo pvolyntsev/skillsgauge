@@ -15,15 +15,12 @@ export class Topic {
   owner: User;
 
   public static fromObject(obj: any): Topic {
+    const { key, type, title, titleShort, version } = obj;
     const instance = new Topic();
-    const choices = (obj.choices || []).map(answer => Choice.fromObject(answer));
+    const choices = (obj.choices || []).map(choice => Choice.fromObject(choice));
     const terms = (obj.terms || []).map(term => TopicTerm.fromObject(instance, term));
-    const user = User.fromObject(obj.user);
-    return Object.assign(instance, {
-      ...obj,
-      terms,
-      choices,
-    });
+    const owner = User.fromObject(obj.owner || {});
+    return Object.assign(instance, { key, type, title, titleShort, version, terms, choices, owner });
   }
 
   public get htmlId(): string {

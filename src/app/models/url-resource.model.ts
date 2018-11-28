@@ -3,6 +3,7 @@ export class URLResource {
   title: string;
 
   public static fromObject(obj: any): URLResource {
-    return Object.assign(new URLResource(), obj);
+    const { url, title } = obj;
+    return Object.assign(new URLResource(), { url, title });
   }
 }

@@ -4,7 +4,8 @@ export class Choice {
   score = 0;
 
   public static fromObject(obj: any): Choice {
-    return Object.assign(new Choice(), obj);
+    const { key, title, score } = obj;
+    return Object.assign(new Choice(), { key, title, score });
   }
 }
 
