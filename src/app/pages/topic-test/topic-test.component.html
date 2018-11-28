@@ -52,7 +52,7 @@
              *ngIf="nextTopic"
              [title]="nextTopic.title"
              routerLink="/topic/{{nextTopic.key}}" >
-              <span>{{nextTopic.titleShort}}</span>
+              <span>{{nextTopic.titleShort || nextTopic.title}}</span>
               <img class="icon icon-next" src="/assets/img/icons/nav-right.svg" width="25" height="45">
           </a>
           <a class="topic__nav_next"

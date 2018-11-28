@@ -13,7 +13,7 @@
       </svg>
     </span>
     <h3 class="topics__title">{{ topic.title }}</h3>
-    <h3 class="topics__title_short">{{ topic.titleShort }}</h3>
+    <h3 class="topics__title_short">{{ topic.titleShort || topic.title }}</h3>
     <p class="topics__terms">
       <span class="topics__terms_first">{{ topic.termsFirstN(8, ', ') }}</span>
       <span class="topics__terms_last">{{ topic.termsAfterN(8, ', ') }}</span>
