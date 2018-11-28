@@ -103,7 +103,7 @@ export class TopicAnswers {
     }
     return this._topic.terms.reduce((sum, term) => {
       const answer = this.getAnswerByTerm(term);
-      return sum + answer ? answer.score : 0;
+      return sum + (answer ? answer.score : 0);
     }, 0);
   }
 

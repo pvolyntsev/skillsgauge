@@ -126,7 +126,7 @@ export class AnswersStore {
   public get score(): number {
     return this.selectedTopics.reduce((sum, topic) => {
       const answers = this.answers.getTopicAnswers(topic);
-      return sum + answers ? answers.score : 0;
+      return sum + (answers ? answers.score : 0);
     }, 0);
   }
 
@@ -135,7 +135,7 @@ export class AnswersStore {
   public get maximumScore(): number {
     return this.selectedTopics.reduce((sum, topic) => {
       const answers = this.answers.getTopicAnswers(topic);
-      return sum + answers ? answers.maximumScore : 0;
+      return sum + (answers ? answers.maximumScore : 0);
     }, 0);
   }
 
