@@ -12,6 +12,8 @@ export class TopicsStore {
   private topicsLoading = false;
   private ownTopicsLoaded = false;
   private ownTopicsLoading = false;
+  private recommendedTopicsLoaded = false;
+  private recommendedTopicsLoading = false;
 
   constructor(private questionnaire: QuestionnaireService) { }
 
@@ -21,42 +23,45 @@ export class TopicsStore {
   }
 
   get loaded(): Boolean {
-    return this.topicsLoaded && this.ownTopicsLoaded;
+    return this.topicsLoaded
+      && this.ownTopicsLoaded
+      && this.recommendedTopicsLoaded;
   }
 
   get loading(): Boolean {
-    return this.topicsLoading || this.ownTopicsLoading;
+    return this.topicsLoading
+      || this.ownTopicsLoading
+      || this.recommendedTopicsLoading;
   }
 
-  awaitTopics(topicsKeys?: string[]): Observable<Topics> {
+  awaitTopics(topicsKeys: string[]): Observable<Topics> {
     if (!this.loaded && !this.loading) {
       this.loadTopics(topicsKeys);
+      this.loadOwnTopics(topicsKeys);
     }
     return this._topics.asObservable();
   }
 
-  loadTopics(topicsKeys?: string[]) {
+  awaitRecommendedTopics(): Observable<Topics> {
+    if (!this.loaded && !this.loading) {
+      this.loadRecommendedTopics();
+    }
+    return this._topics.asObservable();
+  }
+
+  loadTopics(topicsKeys: string[]) {
     console.log('TopicsStore:loadTopics', topicsKeys);
 
     this.topicsLoaded = false;
     this.topicsLoading = true;
-    this.ownTopicsLoaded = false;
-    this.ownTopicsLoading = true;
-
     this.questionnaire.topics(topicsKeys)
       .subscribe(
         this.onLoadTopicsSuccess.bind(this),
         this.onLoadTopicsError.bind(this)
       );
-
-    this.questionnaire.ownTopics(topicsKeys)
-      .subscribe(
-        this.onLoadOwnTopicsSuccess.bind(this),
-        this.onLoadOwnTopicsError.bind(this)
-      );
   }
 
-  onLoadTopicsSuccess(topics: Topics): void {
+  private onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicsStore:onLoadTopicsSuccess');
 
     // Можно бы ввести Mutex но NodeJS однопоточный
@@ -67,7 +72,7 @@ export class TopicsStore {
     this.topicsLoading = false;
   }
 
-  onLoadTopicsError(error: any): void {
+  private onLoadTopicsError(error: any): void {
     console.log('TopicsStore:onLoadTopicsError');
     console.log(error);
 
@@ -76,7 +81,7 @@ export class TopicsStore {
     this.topicsLoading = false;
   }
 
-  onLoadOwnTopicsSuccess(topics: Topics): void {
+  private onLoadOwnTopicsSuccess(topics: Topics): void {
     console.log('TopicsStore:onLoadOwnTopicsSuccess');
 
     // Можно бы ввести Mutex но NodeJS однопоточный
@@ -87,12 +92,20 @@ export class TopicsStore {
     this.ownTopicsLoading = false;
   }
 
-  onLoadOwnTopicsError(error: any): void {
+  private onLoadOwnTopicsError(error: any): void {
     console.log('TopicsStore:onLoadTopicsError');
     console.log(error);
 
     this._topics.error(error);
     this.ownTopicsLoaded = false;
     this.ownTopicsLoading = false;
+  }
+
+  private onLoadRecommendedTopicsSuccess(topics: Topics): void {
+
+  }
+
+  private onLoadRecommendedTopicsError(error: any): void {
+
   }
 }
