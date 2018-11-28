@@ -23,7 +23,7 @@ import { TopicTestComponent, TopicTestTermComponent, TopicTestNavigationComponen
 
 // сервисы
 import { QuestionnaireService, QuestionnaireLocalStorageService } from './services';
-import { TopicsStore, UserStore } from './stores';
+import { TopicsStore, UserStore, AnswersStore } from './stores';
 
 @NgModule({
   declarations: [
@@ -53,6 +53,7 @@ import { TopicsStore, UserStore } from './stores';
     QuestionnaireService,
     TopicsStore,
     UserStore,
+    AnswersStore,
   ],
   bootstrap: [AppComponent]
 })

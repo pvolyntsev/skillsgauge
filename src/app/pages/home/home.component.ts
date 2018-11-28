@@ -1,8 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { TopicsStore } from '../../stores/';
-import { Topics } from '../../models';
+import { AnswersStore } from '../../stores';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +9,7 @@ import { Topics } from '../../models';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnDestroy {
-  private topicSearchSubscription: Subscription;
-  topicSearch: Topics = new Topics();
+  private readonly _answersSubscription: Subscription;
 
   loader_bar1_width = 0;
   loader_bar2_width = 0;
@@ -20,13 +18,13 @@ export class HomeComponent implements OnDestroy {
   loader_bar2_fill = 'rgb(0,0,0,0)'; // -> #aa3853
   loader_bar3_fill = 'rgb(0,0,0,0)'; // -> #488456
 
-  constructor(private topicsStore: TopicsStore,
+  constructor(private answersStore: AnswersStore,
               private router: Router) {
     // обработчик на загрузку топиков
-    this.topicSearchSubscription = topicsStore.awaitTopics()
+    this._answersSubscription = answersStore.awaitAnswers()
       .subscribe(
-        (topics) => { this.onLoadTopicsSuccess(topics); },
-        (error) => { this.onLoadTopicsError(error); }
+        (answers) => { this.onLoadSuccess(); },
+        (error) => { /* console.log(error); */ }
       );
 
     setTimeout(() => {
@@ -47,12 +45,11 @@ export class HomeComponent implements OnDestroy {
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
-    this.topicSearchSubscription.unsubscribe();
+    this._answersSubscription.unsubscribe();
   }
 
-  onLoadTopicsSuccess(topics: Topics): void {
+  onLoadSuccess(): void {
     console.log('HomeComponent:onLoadTopicsSuccess');
-    this.topicSearch = topics;
 
     setTimeout(() => {
       setTimeout(() => {
@@ -71,9 +68,9 @@ export class HomeComponent implements OnDestroy {
       }, 1250);
 
       setTimeout(() => {
-        if (this.topicSearch.selectedTopics.length === 0) {
+        if (this.answersStore.selectedTopics.length === 0) {
           this.router.navigateByUrl('/intro');
-        } else if (this.topicSearch.score === 0) {
+        } else if (this.answersStore.score === 0) {
           this.router.navigateByUrl('/topics');
         } else {
           this.router.navigateByUrl('/dashboard');
@@ -81,10 +78,5 @@ export class HomeComponent implements OnDestroy {
       }, 2000);
 
     }, 900);
-  }
-
-  onLoadTopicsError(error: any): void {
-    console.log('HomeComponent:onLoadTopicsError');
-    console.log(error);
   }
 }
