@@ -1,7 +1,6 @@
 import { TopicTerm } from './topic-term.model';
 import { Choice } from './choice.model';
 import { User } from './user.model';
-import { TopicAnswers } from './topic-answers.model';
 
 const topicKeyClearer = new RegExp('[^a-zA-Z0-9]', 'g');
 
@@ -13,7 +12,6 @@ export class Topic {
   version: string;
   terms: TopicTerm[] = [];
   choices: Choice[] = [];
-  answers: TopicAnswers = new TopicAnswers(this);
   owner: User;
 
   public static fromObject(obj: any): Topic {
@@ -25,7 +23,6 @@ export class Topic {
       ...obj,
       terms,
       choices,
-      answers: new TopicAnswers(instance),
     });
   }
 
