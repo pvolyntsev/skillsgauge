@@ -81,6 +81,56 @@ body.scroll { // страница во весь экран со стандарт
   }
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
 
 
+.validate {
+  .error-message {
+    color: #dc3545;
+    display: none;
+  }
+  .valid-message {
+    color: #28a745;
+    display: none;
+  }
+}
+
+.is-error {
+  .form-control {
+    border-color: #dc3545;
+    background: lighten(#dc3545, 45%);
+    color: #dc3545;
+  }
+  .error-message {
+    color: #dc3545;
+    display: block;
+  }
+}
+
+.is-valid {
+  .form-control {
+    border-color: #28a745;
+  }
+  .valid-message {
+    display: block;
+  }
+}
+
+.btn.btn-icon {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  img {
+    height: 1em;
+  }
+}
 
