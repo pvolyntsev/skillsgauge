@@ -25,6 +25,10 @@ export class TopicsStore {
   }
 
   get loaded(): Boolean {
+  public get allTopics(): Topic[] {
+    return this.topics.allTopics;
+  }
+
     return this.topicsLoaded
       && this.ownTopicsLoaded
       && this.recommendedTopicsLoaded;

@@ -99,17 +99,7 @@ export class AnswersStore {
 
   // все топики
   public get topics(): Topic[] {
-    const topics = [
-      ...this._topics.topics,
-      ...this._topics.ownTopics,
-      ...this._topics.recommendedTopics,
-    ];
-    return topics.reduce((carry, topic) => {
-      if (!carry.find(t => t.key === topic.key)) {
-        carry.push(topic);
-      }
-      return carry;
-    }, []);
+    return this._topics.allTopics;
   }
 
   // выбранные топики

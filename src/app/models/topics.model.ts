@@ -17,6 +17,21 @@ export class Topics {
     });
   }
 
+  // все топики
+  public get allTopics(): Topic[] {
+    const topics = [
+      ...this.topics,
+      ...this.ownTopics,
+      ...this.recommendedTopics,
+    ];
+    return topics.reduce((carry, topic) => {
+      if (!carry.find(t => t.key === topic.key)) {
+        carry.push(topic);
+      }
+      return carry;
+    }, []);
+  }
+
   // добавить несколько топиков c заменой
   public pushOrReplaceTopics(property: string, topics: Topic[]): Topics {
     if (!this.hasOwnProperty(property)) {
