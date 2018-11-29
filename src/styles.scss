@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-@import "./scss/normalize";
 @import "./scss/mixins/clearfix";
 @import "./scss/mixins/transition";
 @import "./scss/mixins/opacity";
@@ -12,6 +11,7 @@
 @import "./vendor/hover/scss/hover.scss";
 @import "./vendor/css-toggle-switch/toggle-switch";
 @import '~@ngx-share/button/themes/default/default-theme';
+@import './scss/bootstrap/bootstrap';
 
 html { height: 100%; }
 body {
