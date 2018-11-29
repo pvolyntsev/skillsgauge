@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AnswersStore, TopicsStore } from '../../stores';
+import { AnswersStore, TopicsStore, UserStore } from '../../stores';
 import { QuestionnaireLocalStorageService } from '../../services';
-import { Topics, Topic, TopicAnswers, TopicsAnswers } from '../../models';
+import { Topics, Topic, TopicAnswers, TopicsAnswers, User } from '../../models';
 
 @Component({
   selector: 'app-topic-test',
@@ -18,12 +18,16 @@ export class TopicTestComponent implements OnInit, OnDestroy {
   private readonly _answersSubscription: Subscription;
   private _answers: TopicsAnswers;
 
+  private readonly _userSubscription: Subscription;
+  private _user: User;
+
   topic: Topic;
   nextTopic: Topic; // следующий выбранный топик
   prevTopic: Topic; // предыдущий выбранный топик
   loaded: Boolean = false;
 
-  constructor(private topicsStore: TopicsStore,
+  constructor(private userStore: UserStore,
+              private topicsStore: TopicsStore,
               private answersStore: AnswersStore,
               private localStorage: QuestionnaireLocalStorageService,
               private router: Router,
@@ -50,6 +54,13 @@ export class TopicTestComponent implements OnInit, OnDestroy {
       console.log(event.url);
       this.selectTopic();
     });
+
+    // обработчик на загрузку пользователя
+    this._userSubscription = userStore.awaitUser()
+      .subscribe(
+        user => this._user = user,
+        (error) => { console.log(error); }
+      );
   }
 
   ngOnInit() {
@@ -59,6 +70,7 @@ export class TopicTestComponent implements OnInit, OnDestroy {
     // unsubscribe to ensure no memory leaks
     this._topicsSubscription.unsubscribe();
     this._answersSubscription.unsubscribe();
+    this._userSubscription.unsubscribe();
   }
 
   get topicAnswers(): TopicAnswers {
@@ -66,6 +78,13 @@ export class TopicTestComponent implements OnInit, OnDestroy {
       return this._answers.getTopicAnswers(this.topic);
     }
     return null;
+  }
+
+  get isOwnTopic(): Boolean {
+    if (this.topic && this._user) {
+      return this.topic.owner && (this.topic.owner.id === this._user.id);
+    }
+    return false;
   }
 
   onLoadAnswersSuccess(answers: TopicsAnswers): void {

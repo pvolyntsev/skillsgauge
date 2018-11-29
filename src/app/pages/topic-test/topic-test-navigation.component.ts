@@ -12,4 +12,7 @@ export class TopicTestNavigationComponent {
 
   @Input()
   answers: TopicAnswers;
+
+  @Input()
+  editable: Boolean = false;
 }

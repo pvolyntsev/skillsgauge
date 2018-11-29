@@ -1,16 +1,21 @@
 <div class="container">
   <div class="container-navigation">
     <div class="topic__header_nav">
-      <a class="topic__header_nav_exit" routerLink="/topics">
+      <a class="topic__header_nav_link" title="Выбор разделов" routerLink="/topics">
         <img class="icon" src="/assets/img/icons/select-topics.svg" width="60" height="50">
       </a>
       <h1 class="topic__header_nav__title"><a routerLink="/topic/{{topic.key}}">{{ topic.title || 'Раздел без названия' }}</a></h1>
       <div class="topic__header_nav__counter">
         {{ answers.score }}&nbsp;из&nbsp;{{ answers.maximumScore }}
       </div>
-      <a class="topic__header_nav_exit" routerLink="/dashboard">
-        <img class="icon" src="/assets/img/icons/skill-bar.svg" width="60" height="50">
-      </a>
+      <span class="topic__header_nav_link">
+        <a routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
+          <img class="icon" src="/assets/img/icons/topic-edit.svg" width="60" height="50">
+        </a>
+        <a routerLink="/dashboard" title="Результаты">
+          <img class="icon" src="/assets/img/icons/skill-bar.svg" width="60" height="50">
+        </a>
+      </span>
     </div>
 
     <div class="topic__header">
