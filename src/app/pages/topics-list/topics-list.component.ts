@@ -103,6 +103,6 @@ export class TopicsListComponent implements OnDestroy {
   // создаёт новый топик и переходит на страницу редактирования
   createOwnTopic(): void {
     const topic = this.topicsStore.createTopic(this.user);
-    this.router.navigateByUrl('/topic/' + this.user.login + '/' + topic.key + '/edit');
+    this.router.navigateByUrl('/topic/' + topic.key + '/edit');
   }
 }
