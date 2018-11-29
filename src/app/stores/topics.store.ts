@@ -66,10 +66,11 @@ export class TopicsStore {
   private onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicsStore:onLoadTopicsSuccess');
 
-    // Можно бы ввести Mutex но NodeJS однопоточный
-    const _topics = this.topics;
-    _topics.topics = topics.topics;
-    this._topics.next(_topics);
+    this._topics.next(
+      this.topics
+        .pushOrReplaceTopics('topics', topics.topics
+        )
+    );
     this.topicsLoaded = true;
     this.topicsLoading = false;
   }
@@ -87,6 +88,11 @@ export class TopicsStore {
 
     this.ownTopicsLoaded = false;
     this.ownTopicsLoading = true;
+
+    // сначала загрузить всё что есть в LocalStorage
+    this.onLocalStorageTopics(this.localStorage.findAllTopics());
+
+    // затем то, что есть на сервере
     this.questionnaire.ownTopics(topicsKeys)
       .subscribe(
         this.onLoadOwnTopicsSuccess.bind(this),
@@ -94,13 +100,24 @@ export class TopicsStore {
       );
   }
 
+  // завершение загрузки ответов из LocalStorage
+  private onLocalStorageTopics(topics: Topic[]): void {
+    console.log('TopicsStore:onLocalStorageTopics');
+    this._topics.next(
+      this.topics
+        .pushOrReplaceTopics('ownTopics', topics
+        )
+    );
+  }
+
   private onLoadOwnTopicsSuccess(topics: Topics): void {
     console.log('TopicsStore:onLoadOwnTopicsSuccess');
 
-    // Можно бы ввести Mutex но NodeJS однопоточный
-    const _topics = this.topics;
-    _topics.ownTopics = topics.topics;
-    this._topics.next(_topics);
+    this._topics.next(
+      this.topics
+        .pushOrReplaceTopics('ownTopics', topics.topics
+        )
+    );
     this.ownTopicsLoaded = true;
     this.ownTopicsLoading = false;
   }
@@ -128,10 +145,11 @@ export class TopicsStore {
   private onLoadRecommendedTopicsSuccess(topics: Topics): void {
     console.log('TopicsStore:onLoadRecommendedTopicsSuccess');
 
-    // Можно бы ввести Mutex но NodeJS однопоточный
-    const _topics = this.topics;
-    _topics.recommendedTopics = topics.topics;
-    this._topics.next(_topics);
+    this._topics.next(
+      this.topics
+        .pushOrReplaceTopics('recommendedTopics', topics.topics
+        )
+    );
     this.recommendedTopicsLoaded = true;
     this.recommendedTopicsLoading = false;
   }
@@ -151,12 +169,16 @@ export class TopicsStore {
       choices: defaultChoices,
     });
 
+    // сохранить
     // TODO HTTP
-    this.localStorage.saveOwnTopic(topic);
+    this.localStorage.saveTopic(topic);
 
-    const _topics = this.topics;
-    _topics.ownTopics.push(topic);
-    this._topics.next(_topics);
+    // добавить в список
+    this._topics.next(
+      this.topics
+        .pushOrReplaceTopics('ownTopics', [ topic ]
+      )
+    );
 
     return topic;
   }

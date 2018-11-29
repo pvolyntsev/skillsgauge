@@ -16,4 +16,23 @@ export class Topics {
       recommendedTopics,
     });
   }
+
+  // добавить несколько топиков c заменой
+  public pushOrReplaceTopics(property: string, topics: Topic[]): Topics {
+    if (!this.hasOwnProperty(property)) {
+      return this;
+    }
+
+    const target = this[property];
+    topics.map(topic => {
+      const sameTopicIndex = this[property].findIndex(t => t.key === topic.key)
+      if (sameTopicIndex >= 0) {
+        target[sameTopicIndex] = topic;
+      } else {
+        target.push(topic);
+      }
+    });
+
+    return this;
+  }
 }
