@@ -4,7 +4,7 @@
       <a class="topic__header_nav_exit" routerLink="/topics">
         <img class="icon" src="/assets/img/icons/easy-checklist.svg" width="60" height="50">
       </a>
-      <h1 class="topic__header_nav__title"><a routerLink="/topic/{{topic.key}}">{{ topic.title }}</a></h1>
+      <h1 class="topic__header_nav__title"><a routerLink="/topic/{{topic.key}}">{{ topic.title || 'Раздел без названия' }}</a></h1>
       <div class="topic__header_nav__counter">
         {{ answers.score }}&nbsp;из&nbsp;{{ answers.maximumScore }}
       </div>

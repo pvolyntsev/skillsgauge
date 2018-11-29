@@ -17,7 +17,7 @@
           ></share-buttons>
         </div>
 
-        <h1 class="topic__title">{{ topic.title }}</h1>
+        <h1 class="topic__title">{{ topic.title || 'Раздел без названия' }}</h1>
         <ul class="topic__terms_list">
           <li
             appTopicTestTerm
@@ -41,18 +41,18 @@
           </a>
           <a class="topic__nav_prev"
              *ngIf="prevTopic"
-             [title]="prevTopic.title"
+             [title]="prevTopic.title || 'Раздел без названия'"
              routerLink="/topic/{{prevTopic.key}}">
-              <span>{{prevTopic.titleShort}}</span>
+              <span>{{prevTopic.titleShort || prevTopic.title  || 'Раздел без названия'}}</span>
               <img class="icon icon-prev" src="/assets/img/icons/nav-left.svg" width="25" height="45">
           </a>
         </div>
         <div class="topic__nav_wrapper">
           <a class="topic__nav_next"
              *ngIf="nextTopic"
-             [title]="nextTopic.title"
+             [title]="nextTopic.title || 'Раздел без названия'"
              routerLink="/topic/{{nextTopic.key}}" >
-              <span>{{nextTopic.titleShort || nextTopic.title}}</span>
+              <span>{{nextTopic.titleShort || nextTopic.title || 'Раздел без названия'}}</span>
               <img class="icon icon-next" src="/assets/img/icons/nav-right.svg" width="25" height="45">
           </a>
           <a class="topic__nav_next"
