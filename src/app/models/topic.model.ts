@@ -36,7 +36,7 @@ export class Topic {
   public get htmlId(): string {
     return [
       'topic',
-      this.type.replace(topicKeyClearer, '_'),
+      (this.type || '').replace(topicKeyClearer, '_'),
       this.key.replace(topicKeyClearer, '_'),
     ].join('_');
   }
