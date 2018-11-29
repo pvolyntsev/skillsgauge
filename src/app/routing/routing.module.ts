@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'intro', component: IntroComponent },
       { path: 'topics', component: TopicsListComponent },
       { path: 'topic/:key', component: TopicTestComponent },
-      { path: 'topic/:user/:key/edit', component: TopicEditorComponent },
+      { path: 'topic/:key/edit', component: TopicEditorComponent },
     ]
   },
 
