@@ -28,7 +28,8 @@
             class="topics__topic"
             *ngFor="let t of topics"
             [topic]="t"
-            [answers]="topicAnswers(t)"></li>
+            [answers]="topicAnswers(t)"
+            [editable]="isOwnTopic(t)"></li>
         </ul>
       </div>
     </div>
@@ -37,14 +38,10 @@
          *ngIf="loaded">
       <h1 class="topics__title_main">Мои разделы:
         <div
-          class="topics__title_main__button"
-          *ngIf="user && ownTopics.length > 0"
-          (click)="createOwnTopic()">
-            <!--<svg class="icon plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-              <path style="fill:#4CAF50;" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
-              <path style="fill:#FFFFFF;" d="M21,14h6v20h-6V14z"></path>
-              <path style="fill:#FFFFFF;" d="M14,21h20v6H14V21z"></path>
-            </svg>--> Добавить раздел</div>
+          class="topics__title_main__link"
+          *ngIf="user"
+          (click)="createOwnTopic()"><img class="icon" src="/assets/img/icons/topic-add.svg">
+            {{ ownTopics.length > 0 ? 'Добавить раздел' : 'Создать раздел' }}</div>
       </h1>
     </div>
     <div class="topics__content"
@@ -56,17 +53,21 @@
             class="topics__topic"
             *ngFor="let t of ownTopics"
             [topic]="t"
-            [answers]="topicAnswers(t)"></li>
+            [answers]="topicAnswers(t)"
+            [editable]="isOwnTopic(t)"></li>
         </ul>
-        <div
-          class="topics__list__button_add"
-          *ngIf="user && ownTopics.length === 0"
-            (click)="createOwnTopic()">
-            <!--<svg class="icon plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-              <path style="fill:#4CAF50;" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path>
-              <path style="fill:#FFFFFF;" d="M21,14h6v20h-6V14z"></path>
-              <path style="fill:#FFFFFF;" d="M14,21h20v6H14V21z"></path>
-            </svg>--> Создать свой раздел</div>
+        <div class="topics__list__promo" *ngIf="user && ownTopics.length < 4" (click)="createOwnTopic()">
+          <ul>
+            <li>Ты можешь создавать свои разделы опросника по другим темам</li>
+            <li>А также ты можешь сделать копию чужого раздела, чтобы дополнить или исправить</li>
+            <!--<li>Ты можешь поделиться своим разделом с другими пользователями и посмотреть статистику его заполнения</li>-->
+          </ul>
+          <div class="topics__list__promo_links">
+            <div class="topics__list__promo_link"
+              *ngIf="user" (click)="createOwnTopic()"><img class="icon" src="/assets/img/icons/topic-add.svg">
+                {{ ownTopics.length > 0 ? 'Добавить раздел' : 'Создать раздел' }}</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -83,7 +84,8 @@
             class="topics__topic"
             *ngFor="let t of recommendedTopics"
             [topic]="t"
-            [answers]="topicAnswers(t)"></li>
+            [answers]="topicAnswers(t)"
+            [editable]="isOwnTopic(t)"></li>
         </ul>
       </div>
     </div>

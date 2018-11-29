@@ -86,6 +86,13 @@ export class TopicsListComponent implements OnDestroy {
     return this._answers.getTopicAnswers(topic);
   }
 
+  isOwnTopic(topic: Topic): Boolean {
+    if (topic && this.user) {
+      return topic.owner && (topic.owner.id === this.user.id);
+    }
+    return false;
+  }
+
   // есть ли выбранные топики
   // @example: this.hasSelectedTopic
   get hasSelectedTopic(): Boolean {

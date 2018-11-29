@@ -14,6 +14,9 @@ export class TopicsListItemComponent {
   @Input()
   answers: TopicAnswers;
 
+  @Input()
+  editable: Boolean;
+
   constructor(private localStorage: QuestionnaireLocalStorageService) {
   }
 
