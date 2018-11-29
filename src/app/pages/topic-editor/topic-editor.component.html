@@ -1,42 +1,124 @@
 <div class="topic-editor">
+  <div class="container">
+    <form class="validate"
+          *ngIf="loaded"
+          [formGroup]="topicForm"
+          (ngSubmit)="onSubmit()">
 
-  <form [formGroup]="topicForm" (ngSubmit)="onSubmit()">
-    <label>
-      Название раздела:
-      <input type="text" formControlName="name" required>
-    </label>
+      <div class="form-group"
+           [class.is-error]="!topicForm.get('title').valid"
+           [class.is-valid]="topicForm.get('title').valid">
+        <label for="topic_title">Название раздела:</label>
+        <input id="topic_title"
+               class="form-control"
+               type="text"
+               placeholder="название..."
+               formControlName="title" required>
+      </div>
 
-    <!--
-    <div formArrayName="aliases">
-      <h3>Термины</h3> <button (click)="addTerm()">добавить термин</button>
+      <div class="form-group"
+           [class.is-error]="!topicForm.get('titleShort').valid">
+        <label for="topic_title_short">Короткое название раздела:</label>
+        <input id="topic_title_short"
+               class="form-control"
+               type="text"
+               maxlength="40"
+               placeholder="короткое название..."
+               formControlName="titleShort">
+      </div>
 
-      <div *ngFor="let term of terms.controls; let i=index">
+      <div class="form-group"
+           [class.is-error]="!topicForm.get('description').valid">
+        <label for="topic_description">Описание:</label>
+        <textarea id="topic_description"
+                  class="form-control"
+                  rows="5"
+                  maxlength="500"
+                  placeholder="описание..."
+                  formControlName="description"></textarea>
+      </div>
+
+      <div class="form-group"
+           [class.is-error]="!topicForm.get('tags').valid">
+        <label for="topic_tags">Ключевые слова:</label>
+        <textarea id="topic_tags"
+                  class="form-control"
+                  rows="2"
+                  maxlength="100"
+                  placeholder="ключевые слова (для поиска)..."
+                  formControlName="tags"></textarea>
+      </div>
+
+      <div class="form-group" *ngIf="false"
+           [class.is-error]="!type.valid">
         <label>
-          Термин:
-          <input type="text" [formControlName]="term.name">
-        </label>
-
-        <label>
-          Термин:
-          <input type="text" [formControlName]="term.name">
+          О чём этот раздел:
+          <select class="" formControlName="type">
+            <option value="programming">Программирование</option>
+            <option value="programming">Проектирование</option>
+            <option value="programming">Проектирование</option>
+            <option value="other">Что-то другое</option>
+          </select>
         </label>
       </div>
-    </div>
-    -->
 
-    <!--<button type="submit" [disabled]="!profileForm.valid">Submit</button>-->
-  </form>
+      <div formArrayName="terms" class="topic-editor__terms">
+        <h3>Термины, темы или задачи:</h3>
 
-  <hr>
+        <div class="btn-group"
+             title="Добавить строку"
+             role="group" (click)="addTermBefore(0)">
+          <button type="button" class="btn btn-sm btn-primary btn-icon"><img src="/assets/img/icons/plus.svg"></button>
+          <button type="button" class="btn btn-sm btn-primary">добавить</button>
+        </div>
 
+        <div class="topic-editor__terms__list">
+          <div class="topic-editor__term__item"
+               *ngFor="let term of termsArray.controls; let idx = index"
+               [formGroupName]="idx">
+            <div class="input-group"
+                 [class.is-error]="!termsArray.controls[idx].valid"
+                 [class.is-valid]="termsArray.controls[idx].valid">
+              <div class="input-group-prepend">
+                <div class="input-group-text topic-editor__term__idx">{{ idx + 1}}</div>
+              </div>
+              <input type="text"
+                     class="form-control"
+                     maxlength="120"
+                     placeholder="термин, тема, задача"
+                     formControlName="title">
+              <div class="input-group-append">
+                <div class="btn btn-secondary btn-icon"
+                     title="Удалить строку"
+                     (click)="removeTerm(idx)"><img src="/assets/img/icons/delete.svg"></div>
+              </div>
+            </div>
 
-  <p>
-    Form Value: {{ profileForm.value | json }}
-  </p>
+            <div class="topic-editor__term__add" role="group"
+                 title="Добавить строку"
+                 (click)="addTermBefore(idx + 1)" *ngIf="idx < termsArray.controls.length - 1">
+              <img src="/assets/img/icons/plus.svg">
+            </div>
+          </div>
+        </div>
 
+        <div class="mb-3"></div>
 
-  <p>
-    Form Status: {{ profileForm.status }}
-  </p>
+        <div class="btn-group" role="group"
+             title="Добавить строку"
+             (click)="addTerm()" *ngIf="termsArray.controls.length > 0">
+          <button type="button" class="btn btn-sm btn-primary btn-icon"><img src="/assets/img/icons/plus.svg"></button>
+          <button type="button" class="btn btn-sm btn-primary">добавить</button>
+        </div>
 
+      </div>
+
+      <div class="text-right">
+        <div class="btn btn-primary"
+             [class.disabled]="topicForm.invalid"
+             (click)="onSubmit()">Сохранить</div><span *ngIf="loaded"> &nbsp; или <a routerLink="/topic/{{topic.key}}">вернуться</a></span>
+      </div>
+    </form>
+
+  </div>
 </div>

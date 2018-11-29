@@ -1,0 +1,52 @@
+.topic-editor {
+  margin-top: 3em;
+  margin-bottom: 3em;
+
+  #topic_title_short {
+    max-width: 40em;
+  }
+
+  &__terms__list {
+    margin-top: 2em;
+  }
+
+  &__term__item {
+    position: relative;
+    padding-bottom: 2em;
+  }
+
+  &__term__add {
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    right: -25px;
+    top: 40px;
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0;
+    transform: translateX(-5px);
+
+    &:before {
+      content: '';
+      display: block;
+      width: 50px;
+      right: 30px;
+      border-bottom: 2px dashed #fff;
+      position: absolute;
+      top: 11px;
+    }
+
+    img {
+      height: 24px;
+    }
+  }
+
+  &__term__item:hover &__term__add {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &__term__idx {
+    min-width: 3em;
+    align-items: end;
+  }
+}
