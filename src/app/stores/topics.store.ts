@@ -20,27 +20,27 @@ export class TopicsStore {
               private localStorage: QuestionnaireLocalStorageService) { }
 
   // current value
-  get topics(): Topics {
+  public get topics(): Topics {
     return this._topics.getValue();
   }
 
-  get loaded(): Boolean {
   public get allTopics(): Topic[] {
     return this.topics.allTopics;
   }
 
+  public get loaded(): Boolean {
     return this.topicsLoaded
       && this.ownTopicsLoaded
       && this.recommendedTopicsLoaded;
   }
 
-  get loading(): Boolean {
+  public get loading(): Boolean {
     return this.topicsLoading
       || this.ownTopicsLoading
       || this.recommendedTopicsLoading;
   }
 
-  awaitTopics(topicsKeys?: string[]): Observable<Topics> {
+  public awaitTopics(topicsKeys?: string[]): Observable<Topics> {
     if (topicsKeys !== undefined && !this.loaded && !this.loading) {
       this.loadTopics(topicsKeys);
       this.loadOwnTopics(topicsKeys);
@@ -48,14 +48,14 @@ export class TopicsStore {
     return this._topics.asObservable();
   }
 
-  awaitRecommendedTopics(): Observable<Topics> {
+  public awaitRecommendedTopics(): Observable<Topics> {
     if (!this.loaded && !this.loading) {
       this.loadRecommendedTopics();
     }
     return this._topics.asObservable();
   }
 
-  loadTopics(topicsKeys: string[]) {
+  private loadTopics(topicsKeys: string[]) {
     console.log('TopicsStore:loadTopics', topicsKeys);
 
     this.topicsLoaded = false;
@@ -87,7 +87,7 @@ export class TopicsStore {
     this.topicsLoading = false;
   }
 
-  loadOwnTopics(topicsKeys: string[]) {
+  private loadOwnTopics(topicsKeys: string[]) {
     console.log('TopicsStore:loadOwnTopics', topicsKeys);
 
     this.ownTopicsLoaded = false;
@@ -134,7 +134,7 @@ export class TopicsStore {
     this.ownTopicsLoading = false;
   }
 
-  loadRecommendedTopics() {
+  private loadRecommendedTopics() {
     console.log('TopicsStore:loadRecommendedTopics');
 
     this.recommendedTopicsLoaded = false;
@@ -166,7 +166,7 @@ export class TopicsStore {
     this.recommendedTopicsLoading = false;
   }
 
-  createTopic(owner: User): Topic {
+  public createTopic(owner: User): Topic {
     const topic = Topic.fromObject({
       key: pseudoRandom(8),
       owner,
