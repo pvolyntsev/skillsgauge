@@ -166,6 +166,7 @@ export class TopicsStore {
     this.recommendedTopicsLoading = false;
   }
 
+  // создать новый топик
   public createTopic(owner: User): Topic {
     const topic = Topic.fromObject({
       key: pseudoRandom(8),
@@ -182,6 +183,30 @@ export class TopicsStore {
       this.topics
         .pushOrReplaceTopics('ownTopics', [ topic ]
       )
+    );
+
+    return topic;
+  }
+
+  // создать копию топика из исходного топика
+  public copyTopic(owner: User, sourceTopic: Topic): Topic {
+    const topic = Topic.fromObject({
+      ...sourceTopic.toObject(),
+      sourceKey: sourceTopic.key,
+      key: pseudoRandom(8),
+      owner,
+    });
+
+    // TODO HTTP
+    this.localStorage.saveTopic(topic);
+
+    // TODO скопировать ответы на оригинальный топик
+
+    // добавить в список
+    this._topics.next(
+      this.topics
+        .pushOrReplaceTopics('ownTopics', [ topic ]
+        )
     );
 
     return topic;

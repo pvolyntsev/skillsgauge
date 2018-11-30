@@ -116,7 +116,8 @@
       <div class="text-right">
         <div class="btn btn-primary"
              [class.disabled]="topicForm.invalid"
-             (click)="onSubmit()">Сохранить</div><span *ngIf="loaded"> &nbsp; или <a routerLink="/topic/{{topic.key}}">вернуться</a></span>
+             (click)="onSubmit()">{{ isOwnTopic ? 'Сохранить' : 'Скопировать себе' }}</div>
+          <span *ngIf="loaded"> &nbsp; или <a routerLink="/topics">вернуться</a></span>
       </div>
     </form>
 

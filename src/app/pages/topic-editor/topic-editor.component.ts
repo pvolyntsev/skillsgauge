@@ -43,7 +43,7 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initForm();
+    this.createForm();
 
     const key = this.route.snapshot.paramMap.get('key');
     // обработчик на загрузку топиков
@@ -72,7 +72,6 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
     return this.topicForm.get('terms') as FormArray;
   }
 
-  private initForm(): void {
   get isOwnTopic(): Boolean {
     if (this._topic && this._user) {
       return this._topic.owner && (this._topic.owner.id === this._user.id);
@@ -80,6 +79,7 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  private createForm(): void {
     this.topicForm = this.fb.group({
       // key: ['', Validators.required],
       // type: ['', Validators.required],
@@ -140,18 +140,28 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
   // }
 
   onSubmit(): void {
-    if (!this._topic || !this.topicForm.valid) {
+    if (!this.loaded || !this.topicForm.valid) {
       return;
     }
 
     const values = this.topicForm.value;
     const { title, titleShort, description, tags, type, terms } = values;
 
-    Object.assign(this._topic, { title, titleShort, description, tags, type });
+    const isOwnTopic = this.isOwnTopic;
+    if (!isOwnTopic) {
+      this._topic = this.topicsStore.copyTopic(this._user, this._topic);
+    }
+
+    Object.assign(this._topic, {title, titleShort, description, tags, type});
     this._topic.terms = (terms || []).map(t => TopicTerm.fromObject(this._topic, t));
 
     this.localStorage.saveTopic(this._topic);
-  }
+
+
+    if (!isOwnTopic) {
+      this.router.navigateByUrl('/topic/' + this._topic.key + '/edit');
+    }
+}
 
   onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicEditorComponent:onLoadTopicsSuccess');
@@ -161,25 +171,15 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
     this.setupForm();
   }
 
-  selectTopic(): void {
-    const key = this.route.snapshot.paramMap.get('key');
-    console.log('TopicTestComponent:selectTopic', key);
-    const topic = this._topics.allTopics.find(t => t.key === key);
-    if (topic) {
-      this.loaded = true;
-      this._topic = topic;
-    } else {
-      this.loaded = false;
-      this._topic = null;
-    }
   private onLoadUserSuccess(user: User): void {
     console.log('TopicEditorComponent:onLoadTopicsSuccess');
     this._user = user;
     this._userLoaded = !!this._user;
   }
 
-  setupForm(): void {
+  private setupForm(): void {
     if (this._topic) {
+
       const { key, type, title, titleShort, description } = this._topic;
       const tags = (this._topic.tags || []).join(', ');
 

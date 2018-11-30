@@ -15,24 +15,27 @@ export class Topic {
   terms: TopicTerm[] = [];
   choices: Choice[] = [];
   owner: User;
+  sourceKey: String;
 
   public static fromObject(obj: any): Topic {
-    const { key, type, title, titleShort, description, tags, version } = obj;
+    const { key, type, title, titleShort, description, tags, version, sourceKey } = obj;
     const instance = new Topic();
     const choices = (obj.choices || []).map(choice => Choice.fromObject(choice));
     const terms = (obj.terms || []).map(term => TopicTerm.fromObject(instance, term));
     const owner = User.fromObject(obj.owner || {});
-    return Object.assign(instance, { key, type, title, titleShort, description, tags, version, terms, choices, owner });
+    return Object.assign(instance, {
+      key, type, title, titleShort, description, tags, version, terms, choices, owner, sourceKey,
+    });
   }
 
   toObject(): object {
-    const { key, type, title, titleShort, description, tags, version, choices } = this;
+    const { key, type, title, titleShort, description, tags, version, choices, sourceKey } = this;
     const owner = {
       id: this.owner ? this.owner.id : null,
     };
     const terms = this.terms.map(t => t.toObject());
     return {
-      key, type, title, titleShort, description, tags, version, terms, choices, owner,
+      key, type, title, titleShort, description, tags, version, terms, choices, owner, sourceKey,
     };
   }
 
