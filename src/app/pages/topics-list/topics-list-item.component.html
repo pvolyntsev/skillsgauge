@@ -24,7 +24,7 @@
         <img class="icon" src="/assets/img/icons/topic-edit.svg">
       </a>
     </h3>
-    <div *ngIf="topic.owner && topic.owner.id" class="topics__author">
+    <div *ngIf="!editable" class="topics__author">
       Опубликовал
         <a *ngIf="topic.owner.home_url" href="{{topic.owner.home_url}}">
           <img class="avatar" *ngIf="topic.owner.avatar_url" [src]="topic.owner.avatar_url">
