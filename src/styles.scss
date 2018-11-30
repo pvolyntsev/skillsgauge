@@ -127,10 +127,9 @@ body.scroll { // страница во весь экран со стандарт
 }
 
 .btn.btn-icon {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
   img {
-    height: 1em;
+    height: 1.25rem;
+    margin-top: -3px;
   }
 }
 
