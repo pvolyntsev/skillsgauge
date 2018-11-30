@@ -13,12 +13,14 @@
       </svg>
     </span>
     <h3 class="topics__title">{{ topic.title || 'Раздел без названия' }}
-      <a class="topics__title_link_edit" routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
+      <a class="btn btn-primary btn-icon"
+         routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
         <img class="icon" src="/assets/img/icons/topic-edit.svg">
       </a>
     </h3>
     <h3 class="topics__title_short">{{ topic.titleShort || topic.title || 'Раздел без названия' }}
-      <a class="topics__title_link_edit" routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
+      <a class="btn btn-primary btn-icon"
+         routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
         <img class="icon" src="/assets/img/icons/topic-edit.svg">
       </a>
     </h3>
