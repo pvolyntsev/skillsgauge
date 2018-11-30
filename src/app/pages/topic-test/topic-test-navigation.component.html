@@ -9,8 +9,8 @@
         {{ answers.score }}&nbsp;из&nbsp;{{ answers.maximumScore }}
       </div>
       <span class="topic__header_nav_link">
-        <a routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
-          <img class="icon" src="/assets/img/icons/topic-edit.svg" width="60" height="50">
+        <a routerLink="/topic/{{topic.key}}/edit" [title]="editable ? 'Изменить раздел' : 'Сделать копию раздела'">
+          <img class="icon" [src]="editable ? '/assets/img/icons/topic-edit.svg' : '/assets/img/icons/topic-fork.svg'" width="60" height="50">
         </a>
         <a routerLink="/dashboard" title="Результаты">
           <img class="icon" src="/assets/img/icons/skill-bar.svg" width="60" height="50">
