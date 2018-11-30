@@ -15,7 +15,7 @@ export class QuestionnaireService {
   }
 
   private get api_url(): string {
-    return environment.app_host + '/assets';
+    return environment.api_host + '/assets';
   }
 
   topics(topicsKeys?: string[]): Observable<Topics> {
