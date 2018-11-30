@@ -6,11 +6,11 @@
              *ngIf="isOwnTopic"
               (click)="onDelete()"><img src="/assets/img/icons/trash.svg"> Удалить раздел</div>
       </div>
-      <div>
+      <div class="btn-group">
         <div class="btn btn-primary"
              [class.disabled]="topicForm.invalid"
              (click)="onSubmit()">{{ isOwnTopic ? 'Сохранить' : 'Скопировать себе' }}</div>
-        <span *ngIf="loaded"> &nbsp; или <a routerLink="/topics">вернуться</a></span>
+        <a class="btn btn-secondary" *ngIf="loaded" routerLink="/topics">Вернуться</a>
       </div>
     </nav>
   </div>
