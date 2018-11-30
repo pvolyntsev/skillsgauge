@@ -90,6 +90,20 @@ $unchecked-color: #c5415e;
     }
   }
 
+  &__source {
+    font-size: 0.8em;
+    font-style: italic;
+    margin: 0.5em 0;
+
+    .avatar {
+      margin-left: 0.5em;
+    }
+    a {
+      color: $link-hot-color;
+      text-decoration: none;
+    }
+  }
+
   &__description {
     font-size: 15px;
     line-height: 1.5rem;

@@ -79,6 +79,12 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  get source(): Topic {
+    if (this.topic.sourceKey) {
+      return this.topicsStore.allTopics.find(t => t.key === this.topic.sourceKey);
+    }
+  }
+
   private createForm(): void {
     this.topicForm = this.fb.group({
       // key: ['', Validators.required],

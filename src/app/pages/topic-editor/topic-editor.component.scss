@@ -34,6 +34,19 @@
     margin-top: 80px;
   }
 
+  &__source {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+
+    .avatar {
+      margin-left: 0.5em;
+    }
+    a {
+      color: $link-hot-color;
+      text-decoration: none;
+    }
+  }
+
   &__terms__list {
     margin-top: 2em;
   }

@@ -21,6 +21,17 @@
           [formGroup]="topicForm"
           (ngSubmit)="onSubmit()">
 
+      <div *ngIf="source" class="topic-editor__source">
+        Копия раздела <em>{{ source.title || 'Раздел без названия'}}</em> &nbsp;
+
+        <a *ngIf="source.owner.home_url" href="{{source.owner.home_url}}">
+          <img class="avatar" *ngIf="source.owner.avatar_url" [src]="source.owner.avatar_url">
+          {{source.owner.name || source.owner.login }}</a>
+        <span *ngIf="!source.owner.home_url">
+          <img class="avatar" *ngIf="source.owner.avatar_url" [src]="source.owner.avatar_url">
+          {{source.owner.name || source.owner.login }}</span>
+      </div>
+
       <div class="form-group"
            [class.is-error]="!topicForm.get('title').valid"
            [class.is-valid]="topicForm.get('title').valid">
