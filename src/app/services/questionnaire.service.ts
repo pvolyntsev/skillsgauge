@@ -14,7 +14,7 @@ export class QuestionnaireService {
     return Topics.fromObject(obj);
   }
 
-  private api_url(): string {
+  private get api_url(): string {
     return environment.app_host + '/assets';
   }
 
