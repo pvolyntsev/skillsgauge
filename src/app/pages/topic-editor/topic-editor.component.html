@@ -3,7 +3,8 @@
     <nav>
       <div>
         <div class="btn btn-danger btn-icon topic-editor__btn__delete"
-             *ngIf="isOwnTopic"><img src="/assets/img/icons/trash.svg"> Удалить раздел</div>
+             *ngIf="isOwnTopic"
+              (click)="onDelete()"><img src="/assets/img/icons/trash.svg"> Удалить раздел</div>
       </div>
       <div>
         <div class="btn btn-primary"

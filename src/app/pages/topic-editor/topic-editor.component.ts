@@ -150,6 +150,7 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
     const isOwnTopic = this.isOwnTopic;
     if (!isOwnTopic) {
       this._topic = this.topicsStore.copyTopic(this._user, this._topic);
+      // TODO скопировать ответы на оригинальный топик
     }
 
     Object.assign(this._topic, {title, titleShort, description, tags, type});
@@ -161,7 +162,20 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
     if (!isOwnTopic) {
       this.router.navigateByUrl('/topic/' + this._topic.key + '/edit');
     }
-}
+  }
+
+  onDelete(): void {
+    if (!this.loaded || !this.isOwnTopic) {
+      return;
+    }
+
+    // TODO подтверждение удаления
+
+    this.topicsStore.removeTopic(this._topic);
+    // TODO удалить ответы
+
+    this.router.navigateByUrl('/topics');
+  }
 
   onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicEditorComponent:onLoadTopicsSuccess');

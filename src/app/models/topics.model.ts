@@ -50,4 +50,11 @@ export class Topics {
 
     return this;
   }
+
+  // удалить топик
+  public removeTopic(topicKey: string): Topics {
+    // this.topics = this.topics.filter(t => t.key !== topicKey);
+    this.ownTopics = this.ownTopics.filter(t => t.key !== topicKey);
+    return this;
+  }
 }
