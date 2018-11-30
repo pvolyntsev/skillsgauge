@@ -513,6 +513,7 @@
       "key": "scss",
       "type": "programming_language",
       "title": "Препроцессор SCSS",
+      "description": "Sass (Syntactically Awesome Style Sheets) и его модификация SCSS. Это метаязык на основе CSS, предназначенный для увеличения уровня абстракции CSS кода и упрощения файлов каскадных таблиц стилей.",
       "version": "2018-11-30",
       "owner": {
         "id": "2f6699bd-9394-4944-bb81-2e09f92e5ed9",

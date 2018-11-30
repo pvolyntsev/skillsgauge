@@ -97,6 +97,18 @@ $unchecked-color: #c5415e;
     .avatar {
       margin-left: 0.5em;
     }
+    a {
+      color: $link-hot-color;
+      text-decoration: none;
+    }
+  }
+
+  &__description {
+    font-size: 15px;
+    line-height: 1.5rem;
+    margin-left: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 }
 
