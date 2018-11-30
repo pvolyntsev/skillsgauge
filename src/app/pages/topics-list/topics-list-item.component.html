@@ -34,7 +34,7 @@
           {{topic.owner.name || topic.owner.login }}</span>
     </div>
     <div *ngIf="topic.description" class="topics__description" [innerHTML]="topic.description"></div>
-    <p class="topics__terms">
+    <p class="topics__terms" *ngIf="topic.terms.length > 0">
       <span class="topics__terms_first">{{ topic.termsFirstN(8, ', ') }}</span>
       <span class="topics__terms_last">{{ topic.termsAfterN(8, ', ') }}</span>
     </p>
