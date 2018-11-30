@@ -99,7 +99,8 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
   }
 
   clearTerms(): void {
-    this.termsArray.reset();
+    const termsFormArray = this.fb.array([]);
+    this.topicForm.setControl('terms', termsFormArray);
   }
 
   // get termResources(term: ): FormArray {
@@ -160,18 +161,10 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
         tags,
       });
 
-      // const termsFormGroups = []; // team.employees.map(employee => this.formBuilder.group(employee));
-      // const termsFormArray = this.fb.array(termsFormGroups);
-      // this.topicForm.setControl('terms', termsFormArray);
-
       this.clearTerms();
       (this._topic.terms || []).map(term => {
         this.termsArray.push(this.createTerm(term));
       });
-
-      // this.termsArray.push(this.createTerm());
-      // this.termsArray.push(this.createTerm());
-      // this.termsArray.push(this.createTerm());
     }
   }
 }
