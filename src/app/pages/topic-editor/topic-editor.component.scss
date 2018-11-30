@@ -1,9 +1,37 @@
+@import "../../../scss/variables";
+
 .topic-editor {
   margin-top: 3em;
   margin-bottom: 3em;
 
   #topic_title_short {
     max-width: 40em;
+  }
+
+  & .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    opacity: 0.9;
+    padding: 0.25em 2em;
+    background: $page-background;
+    z-index: 20;
+    border-bottom: 1px solid #000;
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .topic-editor__btn__delete {
+      margin-right: 4em;
+    }
+  }
+
+  .container {
+    margin-top: 80px;
   }
 
   &__terms__list {
