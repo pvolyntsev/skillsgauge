@@ -6,6 +6,14 @@
       "title": "Объектно-ориентированное программирование",
       "titleShort": "ООП",
       "version": "2018-11-24",
+      "owner": {
+        "id": "2f6699bd-9394-4944-bb81-2e09f92e5ed9",
+        "login": "copist",
+        "name": "Pavel (copist) Volyntsev",
+        "about": "Empower people to give",
+        "home_url": "https://copist.ru",
+        "avatar_url": "https://copist.ru/wp-content/uploads/2013/09/19789.jpg"
+      },
       "terms": [
         {
           "key": "class",
@@ -101,6 +109,15 @@
       "title": "Архитектура и стиль кода",
       "titleShort": "Архитектура/стиль кода",
       "version": "2018-11-25",
+      "owner": {
+        "id": "2f6699bd-9394-4944-bb81-2e09f92e5ed9",
+        "login": "copist",
+        "name": "Pavel (copist) Volyntsev",
+        "about": "Empower people to give",
+        "home_url": "https://copist.ru",
+        "avatar_url": "https://copist.ru/wp-content/uploads/2013/09/19789.jpg"
+      },
+
       "terms": [
         {
           "key": "GRASP",
@@ -251,6 +268,15 @@
       "type": "common",
       "title": "Шаблоны проектирования",
       "version": "2018-11-28",
+      "owner": {
+        "id": "2f6699bd-9394-4944-bb81-2e09f92e5ed9",
+        "login": "copist",
+        "name": "Pavel (copist) Volyntsev",
+        "about": "Empower people to give",
+        "home_url": "https://copist.ru",
+        "avatar_url": "https://copist.ru/wp-content/uploads/2013/09/19789.jpg"
+      },
+
       "terms": [
         {
           "key": "singleton",
@@ -361,6 +387,15 @@
       "type": "programming_language",
       "title": "Язык программирования TypeScript",
       "version": "2018-11-30",
+      "owner": {
+        "id": "2f6699bd-9394-4944-bb81-2e09f92e5ed9",
+        "login": "copist",
+        "name": "Pavel (copist) Volyntsev",
+        "about": "Empower people to give",
+        "home_url": "https://copist.ru",
+        "avatar_url": "https://copist.ru/wp-content/uploads/2013/09/19789.jpg"
+      },
+
       "terms": [
         {
           "key": "bas",
@@ -479,6 +514,15 @@
       "type": "programming_language",
       "title": "Препроцессор SCSS",
       "version": "2018-11-30",
+      "owner": {
+        "id": "2f6699bd-9394-4944-bb81-2e09f92e5ed9",
+        "login": "copist",
+        "name": "Pavel (copist) Volyntsev",
+        "about": "Empower people to give",
+        "home_url": "https://copist.ru",
+        "avatar_url": "https://copist.ru/wp-content/uploads/2013/09/19789.jpg"
+      },
+
       "terms": [
         {
           "key": "nr",

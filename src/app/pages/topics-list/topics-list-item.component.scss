@@ -88,6 +88,16 @@ $unchecked-color: #c5415e;
     -webkit-transform: translateY(0);
     transform: translateY(0);
   }
+
+  &__author {
+    font-size: 0.8em;
+    font-style: italic;
+    margin: 0.5em 0;
+
+    .avatar {
+      margin-left: 0.5em;
+    }
+  }
 }
 
 @media (max-width: 640px) {

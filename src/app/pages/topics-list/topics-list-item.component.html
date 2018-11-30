@@ -17,6 +17,11 @@
         <img class="icon" src="/assets/img/icons/topic-edit.svg">
       </a>
     </h3>
+    <div *ngIf="topic.owner && topic.owner.id" class="topics__author">
+      Опубликовал
+        <img class="avatar" *ngIf="topic.owner.avatar_url" [src]="topic.owner.avatar_url">
+        <span>{{topic.owner.name || topic.owner.login }}</span>
+    </div>
     <h3 class="topics__title_short">{{ topic.titleShort || topic.title || 'Раздел без названия' }}
       <a class="topics__title_link_edit" routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
         <img class="icon" src="/assets/img/icons/topic-edit.svg">

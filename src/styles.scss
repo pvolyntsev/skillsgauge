@@ -133,3 +133,19 @@ body.scroll { // страница во весь экран со стандарт
   }
 }
 
+.avatar {
+  border-style: none;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  background-color: transparent;
+  margin-right: .25em;
+  width: 2em;
+  height: 2em;
+  border-radius: 500rem;
+}
+.avatar-sm {
+  width: 1rem;
+  height: 1rem;
+}
