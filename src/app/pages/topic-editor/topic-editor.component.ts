@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Topic, Topics, TopicTerm } from '../../models';
-import { TopicsStore } from '../../stores';
+import { Topic, Topics, TopicTerm, User } from '../../models';
+import { TopicsStore, UserStore} from '../../stores';
 import { QuestionnaireLocalStorageService, QuestionnaireService } from '../../services';
 import { pseudoRandom } from '../../pseudo-random';
 
@@ -17,16 +17,30 @@ import { pseudoRandom } from '../../pseudo-random';
 })
 export class TopicEditorComponent implements OnInit, OnDestroy {
   private _topicsSubscription: Subscription;
-  private _topics: Topics;
+  private _topicsLoaded = false;
   private _topic: Topic;
-  loaded = false;
+
+  private readonly _userSubscription: Subscription;
+  private _user: User;
+  private _userLoaded = false;
+
   topicForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               private questionnaire: QuestionnaireService,
               private localStorage: QuestionnaireLocalStorageService,
+              private userStore: UserStore,
               private topicsStore: TopicsStore,
-              private route: ActivatedRoute) { }
+              private router: Router,
+              private route: ActivatedRoute) {
+
+    // обработчик на загрузку пользователя
+    this._userSubscription = userStore.awaitUser()
+      .subscribe(
+        user => { this.onLoadUserSuccess(user); },
+        (error) => { console.log(error); }
+      );
+  }
 
   ngOnInit() {
     this.initForm();
@@ -43,10 +57,15 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this._topicsSubscription.unsubscribe();
+    this._userSubscription.unsubscribe();
   }
 
   get topic(): Topic {
     return this._topic;
+  }
+
+  get loaded(): boolean {
+    return this._topicsLoaded && this._userLoaded;
   }
 
   get termsArray(): FormArray {
@@ -54,6 +73,13 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
   }
 
   private initForm(): void {
+  get isOwnTopic(): Boolean {
+    if (this._topic && this._user) {
+      return this._topic.owner && (this._topic.owner.id === this._user.id);
+    }
+    return false;
+  }
+
     this.topicForm = this.fb.group({
       // key: ['', Validators.required],
       // type: ['', Validators.required],
@@ -129,8 +155,9 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
 
   onLoadTopicsSuccess(topics: Topics): void {
     console.log('TopicEditorComponent:onLoadTopicsSuccess');
-    this._topics = topics;
-    this.selectTopic();
+    const key = this.route.snapshot.paramMap.get('key');
+    this._topic = topics.allTopics.find(t => t.key === key);
+    this._topicsLoaded = !!this._topic;
     this.setupForm();
   }
 
@@ -145,6 +172,10 @@ export class TopicEditorComponent implements OnInit, OnDestroy {
       this.loaded = false;
       this._topic = null;
     }
+  private onLoadUserSuccess(user: User): void {
+    console.log('TopicEditorComponent:onLoadTopicsSuccess');
+    this._user = user;
+    this._userLoaded = !!this._user;
   }
 
   setupForm(): void {
