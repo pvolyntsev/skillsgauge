@@ -200,8 +200,6 @@ export class TopicsStore {
     // TODO HTTP
     this.localStorage.saveTopic(topic);
 
-    // TODO скопировать ответы на оригинальный топик
-
     // добавить в список
     this._topics.next(
       this.topics
@@ -210,5 +208,19 @@ export class TopicsStore {
     );
 
     return topic;
+  }
+
+  // удалить топик
+  public removeTopic(topic: Topic): void {
+    // TODO HTTP
+
+    const { key } = topic;
+    const itemKey = [ key, 't'].join(':');
+    localStorage.removeItem(itemKey);
+
+    // удалить из списка
+    this._topics.next(
+      this.topics.removeTopic(topic.key)
+    );
   }
 }
