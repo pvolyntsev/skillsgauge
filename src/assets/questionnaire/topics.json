@@ -245,6 +245,234 @@
           "score": 4
         }
       ]
+    },
+    {
+      "key": "software_design_pattern",
+      "type": "common",
+      "title": "Шаблоны проектирования",
+      "version": "2018-11-28",
+      "terms": [
+        {
+          "key": "singleton",
+          "title": "singleton"
+        },
+        {
+          "key": "factory",
+          "title": "factory"
+        },
+        {
+          "key": "wrapper",
+          "title": "wrapper"
+        },
+        {
+          "key": "bridge",
+          "title": "bridge"
+        },
+        {
+          "key": "strategy",
+          "title": "strategy"
+        },
+        {
+          "key": "decorator",
+          "title": "decorator"
+        },
+        {
+          "key": "lazy load",
+          "title": "lazy load"
+        },
+        {
+          "key": "builder",
+          "title": "builder"
+        },
+        {
+          "key": "composit",
+          "title": "composit"
+        },
+        {
+          "key": "proxy",
+          "title": "proxy"
+        },
+        {
+          "key": "iterator",
+          "title": "iterator"
+        },
+        {
+          "key": "active record",
+          "title": "active record"
+        },
+        {
+          "key": "mvc",
+          "title": "MVC"
+        },
+        {
+          "key": "mvvm",
+          "title": "MVVM"
+        },
+        {
+          "key": "behavior",
+          "title": "behavior"
+        },
+        {
+          "key": "mixin",
+          "title": "mixin"
+        },
+        {
+          "key": "mixin",
+          "title": "mixin"
+        },
+        {
+          "key": "mixin",
+          "title": "mixin"
+        },
+        {
+          "key": "filters",
+          "title": "filters"
+        },
+        {
+          "key": "registry",
+          "title": "registry"
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "title": "Мимо",
+          "score": 0
+        },
+        {
+          "key": "2",
+          "title": "Слышал",
+          "score": 1
+        },
+        {
+          "key": "3",
+          "title": "Знаю",
+          "score": 2
+        },
+        {
+          "key": "4",
+          "title": "Использовал",
+          "score": 4
+        }
+      ]
+    },
+    {
+      "key": "typescript",
+      "type": "programming_language",
+      "title": "Язык программирования TypeScript",
+      "version": "2018-11-30",
+      "terms": [
+        {
+          "key": "bas",
+          "title": "Basic Types"
+        },
+        {
+          "key": "vars",
+          "title": "Variable Declarations"
+        },
+        {
+          "key": "i",
+          "title": "Interfaces"
+        },
+        {
+          "key": "cls",
+          "title": "Classes"
+        },
+        {
+          "key": "fun",
+          "title": "Functions"
+        },
+        {
+          "key": "gen",
+          "title": "Generics"
+        },
+        {
+          "key": "enum",
+          "title": "Enums"
+        },
+        {
+          "key": "ti",
+          "title": "Type Inference"
+        },
+        {
+          "key": "tc",
+          "title": "Type Compatibility"
+        },
+        {
+          "key": "at",
+          "title": "Advanced Types"
+        },
+        {
+          "key": "sym",
+          "title": "Symbols"
+        },
+        {
+          "key": "ing",
+          "title": "Iterators and Generators"
+        },
+        {
+          "key": "mod",
+          "title": "Modules"
+        },
+        {
+          "key": "ns",
+          "title": "Namespaces"
+        },
+        {
+          "key": "nnm",
+          "title": "Namespaces and Modules"
+        },
+        {
+          "key": "mr",
+          "title": "Module Resolution"
+        },
+        {
+          "key": "md",
+          "title": "Declaration Merging"
+        },
+        {
+          "key": "jsx",
+          "title": "JSX"
+        },
+        {
+          "key": "dec",
+          "title": "Decorators"
+        },
+        {
+          "key": "mix",
+          "title": "Mixins"
+        },
+        {
+          "key": "tds",
+          "title": "Triple-Slash Directives"
+        },
+        {
+          "key": "tcksf",
+          "title": "Type Checking JavaScript Files"
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "title": "Мимо",
+          "score": 0
+        },
+        {
+          "key": "2",
+          "title": "Слышал",
+          "score": 1
+        },
+        {
+          "key": "3",
+          "title": "Знаю",
+          "score": 2
+        },
+        {
+          "key": "4",
+          "title": "Использовал",
+          "score": 4
+        }
+      ]
     }
   ]
 }
