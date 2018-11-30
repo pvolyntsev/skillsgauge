@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AnswersStore, TopicsStore, UserStore } from '../../stores';
 import { QuestionnaireLocalStorageService } from '../../services';
 import { Topics, Topic, TopicAnswers, TopicsAnswers, User } from '../../models';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-topic-test',
@@ -144,7 +145,7 @@ export class TopicTestComponent implements OnInit, OnDestroy {
   }
 
   get share_url(): string {
-    return 'http://skillsgauge.uptlo.com/topic/' + this.topic.key;
+    return environment.app_host + '/topic/' + this.topic.key;
   }
 
   setSelected(): void {

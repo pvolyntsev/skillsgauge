@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TopicsStore, UserStore, AnswersStore } from '../../stores';
 import {Topic, TopicAnswers, Topics, TopicsAnswers, User} from '../../models';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-topics-list',
@@ -53,6 +54,9 @@ export class TopicsListComponent implements OnDestroy {
     this._answersSubscription.unsubscribe();
   }
 
+  get share_url(): string {
+    return environment.app_host;
+  }
   // @example this.loaded
   get loaded(): boolean {
     return (this.user !== undefined)

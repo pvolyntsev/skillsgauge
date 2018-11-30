@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-intro',
@@ -14,6 +15,6 @@ export class IntroComponent implements OnInit {
   }
 
   get share_url(): string {
-    return 'http://skillsgauge.uptlo.com/';
+    return environment.app_host;
   }
 }

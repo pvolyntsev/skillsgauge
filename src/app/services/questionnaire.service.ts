@@ -3,16 +3,19 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Topics } from '../models';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class QuestionnaireService {
-
-  private endpoint = '/assets';
 
   constructor(private http: HttpClient) {}
 
   private static decodeTopics(obj: any): Topics {
     return Topics.fromObject(obj);
+  }
+
+  private api_url(): string {
+    return environment.app_host + '/assets';
   }
 
   topics(topicsKeys?: string[]): Observable<Topics> {
@@ -23,7 +26,7 @@ export class QuestionnaireService {
     Object.keys(options).forEach((p, i) => {
       params = params.set(p, options[p]);
     });
-    return this.http.get<Topics>(`${this.endpoint}/questionnaire/topics.json`, {params})
+    return this.http.get<Topics>(`${this.api_url}/questionnaire/topics.json`, {params})
       .pipe(
         map(QuestionnaireService.decodeTopics)
       );
@@ -37,7 +40,7 @@ export class QuestionnaireService {
     Object.keys(options).forEach((p, i) => {
       params = params.set(p, options[p]);
     });
-    return this.http.get<Topics>(`${this.endpoint}/questionnaire/own-topics.json`, {params})
+    return this.http.get<Topics>(`${this.api_url}/questionnaire/own-topics.json`, {params})
       .pipe(
         map(QuestionnaireService.decodeTopics)
       );
@@ -51,14 +54,14 @@ export class QuestionnaireService {
     Object.keys(options).forEach((p, i) => {
       params = params.set(p, options[p]);
     });
-    return this.http.get<Topics>(`${this.endpoint}/questionnaire/recommended-topics.json`, {params})
+    return this.http.get<Topics>(`${this.api_url}/questionnaire/recommended-topics.json`, {params})
       .pipe(
         map(QuestionnaireService.decodeTopics)
       );
   }
 
   answers(): Observable<Topics> {
-    return this.http.get<Topics>(`${this.endpoint}/questionnaire/answers.json`);
+    return this.http.get<Topics>(`${this.api_url}/questionnaire/answers.json`);
   }
 
   saveOwnTopic(/*topic: Topic*/): void {
