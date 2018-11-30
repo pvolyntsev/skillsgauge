@@ -38,8 +38,8 @@
          *ngIf="loaded">
       <h1 class="topics__title_main">Мои разделы:
         <div
-          class="topics__title_main__link"
-          *ngIf="user"
+          class="btn btn-primary btn-icon"
+          *ngIf="user && ownTopics.length >= 4"
           (click)="createOwnTopic()"><img class="icon" src="/assets/img/icons/topic-add.svg">
             {{ ownTopics.length > 0 ? 'Добавить раздел' : 'Создать раздел' }}</div>
       </h1>
@@ -62,8 +62,8 @@
             <li>А также ты можешь сделать копию чужого раздела, чтобы дополнить или исправить</li>
             <!--<li>Ты можешь поделиться своим разделом с другими пользователями и посмотреть статистику его заполнения</li>-->
           </ul>
-          <div class="topics__list__promo_links">
-            <div class="topics__list__promo_link"
+          <div class="text-center">
+            <div class="btn btn-primary btn-icon"
               *ngIf="user" (click)="createOwnTopic()"><img class="icon" src="/assets/img/icons/topic-add.svg">
                 {{ ownTopics.length > 0 ? 'Добавить раздел' : 'Создать раздел' }}</div>
           </div>

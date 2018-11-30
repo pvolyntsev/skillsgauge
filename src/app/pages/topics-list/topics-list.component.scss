@@ -81,33 +81,13 @@ $button-secondary-color: #ffffff;
   }
 
   &__list__promo {
-    margin: 1em 4em;
+    margin: 4em 4em;
     font-size: 17px;
 
     li {
       margin: 0.5em 0;
     }
   }
-
-  &__list__promo_links {
-    text-align: center;
-  }
-
-  &__list__promo_link {
-    display: inline-block;
-    color: #fff;
-    cursor: pointer;
-    padding: 1em;
-    line-height: 36px;
-    background: $button-background;
-
-    img {
-      padding: 0;
-      height: 36px;
-      margin: 0 0 -12px;
-    }
-  }
-
 
   &__topic {
     cursor: pointer;
