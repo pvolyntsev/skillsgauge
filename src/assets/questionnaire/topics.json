@@ -473,6 +473,180 @@
           "score": 4
         }
       ]
+    },
+    {
+      "key": "scss",
+      "type": "programming_language",
+      "title": "Препроцессор SCSS",
+      "version": "2018-11-30",
+      "terms": [
+        {
+          "key": "nr",
+          "title": "Nested Rules"
+        },
+        {
+          "key": "rpsn",
+          "title": "Referencing Parent Selectors: &"
+        },
+        {
+          "key": "np",
+          "title": "Nested Properties"
+        },
+        {
+          "key": "psf",
+          "title": "Placeholder Selectors: %foo"
+        },
+        {
+          "key": "ccc",
+          "title": "Comments: /* */ and //"
+        },
+        {
+          "key": "vs",
+          "title": "Variables: $"
+        },
+        {
+          "key": "dtyp",
+          "title": "Data Types: Strings, Lists, Maps, Colors, Functions"
+        },
+        {
+          "key": "num",
+          "title": "Number Operations"
+        },
+        {
+          "key": "col",
+          "title": "Color Operations"
+        },
+        {
+          "key": "str",
+          "title": "String Operations"
+        },
+        {
+          "key": "bool",
+          "title": "Boolean Operations"
+        },
+        {
+          "key": "li",
+          "title": "List Operations"
+        },
+        {
+          "key": "inter",
+          "title": "Interpolation: #{}"
+        },
+        {
+          "key": "def",
+          "title": "Variable Defaults: !default"
+        },
+        {
+          "key": "imppart",
+          "title": "@import Partials"
+        },
+        {
+          "key": "impidx",
+          "title": "@import Index Files"
+        },
+        {
+          "key": "neximp",
+          "title": "Nested @import"
+        },
+        {
+          "key": "med",
+          "title": "@media"
+        },
+        {
+          "key": "ext",
+          "title": "@extend"
+        },
+        {
+          "key": "mulext",
+          "title": "Multiple Extends"
+        },
+        {
+          "key": "extonl",
+          "title": "@extend-Only Selectors"
+        },
+        {
+          "key": "optfl",
+          "title": "The !optional Flag"
+        },
+        {
+          "key": "extdir",
+          "title": "@extend in Directives"
+        },
+        {
+          "key": "atroot",
+          "title": "@at-root"
+        },
+        {
+          "key": "debug",
+          "title": "@debug"
+        },
+        {
+          "key": "warn",
+          "title": "@warn"
+        },
+        {
+          "key": "error",
+          "title": "@error"
+        },
+        {
+          "key": "if",
+          "title": "if() expression"
+        },
+        {
+          "key": "for",
+          "title": "@for expression"
+        },
+        {
+          "key": "each",
+          "title": "@each expression"
+        },
+        {
+          "key": "while",
+          "title": "@while expression"
+        },
+        {
+          "key": "defmix",
+          "title": "Defining a Mixin: @mixin"
+        },
+        {
+          "key": "inlude",
+          "title": "Including a Mixin: @include"
+        },
+        {
+          "key": "mixargs",
+          "title": "Arguments of mixins"
+        },
+        {
+          "key": "func",
+          "title": "@function Directives"
+        },
+        {
+          "key": "styles",
+          "title": "Output Styles"
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "title": "Мимо",
+          "score": 0
+        },
+        {
+          "key": "2",
+          "title": "Слышал",
+          "score": 1
+        },
+        {
+          "key": "3",
+          "title": "Знаю",
+          "score": 2
+        },
+        {
+          "key": "4",
+          "title": "Использовал",
+          "score": 4
+        }
+      ]
     }
   ]
 }
