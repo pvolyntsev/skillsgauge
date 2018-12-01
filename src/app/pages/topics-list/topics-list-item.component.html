@@ -5,36 +5,41 @@
       <path class="checkbox_circle" d="M24 4A20 20 0 0 0 4 24a20 20 0 0 0 20 20 20 20 0 0 0 20-20A20 20 0 0 0 24 4zm0 4a16 16 0 0 1 16 16 16 16 0 0 1-16 16A16 16 0 0 1 8 24 16 16 0 0 1 24 8z"></path>
     </svg>
   </span>
-  <h3 class="topics__title">{{ topic.title || 'Раздел без названия' }}
-    <a class="btn btn-primary btn-icon"
+  <h3 class="topics__title"><a routerLink="/topic/{{topic.key}}">{{ topic.title || 'Раздел без названия' }}</a>
+    <a class="btn btn-primary btn-icon ml-1"
        routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
       <img class="icon" src="/assets/img/icons/topic-edit.svg">
     </a>
   </h3>
-  <h3 class="topics__title_short">{{ topic.titleShort || topic.title || 'Раздел без названия' }}
-    <a class="btn btn-primary btn-icon"
+  <h3 class="topics__title_short"><a routerLink="/topic/{{topic.key}}">{{ topic.titleShort || topic.title || 'Раздел без названия' }}</a>
+    <a class="btn btn-primary btn-icon ml-1"
        routerLink="/topic/{{topic.key}}/edit" title="Изменить раздел" *ngIf="editable">
       <img class="icon" src="/assets/img/icons/topic-edit.svg">
     </a>
   </h3>
   <div *ngIf="!editable" class="topics__author">
     Опубликовал
-      <a *ngIf="topic.owner.home_url" href="{{topic.owner.home_url}}">
-        <img class="avatar" *ngIf="topic.owner.avatar_url" [src]="topic.owner.avatar_url">
-        {{topic.owner.name || topic.owner.login }}</a>
-      <span *ngIf="!topic.owner.home_url">
-        <img class="avatar" *ngIf="topic.owner.avatar_url" [src]="topic.owner.avatar_url">
-        {{topic.owner.name || topic.owner.login }}</span>
+    <span *ngIf="topic.owner.home_url">
+      <a href="{{topic.owner.home_url}}"><img class="avatar" *ngIf="topic.owner.avatar_url" [src]="topic.owner.avatar_url"></a>
+      <a href="{{topic.owner.home_url}}">{{topic.owner.name || topic.owner.login }}</a>
+    </span>
+    <span *ngIf="!topic.owner.home_url">
+      <img class="avatar" *ngIf="topic.owner.avatar_url" [src]="topic.owner.avatar_url">
+      {{topic.owner.name || topic.owner.login }}
+    </span>
   </div>
   <div *ngIf="source" class="topics__source">
-    Копия раздела <em>{{ source.title || 'Раздел без названия'}}</em> &nbsp;
+    Копия раздела <a routerLink="/topic/{{source.key}}">{{ source.title || 'Раздел без названия'}}</a>
 
-    <a *ngIf="source.owner.home_url" href="{{source.owner.home_url}}">
-      <img class="avatar" *ngIf="source.owner.avatar_url" [src]="source.owner.avatar_url">
-      {{source.owner.name || source.owner.login }}</a>
+    <span *ngIf="source.owner.home_url">
+      <a href="{{source.owner.home_url}}"><img class="avatar" *ngIf="source.owner.avatar_url" [src]="source.owner.avatar_url"></a>
+      <a href="{{source.owner.home_url}}">{{source.owner.name || source.owner.login }}</a>
+    </span>
     <span *ngIf="!source.owner.home_url">
-        <img class="avatar" *ngIf="source.owner.avatar_url" [src]="source.owner.avatar_url">
-        {{source.owner.name || source.owner.login }}</span>
+      <img class="avatar" *ngIf="source.owner.avatar_url" [src]="source.owner.avatar_url">
+      {{source.owner.name || source.owner.login }}
+    </span>
+    
   </div>
   <div *ngIf="topic.description" class="topics__description" [innerHTML]="topic.description"></div>
   <p class="topics__terms" *ngIf="topic.terms.length > 0">
