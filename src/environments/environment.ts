@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  app_host: 'http://skillsgauge.uptlo.com',
+  app_host: 'http://up.uptlo.com',
   api_host: ''
 };
 
