@@ -44,6 +44,7 @@ $unchecked-color: #c5415e;
   }
 
   &__checkmark {
+    cursor: pointer;
     display: block;
     width: 40px;
     float: left;
