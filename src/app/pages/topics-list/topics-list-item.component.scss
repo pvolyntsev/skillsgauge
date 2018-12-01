@@ -51,10 +51,6 @@ $unchecked-color: #c5415e;
     fill: $unchecked-color;
   }
 
-  &__input {
-    display: none;
-  }
-
   &__checkmark .checkbox_tick {
     @include opacity(0);
     -webkit-transform: translateY(-5px);
@@ -62,15 +58,15 @@ $unchecked-color: #c5415e;
     transition: all 0.2s ease-out;
   }
 
-  &__input:checked + &__details {
+  &__details.selected {
     color: $checked-color;
   }
 
-  &__input:checked + &__details &__checkmark {
+  &__details.selected &__checkmark {
     fill: $checked-color;
   }
 
-  &__input:checked + &__details .checkbox_tick {
+  &__details.selected .checkbox_tick {
     @include opacity(1);
     -webkit-transform: translateY(0);
     transform: translateY(0);
