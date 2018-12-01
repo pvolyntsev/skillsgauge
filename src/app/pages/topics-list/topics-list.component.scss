@@ -113,8 +113,8 @@ $button-secondary-color: #ffffff;
     right: 0;
     bottom: 0;
 
-    font-size: 25px;
-    line-height: 70px;
+    font-size: 1.5em;
+    line-height: 3em;
 
     background: $button-background;
     text-decoration: none;
@@ -122,7 +122,7 @@ $button-secondary-color: #ffffff;
     text-align: center;
     color: $button-color;
 
-    height: 70px;
+    height: 3em;
 
     transform: translateY(70px);;
     -webkit-transform: translateY(70px);
