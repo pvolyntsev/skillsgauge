@@ -44,6 +44,20 @@
         </div>
       </div>
 
+      <div *ngIf="user && ownTopics.length < 4" (click)="createOwnTopic()">
+        <h3>Свои разделы в опроснике</h3>
+        <ul>
+          <li>Ты можешь создавать свои разделы опросника по другим темам</li>
+          <li>А также ты можешь сделать копию чужого раздела, чтобы дополнить или исправить</li>
+          <li><em>TODO Ты cможешь поделиться своим разделом с другими пользователями и посмотреть статистику его заполнения</em></li>
+        </ul>
+        <div class="text-center">
+          <div class="btn btn-primary btn-icon"
+               *ngIf="user" (click)="createOwnTopic()"><img class="icon" src="/assets/img/icons/topic-add.svg">
+            {{ ownTopics.length > 0 ? 'Добавить раздел' : 'Создать раздел' }}</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
