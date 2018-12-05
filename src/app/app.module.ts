@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { GtagModule } from 'angular-gtag';
 
 // modules
 import { RoutingModule } from './routing/routing.module';
@@ -37,6 +38,7 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
   ],
   imports: [
     RoutingModule,
+    GtagModule.forRoot({ trackingId: 'UA-72238845-1', trackPageviews: true, debug: true }),
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
