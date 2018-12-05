@@ -22,7 +22,7 @@
               <div class="skillbar-title">{{ topic.title }}</div>
             </div>
             <div class="skillbar-title skillbar-title-short">{{ topic.titleShort || topic.title || 'Раздел без названия' }}</div>
-            <div class="skillbar-percent">{{ topic.percentage }}%</div>
+            <div class="skillbar-percent">{{ topicPercentage(topic) }}%</div>
           </div>
         </div>
       </div>

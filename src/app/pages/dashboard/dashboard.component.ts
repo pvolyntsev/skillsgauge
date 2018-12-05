@@ -53,6 +53,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return this.answersStore.percentage;
   }
 
+  topicPercentage(topic: Topic): number {
+    const answers = this._answers.getTopicAnswers(topic);
+    return answers ? answers.percentage : 0;
+  }
+
   setupPercentageAnim(): void {
     this.setupPercentageAnim['TOTAL'] = 0;
 
