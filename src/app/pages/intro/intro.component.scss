@@ -107,6 +107,13 @@ $text-color : #96a686;
     &:focus {
       @include opacity(1);
     }
+
+    > span {
+      height: 100%;
+      > .icon {
+        height: 1em;
+      }
+    }
   }
 }
 
