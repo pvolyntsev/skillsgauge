@@ -1,0 +1,35 @@
+<div class="stories">
+  <div class="stories__content">
+    <div class="stories__titles">
+      <h1 class="stories__title">Опросник по стеку технологий для веб-разработчика</h1>
+      <span class="stories__subtitle">для неформальной оценки личного профессионального роста</span>
+    </div>
+
+    <div class="stories__share">
+      <share-buttons
+        [include]="['copy','facebook','twitter','google','vk']"
+        [show]="5"
+        [showIcon]="true"
+        [showText]="true"
+        [url]="share_url"
+      ></share-buttons>
+    </div>
+
+    <h3 class="text-center">Истории пользователей</h3>
+
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p>Расскажи историю о том, как тебе пригодились твои знания и навыки. Или историю, где опыт открыл возможности.</p>
+      <p>Расскажи историю, который позволил получить эти умения. Где ты учился? На чём практиковался? Кто тебе помогал? Кому ты помогал?</p>
+      <p>Первые несколько историй войдут (анонимно или с указанием твоего имени) в статьи о сервисе "Опросник" на habrahabr.ru</p>
+
+      <p class="text-center">Спасибо</p>
+    </div>
+
+
+    <a class="stories__button" target="_self" href="mailto:pavel.volyntsev@gmail.com?subject=История_для_up_uptlo_com">Поделись своей историей
+      <span class="display-block float-right mr-2">
+        <img class="icon icon-next" src="/assets/img/icons/nav-right.svg">
+      </span>
+    </a>
+    </div>
+</div>

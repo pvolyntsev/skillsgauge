@@ -11,6 +11,7 @@ import { TopicsListComponent } from '../pages/topics-list/topics-list.component'
 import { TopicTestComponent } from '../pages/topic-test/topic-test.component';
 import { TopicEditorComponent } from '../pages/topic-editor/topic-editor.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { StoriesComponent } from '../pages/stories/stories.component';
 
 const routes: Routes = [
   // простое оформление
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'topics', component: TopicsListComponent },
       { path: 'topic/:key', component: TopicTestComponent },
       { path: 'topic/:key/edit', component: TopicEditorComponent },
+      { path: 'stories', component: StoriesComponent },
     ]
   },
 

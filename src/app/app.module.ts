@@ -23,6 +23,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TopicsListModule } from './pages/topics-list';
 import { TopicTestModule} from './pages/topic-test';
 import { TopicEditorModule } from './pages/topic-editor';
+import { StoriesComponent } from './pages/stories/stories.component';
 
 // сервисы
 import { QuestionnaireService, QuestionnaireLocalStorageService } from './services';
@@ -35,6 +36,7 @@ import { TopicsStore, UserStore, AnswersStore } from './stores';
     P404Component,
     IntroComponent,
     DashboardComponent,
+    StoriesComponent,
   ],
   imports: [
     RoutingModule,

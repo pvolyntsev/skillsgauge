@@ -44,6 +44,25 @@
         </div>
       </div>
 
+      <div *ngIf="percentage >= 90" style="margin: 2em 0;">
+        <h3>У тебя очень хорошие результаты</h3>
+        <p>Не мог бы ты рассказать о своём опыте, который позволил получить такие умения? Твоя история будет опубликована в
+          <a href="/stories" class="btn btn-info btn-xs">Историях</a>. Дай возможность другим верить в себя. Спасибо.</p>
+
+        <div class="text-center">
+          <div class="btn-group">
+            <a class="btn btn-info btn-icon"
+               href="/stories">
+              <img class="icon" src="/assets/img/icons/topic-add.svg">
+              Истории пользователей</a>
+            <a class="btn btn-info btn-icon"
+               target="_self" href="mailto:pavel.volyntsev@gmail.com?subject=История_для_up_uptlo_com">
+              <img class="icon" src="/assets/img/icons/topic-add.svg">
+              Добавить историю</a>
+          </div>
+        </div>
+      </div>
+
       <div *ngIf="user && ownTopics.length < 4" (click)="createOwnTopic()">
         <h3>Свои разделы в опроснике</h3>
         <ul>
