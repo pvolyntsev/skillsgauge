@@ -13,7 +13,7 @@ export class User {
   }
 
   get isGuest(): Boolean {
-    return this.roles.length === 0;
+    return !this.roles || this.roles.length === 0;
   }
 }
 
