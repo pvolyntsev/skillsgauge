@@ -52,17 +52,16 @@
       <div *ngIf="percentage >= 90" style="margin: 2em 0;">
         <h3>У тебя очень хорошие результаты</h3>
         <p>Не мог бы ты рассказать о своём опыте, который позволил получить такие умения? Твоя история будет опубликована в
-          <a href="/stories" class="btn btn-info btn-xs">Историях</a>. Дай возможность другим верить в себя. Спасибо.</p>
+          <a routerLink="/stories" class="btn btn-info btn-xs">Историях пользователей</a>. Дай возможность другим верить в себя. Спасибо.</p>
 
         <div class="text-center">
           <div class="btn-group">
             <a class="btn btn-info btn-icon"
-               href="/stories">
+               routerLink="/stories">
               <img class="icon" src="/assets/img/icons/topic-add.svg">
               Истории пользователей</a>
             <a class="btn btn-info btn-icon"
-               target="_self" href="https://pavel14.typeform.com/to/Op9L7v">
-              <img class="icon" src="/assets/img/icons/topic-add.svg">
+               href="https://pavel14.typeform.com/to/Op9L7v" target="_blank"><img class="icon" src="/assets/img/icons/topic-add.svg">
               Добавить историю</a>
           </div>
         </div>

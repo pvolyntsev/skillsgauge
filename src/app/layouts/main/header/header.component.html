@@ -1,6 +1,7 @@
 <header class="header">
   <nav class="header-nav">
     <ul class="header__menu header__menu_right">
+      <li class="header__menu_item"><a routerLink="/stories">Истории</a></li>
       <li class="header__menu_item" *ngIf="user && user.name">{{ user.name }}</li>
       <li class="header__menu_item" *ngIf="user && !user.isGuest">exit</li>
     </ul>
