@@ -1,7 +1,7 @@
 {
   "name": "skillsgauge",
   "version": "1.0.1",
-  "description": "Опросник по веб-технологиям для быстрой оценки знаний",
+  "description": "Опросник для быстрой оценки знаний",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -4,6 +4,10 @@
 
 .sidebar {
 
+  .sb-button {
+    width: 100%;
+  }
+
   $block-background: #49A15D;
   $nav_link_color: $link-light-color;
   $nav_link_hover_color: $link-light-color;
@@ -41,16 +45,11 @@
     }
 
     &_item {
-      font-size: 1.2*$big-size;
-      line-height: 1.2*$big-size;
-      //line-height: (4*$space);
       margin-bottom: (2*$space);
       @include clearfix;
 
       &_title {
-        font-size: 1.05*$large-size;
-        line-height: $large-size;
-        //line-height: (4*$space);
+        font-size: $big-size;
         margin-bottom: (2*$space);
       }
 
@@ -72,11 +71,9 @@
     & & {
     }
     & & &_item { // пункт в подменю
-      font-size: 0.8em;
       margin-bottom: (0.8 * $space);
     }
     & & &_title { // подзаголовок в подменю
-      font-size: 0.7em;
     }
     & & &_item:last-child {
       margin-bottom: 0;
@@ -101,8 +98,6 @@
       }
 
       &_title {
-        font-size: $big-size;
-        line-height: $big-size;
         padding: 2em 0 0.5em;
       }
     }
