@@ -1,6 +1,6 @@
 {
   "name": "skillsgauge",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Опросник для быстрой оценки знаний",
   "scripts": {
     "ng": "ng",
